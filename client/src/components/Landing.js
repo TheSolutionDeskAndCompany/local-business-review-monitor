@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Star, Bell, Shield, Clock, CheckCircle } from 'lucide-react';
+import { Star, Bell, Shield, Clock, CheckCircle, Award } from 'lucide-react';
 
 const Landing = () => {
   return (
@@ -10,8 +10,7 @@ const Landing = () => {
         <div className="container">
           <div className="nav">
             <div className="logo">
-              <Star className="icon" />
-              <span>ReviewMonitor</span>
+              <img src="/logo.svg" alt="ReviewMonitor" className="logo-image" />
             </div>
             <div className="nav-links">
               <Link to="/login" className="btn btn-outline">Login</Link>
@@ -23,9 +22,14 @@ const Landing = () => {
 
       {/* Hero Section */}
       <section className="hero">
+        <div className="hero-background"></div>
         <div className="container">
           <div className="hero-content">
-            <h1>Never Miss Another Review Again</h1>
+            <div className="hero-badge">
+              <Award size={16} />
+              <span>Trusted by 500+ Local Businesses</span>
+            </div>
+            <h1>More 5-star reviews.<br />Happier clients. Less stress.</h1>
             <p className="hero-subtitle">
               Get instant alerts when customers leave reviews on Google, Yelp, and Facebook. 
               Protect your reputation and respond faster than ever.
@@ -34,7 +38,26 @@ const Landing = () => {
               <Link to="/register" className="btn btn-primary btn-large">
                 Start 7-Day Free Trial
               </Link>
-              <p className="trial-note">No credit card required • Setup in 2 minutes</p>
+              <Link to="/pricing" className="btn btn-secondary btn-large">
+                View Pricing
+              </Link>
+            </div>
+            <p className="trial-note">No credit card required • Setup in 2 minutes</p>
+            
+            {/* Trust Badges */}
+            <div className="trust-badges">
+              <div className="trust-badge">
+                <div className="trust-stars">★★★★★</div>
+                <span>4.9/5 Customer Rating</span>
+              </div>
+              <div className="trust-badge">
+                <CheckCircle size={16} />
+                <span>GDPR Compliant</span>
+              </div>
+              <div className="trust-badge">
+                <Shield size={16} />
+                <span>Bank-Level Security</span>
+              </div>
             </div>
           </div>
           <div className="hero-image">

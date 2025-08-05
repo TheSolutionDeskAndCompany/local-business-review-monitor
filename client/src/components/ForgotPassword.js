@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Star, ArrowLeft, Mail } from 'lucide-react';
+import { ArrowLeft, Mail } from 'lucide-react';
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
@@ -35,8 +35,7 @@ const ForgotPassword = () => {
         <div className="auth-container">
           <div className="auth-header">
             <Link to="/" className="logo">
-              <Star className="icon" />
-              <span>ReviewMonitor</span>
+              <img src="/logo.svg" alt="ReviewMonitor" className="logo-image" />
             </Link>
             <div className="success-icon">
               <Mail size={48} />
@@ -82,8 +81,7 @@ const ForgotPassword = () => {
       <div className="auth-container">
         <div className="auth-header">
           <Link to="/" className="logo">
-            <Star className="icon" />
-            <span>ReviewMonitor</span>
+            <img src="/logo.svg" alt="ReviewMonitor" className="logo-image" />
           </Link>
           <h1>Reset Your Password</h1>
           <p>Enter your email address and we'll send you instructions to reset your password</p>
