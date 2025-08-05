@@ -10,7 +10,7 @@ const Landing = () => {
         <div className="container">
           <div className="nav">
             <div className="logo">
-              <img src="/logo.svg" alt="ReviewMonitor" className="logo-image" />
+              <img src="/logo.svg" alt="ReviewReady" className="logo-image" />
             </div>
             <div className="nav-links">
               <Link to="/login" className="btn btn-outline">Login</Link>
@@ -29,10 +29,10 @@ const Landing = () => {
               <Award size={16} />
               <span>Trusted by 500+ Local Businesses</span>
             </div>
-            <h1>More 5-star reviews.<br />Happier clients. Less stress.</h1>
+            <h1>Never Miss Another Review Again</h1>
             <p className="hero-subtitle">
-              Get instant alerts when customers leave reviews on Google, Yelp, and Facebook. 
-              Protect your reputation and respond faster than ever.
+              Stay one step ahead—catch, respond, and turn every review into an opportunity.
+              Get instant email alerts, see all feedback in one dashboard, and impress every customer.
             </p>
             <div className="hero-cta">
               <Link to="/register" className="btn btn-primary btn-large">

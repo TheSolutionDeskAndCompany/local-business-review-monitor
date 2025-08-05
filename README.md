@@ -1,30 +1,30 @@
-<div align="center">
-  <img src="logo.svg" alt="ReviewMonitor" width="300" />
-  <br /><br />
-  <strong>Never miss a customer review again.</strong><br />
-  Monitor, manage, and get instant alerts for your business's online reviews—all in one simple dashboard.
-</div>
+# 🚐 ReviewReady
 
-[🚀 Start Your Free 7-Day Trial](https://reviewmonitor.thesolutiondesk.ca)
+Be ready for every review—catch, respond, and impress.
+
+[🚀 Start Your Free 7-Day Trial](https://reviewready.ca)
 
 ---
 
-## Who Is ReviewMonitor For?
-
-ReviewMonitor is built for business owners, managers, and marketing professionals who care about protecting their reputation and winning more customers.  
-Get notified instantly when a new review appears—before it impacts your business.
+**ReviewReady** makes sure you never miss an online review again. Instantly monitor, get notified, and respond fast—so you always look your best online.
 
 ---
 
-## Key Features
+## Who's It For?
+
+Business owners, managers, and marketing teams who care about reputation and customer happiness.
+
+---
+
+## Features
 
 - Instant email alerts for new reviews
 - Unified dashboard for Google (Facebook & Yelp coming soon)
-- Easy setup: connect your business in under 60 seconds
-- Smart analytics and trends
+- Easy setup: get started in under 2 minutes
+- Response analytics & trends
 - Multi-location support
-- Mobile responsive
-- Secure & private (bank-level encryption, GDPR compliant)
+- Mobile friendly
+- Secure & private (GDPR compliant, Canada-based)
 
 ---
 
@@ -34,7 +34,7 @@ Get notified instantly when a new review appears—before it impacts your busine
 - 🔄 Facebook Pages (Coming Soon)
 - 🔄 Yelp Business (Coming Soon)
 
-Want another review platform? [Request it here](mailto:support@thesolutiondesk.ca).
+Request another platform: [support@reviewready.ca](mailto:support@reviewready.ca)
 
 ---
 
@@ -45,31 +45,28 @@ Want another review platform? [Request it here](mailto:support@thesolutiondesk.c
 - Pro: $39/month
 - Enterprise: $79/month
 
-[See full pricing & features](https://reviewmonitor.thesolutiondesk.ca/pricing)
+[See full pricing](https://reviewready.ca/pricing)
 
 ---
 
 ## Support
 
-- [Help Center](https://reviewmonitor.thesolutiondesk.ca/help)
-- Email: support@thesolutiondesk.ca
-- Live chat: available inside your dashboard
+- [Help Center](https://reviewready.ca/help)
+- Email: support@reviewready.ca
+- Live chat: inside your dashboard
 
 ---
 
-## About
-
-ReviewMonitor is a premium reputation management tool,  
-**Powered by The Solution Desk** — helping local businesses thrive in the digital age.
+**ReviewReady** is proudly powered by The Solution Desk.  
+Canadian-owned, made for local business.
 
 ---
 
 ## License
 
 This repository is proprietary and not open source.  
- 2025 The Solution Desk Inc. All rights reserved.
+ 2025 ReviewReady / The Solution Desk Inc. All rights reserved.
 
 ---
 
-*Ready to protect your business reputation? [Start your free trial today!](https://reviewmonitor.thesolutiondesk.ca)*
-**Ready to protect your business reputation? Start your free trial today!**
+*Ready to impress every customer? [Start your free trial now.](https://reviewready.ca)*

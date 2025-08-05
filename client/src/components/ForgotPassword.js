@@ -35,7 +35,7 @@ const ForgotPassword = () => {
         <div className="auth-container">
           <div className="auth-header">
             <Link to="/" className="logo">
-              <img src="/logo.svg" alt="ReviewMonitor" className="logo-image" />
+              <img src="/logo.svg" alt="ReviewReady" className="logo-image" />
             </Link>
             <div className="success-icon">
               <Mail size={48} />
@@ -81,7 +81,7 @@ const ForgotPassword = () => {
       <div className="auth-container">
         <div className="auth-header">
           <Link to="/" className="logo">
-            <img src="/logo.svg" alt="ReviewMonitor" className="logo-image" />
+            <img src="/logo.svg" alt="ReviewReady" className="logo-image" />
           </Link>
           <h1>Reset Your Password</h1>
           <p>Enter your email address and we'll send you instructions to reset your password</p>
