@@ -3,7 +3,7 @@
 **Never miss a customer review again.**  
 Monitor, manage, and get instant alerts for your business's online reviews—all in one dashboard.
 
-> **Try it now:** [Get Started with Free Trial](https://reviewmonitor.solutiondesk.ca)
+> **Contact us for a demo:** support@solutiondesk.ca
 
 ---
 
@@ -34,7 +34,7 @@ Local Business Review Monitor is a premium service for business owners, managers
 - **Professional** - $39/month (up to 5 businesses, advanced analytics)
 - **Enterprise** - $79/month (unlimited businesses, priority support)
 
-[View Full Pricing & Features →](https://reviewmonitor.solutiondesk.ca/pricing)
+**Contact sales@solutiondesk.ca for custom pricing and enterprise features.**
 
 ## 🔌 Platform Integrations
 
@@ -52,7 +52,7 @@ Local Business Review Monitor is a premium service for business owners, managers
 
 We're here to help you succeed:
 
-- 📚 **Help Center**: [reviewmonitor.solutiondesk.ca/help](https://reviewmonitor.solutiondesk.ca/help)
+- 📚 **Help Center**: Contact support@solutiondesk.ca for assistance
 - 📧 **Email Support**: support@solutiondesk.ca
 - 💬 **Live Chat**: Available in your dashboard
 - 📞 **Phone Support**: Available for Professional and Enterprise plans
@@ -69,7 +69,7 @@ Your business data is precious. We protect it with:
 - **No data sharing** - We never sell or share your business information
 - **Regular security audits** and penetration testing
 
-[Read our Privacy Policy →](https://solutiondesk.ca/privacy)
+**Privacy Policy available upon request - contact hello@solutiondesk.ca**
 
 ## 🏢 About The Solution Desk
 
@@ -94,13 +94,13 @@ Local Business Review Monitor is proudly developed by The Solution Desk, a Canad
 *"The instant alerts helped us catch and resolve a service issue before it became a bigger problem. Worth every penny."*  
 — Mike T., Auto Repair Shop
 
-[Read More Success Stories →](https://reviewmonitor.solutiondesk.ca/success-stories)
+**Contact sales@solutiondesk.ca to hear more success stories and case studies.**
 
 ## 🚀 Ready to Get Started?
 
 **Start your free 7-day trial today** - no credit card required.
 
-[**Sign Up Now →**](https://reviewmonitor.solutiondesk.ca/signup)
+**[Contact Sales for Demo →](mailto:sales@solutiondesk.ca)**
 
 ---
 
