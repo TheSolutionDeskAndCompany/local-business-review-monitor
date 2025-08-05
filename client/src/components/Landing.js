@@ -105,7 +105,7 @@ const Landing = () => {
           <h2>Join 500+ Local Businesses</h2>
           <div className="testimonials">
             <div className="testimonial">
-              <p>"ReviewMonitor helped us catch a bad review within minutes. We responded quickly and turned an angry customer into a happy one!"</p>
+              <p>"ReviewReady helped us catch a bad review within minutes. We responded quickly and turned an angry customer into a happy one!"</p>
               <div className="author">
                 <strong>Mike Chen</strong>
                 <span>Chen's Restaurant</span>
@@ -170,7 +170,7 @@ const Landing = () => {
           <div className="footer-content">
             <div className="logo">
               <Star className="icon" />
-              <span>ReviewMonitor</span>
+              <span>ReviewReady</span>
             </div>
             <div className="footer-links">
               <Link to="/pricing">Pricing</Link>
@@ -179,7 +179,7 @@ const Landing = () => {
             </div>
           </div>
           <div className="footer-bottom">
-            <p>&copy; 2024 ReviewMonitor. All rights reserved.</p>
+            <p>&copy; 2025 ReviewReady / The Solution Desk Inc. All rights reserved.</p>
           </div>
         </div>
       </footer>

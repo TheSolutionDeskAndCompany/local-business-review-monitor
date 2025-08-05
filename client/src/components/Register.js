@@ -46,7 +46,7 @@ const Register = () => {
         <div className="auth-header">
           <Link to="/" className="logo">
             <Star className="icon" />
-            <span>ReviewMonitor</span>
+            <span>ReviewReady</span>
           </Link>
           <h1>Start Your Free Trial</h1>
           <p>7 days free, no credit card required</p>

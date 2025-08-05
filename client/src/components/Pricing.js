@@ -11,7 +11,7 @@ const Pricing = () => {
           <div className="nav">
             <Link to="/" className="logo">
               <Star className="icon" />
-              <span>ReviewMonitor</span>
+              <span>ReviewReady</span>
             </Link>
             <div className="nav-links">
               <Link to="/login" className="btn btn-outline">Login</Link>
@@ -143,7 +143,7 @@ const Pricing = () => {
           <div className="footer-content">
             <Link to="/" className="logo">
               <Star className="icon" />
-              <span>ReviewMonitor</span>
+              <span>ReviewReady</span>
             </Link>
             <div className="footer-links">
               <Link to="/">Home</Link>
@@ -152,7 +152,7 @@ const Pricing = () => {
             </div>
           </div>
           <div className="footer-bottom">
-            <p>&copy; 2024 ReviewMonitor. All rights reserved.</p>
+            <p>&copy; 2025 ReviewReady / The Solution Desk Inc. All rights reserved.</p>
           </div>
         </div>
       </footer>

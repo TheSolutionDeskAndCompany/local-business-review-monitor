@@ -101,7 +101,7 @@ const Dashboard = () => {
         <div className="header-left">
           <div className="logo">
             <Star className="icon" />
-            <span>ReviewMonitor</span>
+            <span>ReviewReady</span>
           </div>
           <h1>Welcome back, {user?.ownerName}</h1>
         </div>
