@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="client/public/logo.svg" alt="ReviewMonitor" width="300" />
+  <img src="logo.svg" alt="ReviewMonitor" width="300" />
   <br /><br />
   <strong>Never miss a customer review again.</strong><br />
   Monitor, manage, and get instant alerts for your business's online reviews—all in one simple dashboard.
