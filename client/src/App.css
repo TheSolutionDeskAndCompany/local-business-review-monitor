@@ -466,32 +466,114 @@ body {
 
 .auth-container {
   background: var(--color-card);
-  border-radius: 12px;
   padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   width: 100%;
-  max-width: 500px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-  border: 1px solid var(--color-border);
+  max-width: 400px;
+  text-align: center;
 }
 
 .auth-header {
-  text-align: center;
   margin-bottom: 30px;
+}
+
+.auth-header .logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--color-primary);
+  text-decoration: none;
+  margin-bottom: 20px;
 }
 
 .auth-header h1 {
   font-size: 28px;
-  margin: 20px 0 10px;
-  color: var(--color-text-primary);
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: 8px;
 }
 
 .auth-header p {
   color: var(--color-text-secondary);
   font-size: 16px;
+  line-height: 1.5;
 }
 
 .auth-form {
   margin-bottom: 30px;
+}
+
+.auth-footer p {
+  color: var(--color-text-secondary);
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.auth-footer p:last-child {
+  margin-bottom: 0;
+}
+
+/* Forgot Password Styles */
+.form-label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.forgot-password-link {
+  color: var(--color-primary);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.forgot-password-link:hover {
+  color: var(--color-primary-hover);
+  text-decoration: underline;
+}
+
+.success-icon {
+  color: var(--color-success);
+  margin-bottom: 20px;
+}
+
+.success-message {
+  background: rgba(16, 185, 129, 0.1);
+  color: var(--color-success);
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+.auth-actions {
+  margin-bottom: 20px;
+}
+
+.link-button {
+  background: none;
+  border: none;
+  color: var(--color-primary);
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: inherit;
+  font-family: inherit;
+  padding: 0;
+  transition: color 0.2s ease;
+}
+
+.link-button:hover {
+  color: var(--color-primary-hover);
+}
+
+.btn svg {
+  margin-right: 8px;
 }
 
 .form-group {

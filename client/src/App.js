@@ -4,6 +4,7 @@ import { AuthProvider } from './contexts/AuthContext';
 import { useAuth } from './contexts/AuthContext';
 import Login from './components/Login';
 import Register from './components/Register';
+import ForgotPassword from './components/ForgotPassword';
 import Dashboard from './components/Dashboard';
 import Landing from './components/Landing';
 import Pricing from './components/Pricing';
@@ -28,6 +29,7 @@ function App() {
             <Route path="/" element={<Landing />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/pricing" element={<Pricing />} />
             <Route 
               path="/dashboard" 
