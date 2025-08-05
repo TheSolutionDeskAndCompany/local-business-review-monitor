@@ -1,7 +1,9 @@
-# 🏪 ReviewMonitor
-
-**Never miss a customer review again.**  
-Monitor, manage, and get instant alerts for your business's online reviews—all in one simple dashboard.
+<div align="center">
+  <img src="client/public/logo.svg" alt="ReviewMonitor" width="300" />
+  <br /><br />
+  <strong>Never miss a customer review again.</strong><br />
+  Monitor, manage, and get instant alerts for your business's online reviews—all in one simple dashboard.
+</div>
 
 [🚀 Start Your Free 7-Day Trial](https://reviewmonitor.thesolutiondesk.ca)
 
