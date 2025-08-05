@@ -306,6 +306,134 @@ const Dashboard = () => {
             </div>
           </div>
         )}
+
+        {activeTab === 'settings' && (
+          <div className="settings-section">
+            <div className="section-header">
+              <h2>Account Settings</h2>
+            </div>
+            
+            {/* Profile Settings */}
+            <div className="settings-card">
+              <h3>Profile Information</h3>
+              <div className="settings-form">
+                <div className="form-group">
+                  <label>Business Name</label>
+                  <input 
+                    type="text" 
+                    value={user?.businessName || ''} 
+                    readOnly 
+                    className="form-input"
+                  />
+                </div>
+                <div className="form-group">
+                  <label>Owner Name</label>
+                  <input 
+                    type="text" 
+                    value={user?.ownerName || ''} 
+                    readOnly 
+                    className="form-input"
+                  />
+                </div>
+                <div className="form-group">
+                  <label>Email Address</label>
+                  <input 
+                    type="email" 
+                    value={user?.email || ''} 
+                    readOnly 
+                    className="form-input"
+                  />
+                </div>
+                <div className="form-group">
+                  <label>Phone Number</label>
+                  <input 
+                    type="tel" 
+                    value={user?.phone || 'Not provided'} 
+                    readOnly 
+                    className="form-input"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Subscription Settings */}
+            <div className="settings-card">
+              <h3>Subscription</h3>
+              <div className="subscription-info">
+                <div className="subscription-status">
+                  <div className="status-badge trial">Free Trial</div>
+                  <p>Trial ends in 7 days</p>
+                </div>
+                <button className="btn btn-primary">
+                  Upgrade to Pro
+                </button>
+              </div>
+            </div>
+
+            {/* Notification Settings */}
+            <div className="settings-card">
+              <h3>Notifications</h3>
+              <div className="settings-form">
+                <div className="form-group checkbox-group">
+                  <label className="checkbox-label">
+                    <input type="checkbox" defaultChecked />
+                    <span className="checkmark"></span>
+                    Email notifications for new reviews
+                  </label>
+                </div>
+                <div className="form-group checkbox-group">
+                  <label className="checkbox-label">
+                    <input type="checkbox" defaultChecked />
+                    <span className="checkmark"></span>
+                    Weekly review summary
+                  </label>
+                </div>
+                <div className="form-group checkbox-group">
+                  <label className="checkbox-label">
+                    <input type="checkbox" />
+                    <span className="checkmark"></span>
+                    SMS notifications (Pro feature)
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            {/* API Settings */}
+            <div className="settings-card">
+              <h3>Connected Platforms</h3>
+              <div className="platform-connections">
+                <div className="connection-item">
+                  <div className="connection-info">
+                    <strong>Google Business Profile</strong>
+                    <span className="connection-status disconnected">Not Connected</span>
+                  </div>
+                  <button className="btn btn-outline">Connect</button>
+                </div>
+                <div className="connection-item">
+                  <div className="connection-info">
+                    <strong>Yelp</strong>
+                    <span className="connection-status coming-soon">Coming Soon</span>
+                  </div>
+                  <button className="btn btn-outline" disabled>Connect</button>
+                </div>
+              </div>
+            </div>
+
+            {/* Danger Zone */}
+            <div className="settings-card danger-zone">
+              <h3>Danger Zone</h3>
+              <div className="danger-actions">
+                <div className="danger-item">
+                  <div>
+                    <strong>Delete Account</strong>
+                    <p>Permanently delete your account and all data</p>
+                  </div>
+                  <button className="btn btn-danger">Delete Account</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </main>
     </div>
   );

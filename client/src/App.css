@@ -1043,3 +1043,223 @@ body {
     flex-wrap: wrap;
   }
 }
+
+/* Settings Section */
+.settings-section {
+  max-width: 800px;
+}
+
+.settings-card {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e9ecef;
+}
+
+.settings-card h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.settings-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  font-weight: 500;
+  color: #555;
+  font-size: 14px;
+}
+
+.form-input {
+  padding: 12px 16px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+  background: #f8f9fa;
+  color: #666;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+}
+
+/* Subscription Info */
+.subscription-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.subscription-status {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.status-badge.trial {
+  background: #fff3cd;
+  color: #856404;
+  border: 1px solid #ffeaa7;
+}
+
+/* Checkbox Groups */
+.checkbox-group {
+  margin: 0;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  font-weight: normal;
+  margin: 0;
+}
+
+.checkbox-label input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+}
+
+.checkmark {
+  display: none;
+}
+
+/* Platform Connections */
+.platform-connections {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.connection-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  background: #f8f9fa;
+}
+
+.connection-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.connection-info strong {
+  font-weight: 600;
+  color: #333;
+}
+
+.connection-status {
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.connection-status.disconnected {
+  color: #dc3545;
+}
+
+.connection-status.coming-soon {
+  color: #6c757d;
+}
+
+/* Danger Zone */
+.settings-card.danger-zone {
+  border-color: #dc3545;
+  background: #fff5f5;
+}
+
+.danger-zone h3 {
+  color: #dc3545;
+}
+
+.danger-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.danger-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.danger-item div {
+  flex: 1;
+  min-width: 200px;
+}
+
+.danger-item p {
+  color: #666;
+  font-size: 14px;
+  margin: 4px 0 0 0;
+}
+
+.btn-danger {
+  background: #dc3545;
+  color: white;
+  border: 1px solid #dc3545;
+}
+
+.btn-danger:hover {
+  background: #c82333;
+  border-color: #c82333;
+}
+
+/* Mobile Responsive for Settings */
+@media (max-width: 768px) {
+  .settings-card {
+    padding: 16px;
+    margin-bottom: 16px;
+  }
+  
+  .subscription-info {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .connection-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  
+  .danger-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
