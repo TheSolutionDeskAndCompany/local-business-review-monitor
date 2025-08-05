@@ -2,15 +2,15 @@
   "version": 2,
   "builds": [
     {
+      "src": "server.js",
+      "use": "@vercel/node"
+    },
+    {
       "src": "client/package.json",
       "use": "@vercel/static-build",
       "config": {
         "distDir": "build"
       }
-    },
-    {
-      "src": "server.js",
-      "use": "@vercel/node"
     }
   ],
   "routes": [
@@ -19,20 +19,8 @@
       "dest": "/server.js"
     },
     {
-      "src": "/static/(.*)",
-      "dest": "/client/build/static/$1"
-    },
-    {
-      "src": "/manifest.json",
-      "dest": "/client/build/manifest.json"
-    },
-    {
-      "src": "/favicon.ico",
-      "dest": "/client/build/favicon.ico"
-    },
-    {
       "src": "/(.*)",
-      "dest": "/client/build/index.html"
+      "dest": "/client/$1"
     }
   ]
 }
