@@ -10,7 +10,7 @@ const Landing = () => {
         <div className="container">
           <div className="nav">
             <div className="logo">
-              <img src="/logo.svg" alt="ReviewReady" className="logo-image" />
+              <img src="/Review-Ready-logo.png" alt="ReviewReady" className="logo-image" />
             </div>
             <div className="nav-links">
               <Link to="/login" className="btn btn-outline">Login</Link>

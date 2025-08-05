@@ -41,7 +41,7 @@ const Login = () => {
       <div className="auth-container">
         <div className="auth-header">
           <Link to="/" className="logo">
-            <img src="/logo.svg" alt="ReviewReady" className="logo-image" />
+            <img src="/Review-Ready-logo.png" alt="ReviewReady" className="logo-image" />
           </Link>
           <h1>Welcome Back</h1>
           <p>Sign in to your account to continue monitoring reviews</p>

@@ -1,3 +1,7 @@
+<div align="center">
+  <img src="Review-Ready-logo.png" alt="ReviewReady" width="300" />
+</div>
+
 # 🚐 ReviewReady
 
 Be ready for every review—catch, respond, and impress.
