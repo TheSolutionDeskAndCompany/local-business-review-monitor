@@ -1,8 +1,6 @@
 {
-  "version": 2,
+  "cleanUrls": true,
   "buildCommand": "cd client && npm run build",
   "outputDirectory": "client/build",
-  "installCommand": "cd client && npm install",
-  "devCommand": "cd client && npm start",
-  "framework": "create-react-app"
+  "installCommand": "cd client && npm install"
 }
