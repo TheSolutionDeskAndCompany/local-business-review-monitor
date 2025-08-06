@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Updated SaaS Color Palette Style Guide</title>
+    <link rel="stylesheet" href="../src/App.css">
+    <style>
+        .style-guide {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background: var(--color-background);
+            min-height: 100vh;
+        }
+        
+        .guide-section {
+            background: var(--color-card);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 1px solid var(--color-border);
+        }
+        
+        .guide-section h2 {
+            color: var(--color-text-primary);
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        
+        .color-palette {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .color-item {
+            text-align: center;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid var(--color-border);
+        }
+        
+        .color-swatch {
+            width: 100%;
+            height: 80px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+        }
+        
+        .color-name {
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-bottom: 5px;
+        }
+        
+        .color-value {
+            font-family: monospace;
+            font-size: 12px;
+            color: var(--color-text-secondary);
+        }
+        
+        .component-demo {
+            margin-bottom: 30px;
+        }
+        
+        .component-demo h3 {
+            color: var(--color-text-primary);
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .sample-navbar {
+            background: var(--color-neutral-dark);
+            padding: 15px 20px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .sample-navbar .logo {
+            color: white;
+            font-weight: 700;
+            font-size: 18px;
+        }
+        
+        .sample-navbar .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .sample-navbar .nav-links a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.9;
+        }
+        
+        .sample-navbar .nav-links a:hover {
+            opacity: 1;
+        }
+        
+        .sample-navbar .nav-links a.active {
+            color: var(--color-accent-light);
+            border-bottom: 2px solid var(--color-accent-blue);
+            padding-bottom: 2px;
+        }
+        
+        .button-showcase {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .card-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .sample-card {
+            background: var(--color-card);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            padding: 20px;
+        }
+        
+        .sample-card h4 {
+            color: var(--color-text-primary);
+            margin-bottom: 10px;
+        }
+        
+        .sample-card p {
+            color: var(--color-text-secondary);
+            margin-bottom: 15px;
+        }
+        
+        .form-showcase {
+            max-width: 400px;
+        }
+        
+        .alert-showcase {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .highlight-demo {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .accent-demo {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .accent-link {
+            color: var(--color-accent-blue);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .accent-link:hover {
+            color: var(--color-accent-light);
+            text-decoration: underline;
+        }
+        
+        .accent-icon {
+            color: var(--color-accent-blue);
+            padding: 8px;
+            border-radius: 4px;
+            background: rgba(37, 99, 235, 0.1);
+        }
+        
+        .gold-icon {
+            color: var(--color-warning);
+            padding: 8px;
+            border-radius: 4px;
+            background: rgba(234, 179, 8, 0.1);
+        }
+        
+        .cyan-accent {
+            color: var(--color-cyan);
+            padding: 4px 8px;
+            border-radius: 4px;
+            background: rgba(6, 182, 212, 0.1);
+            font-size: 12px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="style-guide">
+        <h1 style="color: var(--color-text-primary); text-align: center; margin-bottom: 40px; font-size: 36px;">
+            Updated SaaS Color Palette Style Guide
+        </h1>
+        
+        <div style="background: rgba(234, 179, 8, 0.1); border: 1px solid rgba(234, 179, 8, 0.2); padding: 16px; border-radius: 8px; margin-bottom: 30px;">
+            <h3 style="color: var(--color-warning); margin-bottom: 8px;">🎨 Key Changes</h3>
+            <ul style="color: var(--color-text-primary); margin: 0;">
+                <li>Navbar/header now uses dark neutral background instead of blue</li>
+                <li>Blue is reserved for subtle accents only (links, active states, tab underlines)</li>
+                <li>Primary buttons are emerald green for better conversion</li>
+                <li>Gold and cyan accents add warmth and premium feel</li>
+                <li>Never use blue as a main background color</li>
+            </ul>
+        </div>
+        
+        <!-- Color Palette -->
+        <div class="guide-section">
+            <h2>Updated Color Palette</h2>
+            <div class="color-palette">
+                <div class="color-item">
+                    <div class="color-swatch" style="background: var(--color-primary);"></div>
+                    <div class="color-name">Primary (Emerald)</div>
+                    <div class="color-value">#10b981</div>
+                    <div class="color-value">Primary buttons, success states</div>
+                </div>
+                <div class="color-item">
+                    <div class="color-swatch" style="background: var(--color-accent-blue);"></div>
+                    <div class="color-name">Accent Blue</div>
+                    <div class="color-value">#2563eb</div>
+                    <div class="color-value">Links, active states, subtle accents</div>
+                </div>
+                <div class="color-item">
+                    <div class="color-swatch" style="background: var(--color-accent-light);"></div>
+                    <div class="color-name">Light Blue</div>
+                    <div class="color-value">#60a5fa</div>
+                    <div class="color-value">Hover states, highlights</div>
+                </div>
+                <div class="color-item">
+                    <div class="color-swatch" style="background: var(--color-warning);"></div>
+                    <div class="color-name">Gold/Warning</div>
+                    <div class="color-value">#eab308</div>
+                    <div class="color-value">Info alerts, special highlights</div>
+                </div>
+                <div class="color-item">
+                    <div class="color-swatch" style="background: var(--color-highlight);"></div>
+                    <div class="color-name">Gold Highlight</div>
+                    <div class="color-value">#efb41d</div>
+                    <div class="color-value">Premium CTAs, special icons</div>
+                </div>
+                <div class="color-item">
+                    <div class="color-swatch" style="background: var(--color-cyan);"></div>
+                    <div class="color-name">Cyan Accent</div>
+                    <div class="color-value">#06b6d4</div>
+                    <div class="color-value">Secondary accents, badges</div>
+                </div>
+                <div class="color-item">
+                    <div class="color-swatch" style="background: var(--color-neutral-dark);"></div>
+                    <div class="color-name">Dark Neutral</div>
+                    <div class="color-value">#1e293b</div>
+                    <div class="color-value">Navbar, text, footers</div>
+                </div>
+                <div class="color-item">
+                    <div class="color-swatch" style="background: var(--color-danger);"></div>
+                    <div class="color-name">Danger</div>
+                    <div class="color-value">#ef4444</div>
+                    <div class="color-value">Errors, destructive actions</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Navbar -->
+        <div class="guide-section">
+            <h2>Navbar (Dark Neutral Background)</h2>
+            <div class="component-demo">
+                <div class="sample-navbar">
+                    <div class="logo">ReviewMonitor</div>
+                    <div class="nav-links">
+                        <a href="#" class="active">Dashboard</a>
+                        <a href="#">Reviews</a>
+                        <a href="#">Settings</a>
+                    </div>
+                </div>
+                <p style="margin-top: 15px; color: var(--color-text-secondary); font-size: 14px;">
+                    ✅ Dark neutral background with white text<br>
+                    ✅ Blue accent only for active states and underlines
+                </p>
+            </div>
+        </div>
+        
+        <!-- Buttons -->
+        <div class="guide-section">
+            <h2>Buttons (Emerald Primary)</h2>
+            <div class="component-demo">
+                <div class="button-showcase">
+                    <button class="btn btn-primary">Primary Button (Emerald)</button>
+                    <button class="btn btn-outline">Outline Button (Blue Accent)</button>
+                    <button class="btn btn-highlight">Highlight CTA (Gold)</button>
+                    <button class="btn btn-danger">Danger Button</button>
+                    <button class="btn btn-primary btn-small">Small Primary</button>
+                    <button class="btn btn-primary" disabled>Disabled</button>
+                </div>
+                <p style="margin-top: 15px; color: var(--color-text-secondary); font-size: 14px;">
+                    ✅ Primary buttons use emerald green for better conversion<br>
+                    ✅ Outline buttons use blue accent, not primary background<br>
+                    ✅ Gold highlight buttons for special CTAs
+                </p>
+            </div>
+        </div>
+        
+        <!-- Cards -->
+        <div class="guide-section">
+            <h2>Cards (White Background Only)</h2>
+            <div class="component-demo">
+                <div class="card-showcase">
+                    <div class="sample-card">
+                        <h4>Standard Card</h4>
+                        <p>Cards always use white background, never blue. Clean and professional appearance.</p>
+                        <button class="btn btn-primary btn-small">Action</button>
+                    </div>
+                    <div class="sample-card">
+                        <h4>Review Card</h4>
+                        <div class="reviewer-name">John Doe</div>
+                        <div class="stars">★★★★★</div>
+                        <p>Great service! Highly recommend to everyone.</p>
+                        <div class="platform">Google</div>
+                    </div>
+                </div>
+                <p style="margin-top: 15px; color: var(--color-text-secondary); font-size: 14px;">
+                    ✅ White background with subtle borders<br>
+                    ✅ Never use blue as card background
+                </p>
+            </div>
+        </div>
+        
+        <!-- Alerts -->
+        <div class="guide-section">
+            <h2>Alerts (Green/Red/Gold)</h2>
+            <div class="component-demo">
+                <div class="alert-showcase">
+                    <div class="alert alert-success">
+                        <span>✓</span>
+                        <span>Success! Your changes have been saved successfully.</span>
+                    </div>
+                    <div class="alert alert-danger">
+                        <span>⚠</span>
+                        <span>Error! There was a problem processing your request.</span>
+                    </div>
+                    <div class="alert alert-info">
+                        <span>ℹ</span>
+                        <span>Info: Your trial expires in 7 days. Upgrade to continue.</span>
+                    </div>
+                </div>
+                <p style="margin-top: 15px; color: var(--color-text-secondary); font-size: 14px;">
+                    ✅ Green for success, red for errors, gold for info<br>
+                    ✅ No blue backgrounds for alerts
+                </p>
+            </div>
+        </div>
+        
+        <!-- Accents & Highlights -->
+        <div class="guide-section">
+            <h2>Accents & Highlights</h2>
+            <div class="component-demo">
+                <h3>Blue Accents (Subtle Only)</h3>
+                <div class="accent-demo">
+                    <a href="#" class="accent-link">Link with blue accent</a>
+                    <span class="accent-icon">🔗</span>
+                    <span style="color: var(--color-accent-blue); font-weight: 500;">Active tab text</span>
+                </div>
+                
+                <h3 style="margin-top: 25px;">Gold & Cyan Highlights</h3>
+                <div class="highlight-demo">
+                    <span class="gold-icon">⭐</span>
+                    <span class="cyan-accent">NEW</span>
+                    <button class="btn btn-highlight btn-small">Premium Feature</button>
+                </div>
+                
+                <p style="margin-top: 15px; color: var(--color-text-secondary); font-size: 14px;">
+                    ✅ Blue only for links, active states, and subtle accents<br>
+                    ✅ Gold and cyan add warmth and premium feel
+                </p>
+            </div>
+        </div>
+        
+        <!-- Forms -->
+        <div class="guide-section">
+            <h2>Form Elements</h2>
+            <div class="component-demo">
+                <div class="form-showcase">
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <input type="email" placeholder="Enter your email">
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" placeholder="Enter your password">
+                    </div>
+                    <div class="form-group">
+                        <label>Business Name</label>
+                        <input type="text" placeholder="Your business name" value="Sample Business">
+                    </div>
+                    <button class="btn btn-primary btn-full">Submit Form</button>
+                </div>
+                <p style="margin-top: 15px; color: var(--color-text-secondary); font-size: 14px;">
+                    ✅ Blue accent only for focus states<br>
+                    ✅ Clean white backgrounds with subtle borders
+                </p>
+            </div>
+        </div>
+        
+        <!-- Typography -->
+        <div class="guide-section">
+            <h2>Typography (Dark Neutral Text)</h2>
+            <div class="component-demo">
+                <h1 style="color: var(--color-text-primary); margin-bottom: 10px;">Heading 1 - Dark Neutral</h1>
+                <h2 style="color: var(--color-text-primary); margin-bottom: 10px;">Heading 2 - Dark Neutral</h2>
+                <h3 style="color: var(--color-text-primary); margin-bottom: 10px;">Heading 3 - Dark Neutral</h3>
+                <p style="color: var(--color-text-primary); margin-bottom: 10px;">
+                    Primary text uses dark neutral color for excellent readability and professional appearance.
+                </p>
+                <p style="color: var(--color-text-secondary); margin-bottom: 10px;">
+                    Secondary text uses lighter neutral for supporting information and captions.
+                </p>
+                <a href="#" class="accent-link">Links use blue accent color</a>
+                <p style="margin-top: 15px; color: var(--color-text-secondary); font-size: 14px;">
+                    ✅ All text uses dark neutral colors, never blue<br>
+                    ✅ Blue reserved only for interactive elements like links
+                </p>
+            </div>
+        </div>
+        
+        <!-- Dashboard Components -->
+        <div class="guide-section">
+            <h2>Dashboard Components</h2>
+            <div class="component-demo">
+                <div class="demo-grid">
+                    <div class="stat-card">
+                        <div class="stat-value">1,234</div>
+                        <div class="stat-label">Total Reviews</div>
+                    </div>
+                    <div class="stat-card positive">
+                        <div class="stat-value">4.8</div>
+                        <div class="stat-label">Average Rating</div>
+                    </div>
+                </div>
+                <p style="margin-top: 15px; color: var(--color-text-secondary); font-size: 14px;">
+                    ✅ White card backgrounds with colored left borders<br>
+                    ✅ Blue accent for default, green for positive metrics
+                </p>
+            </div>
+        </div>
+        
+        <!-- Settings Menu Preview -->
+        <div class="guide-section">
+            <h2>Settings Menu Preview</h2>
+            <div class="component-demo">
+                <div style="display: flex; border: 1px solid var(--color-border); border-radius: 8px; overflow: hidden; max-width: 600px;">
+                    <div style="width: 200px; background: var(--color-card); border-right: 1px solid var(--color-border); padding: 20px;">
+                        <h4 style="margin-bottom: 15px; color: var(--color-text-primary);">Settings</h4>
+                        <div style="display: flex; flex-direction: column; gap: 8px;">
+                            <div style="padding: 8px 12px; background: rgba(37, 99, 235, 0.05); color: var(--color-accent-blue); border-radius: 4px; border-left: 3px solid var(--color-accent-blue); font-size: 14px;">Account</div>
+                            <div style="padding: 8px 12px; color: var(--color-text-secondary); font-size: 14px;">Business Connections</div>
+                            <div style="padding: 8px 12px; color: var(--color-text-secondary); font-size: 14px;">Notifications</div>
+                        </div>
+                    </div>
+                    <div style="flex: 1; padding: 20px; background: var(--color-background);">
+                        <h4 style="margin-bottom: 15px; color: var(--color-text-primary);">Account Settings</h4>
+                        <div style="background: var(--color-card); padding: 15px; border-radius: 6px; border: 1px solid var(--color-border);">
+                            <p style="margin-bottom: 10px; color: var(--color-text-secondary); font-size: 14px;">Update your account information</p>
+                            <button class="btn btn-primary btn-small">Save Changes</button>
+                        </div>
+                    </div>
+                </div>
+                <p style="margin-top: 15px; color: var(--color-text-secondary); font-size: 14px;">
+                    ✅ Sidebar with blue accent for active states<br>
+                    ✅ White cards on off-white background<br>
+                    ✅ Emerald primary buttons for actions
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

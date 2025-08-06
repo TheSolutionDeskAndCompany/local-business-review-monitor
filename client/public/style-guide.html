@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Updated SaaS Color Palette Style Guide</title>
+    <link rel="stylesheet" href="../src/App.css">
+    <style>
+        .style-guide {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background: var(--color-background);
+            min-height: 100vh;
+        }
+        
+        .guide-section {
+            background: var(--color-card);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 1px solid var(--color-border);
+        }
+        
+        .guide-section h2 {
+            color: var(--color-text-primary);
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        
+        .color-palette {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .color-item {
+            text-align: center;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid var(--color-border);
+        }
+        
+        .color-swatch {
+            width: 100%;
+            height: 80px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+        }
+        
+        .color-name {
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-bottom: 5px;
+        }
+        
+        .color-value {
+            font-family: monospace;
+            font-size: 12px;
+            color: var(--color-text-secondary);
+        }
+        
+        .component-demo {
+            margin-bottom: 30px;
+        }
+        
+        .component-demo h3 {
+            color: var(--color-text-primary);
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .sample-navbar {
+            background: var(--color-primary);
+            padding: 15px 20px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .sample-navbar .logo {
+            color: white;
+            font-weight: 700;
+            font-size: 18px;
+        }
+        
+        .sample-navbar .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .sample-navbar .nav-links a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.9;
+        }
+        
+        .sample-navbar .nav-links a:hover {
+            opacity: 1;
+        }
+        
+        .button-showcase {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .card-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .sample-card {
+            background: var(--color-card);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            padding: 20px;
+        }
+        
+        .sample-card h4 {
+            color: var(--color-text-primary);
+            margin-bottom: 10px;
+        }
+        
+        .sample-card p {
+            color: var(--color-text-secondary);
+            margin-bottom: 15px;
+        }
+        
+        .form-showcase {
+            max-width: 400px;
+        }
+        
+        .alert-showcase {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="style-guide">
+        <h1 style="color: var(--color-text-primary); text-align: center; margin-bottom: 40px; font-size: 36px;">
+            SaaS Color Palette Style Guide
+        </h1>
+        
+        <!-- Color Palette -->
+        <div class="guide-section">
+            <h2>Color Palette</h2>
+            <div class="color-palette">
+                <div class="color-item">
+                    <div class="color-swatch" style="background: var(--color-primary);"></div>
+                    <div class="color-name">Primary</div>
+                    <div class="color-value">#2563eb</div>
+                    <div class="color-value">Navbars, headers, key accents</div>
+                </div>
+                <div class="color-item">
+                    <div class="color-swatch" style="background: var(--color-accent);"></div>
+                    <div class="color-name">Accent</div>
+                    <div class="color-value">#60a5fa</div>
+                    <div class="color-value">Highlights, hover states</div>
+                </div>
+                <div class="color-item">
+                    <div class="color-swatch" style="background: var(--color-success);"></div>
+                    <div class="color-name">Success/CTA</div>
+                    <div class="color-value">#10b981</div>
+                    <div class="color-value">Primary buttons, success alerts</div>
+                </div>
+                <div class="color-item">
+                    <div class="color-swatch" style="background: var(--color-danger);"></div>
+                    <div class="color-name">Danger</div>
+                    <div class="color-value">#ef4444</div>
+                    <div class="color-value">Errors, warnings</div>
+                </div>
+                <div class="color-item">
+                    <div class="color-swatch" style="background: var(--color-neutral-dark);"></div>
+                    <div class="color-name">Neutral/Dark</div>
+                    <div class="color-value">#1e293b</div>
+                    <div class="color-value">Dark text, subtle backgrounds</div>
+                </div>
+                <div class="color-item">
+                    <div class="color-swatch" style="background: var(--color-background);"></div>
+                    <div class="color-name">Background</div>
+                    <div class="color-value">#f8fafc</div>
+                    <div class="color-value">Page backgrounds</div>
+                </div>
+                <div class="color-item">
+                    <div class="color-swatch" style="background: var(--color-card); border: 1px solid var(--color-border);"></div>
+                    <div class="color-name">Card</div>
+                    <div class="color-value">#ffffff</div>
+                    <div class="color-value">Cards, content panels</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Navbar -->
+        <div class="guide-section">
+            <h2>Navbar</h2>
+            <div class="component-demo">
+                <div class="sample-navbar">
+                    <div class="logo">ReviewMonitor</div>
+                    <div class="nav-links">
+                        <a href="#">Dashboard</a>
+                        <a href="#">Reviews</a>
+                        <a href="#">Settings</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Buttons -->
+        <div class="guide-section">
+            <h2>Buttons</h2>
+            <div class="component-demo">
+                <div class="button-showcase">
+                    <button class="btn btn-primary">Primary Button</button>
+                    <button class="btn btn-primary btn-large">Large Primary</button>
+                    <button class="btn btn-outline">Outline Button</button>
+                    <button class="btn btn-primary btn-small">Small Button</button>
+                    <button class="btn btn-primary" disabled>Disabled Button</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Cards -->
+        <div class="guide-section">
+            <h2>Cards</h2>
+            <div class="component-demo">
+                <div class="card-showcase">
+                    <div class="sample-card">
+                        <h4>Standard Card</h4>
+                        <p>This is a standard card with the new color palette. It uses the card background color with proper borders.</p>
+                        <button class="btn btn-primary btn-small">Action</button>
+                    </div>
+                    <div class="sample-card">
+                        <h4>Review Card</h4>
+                        <div class="reviewer-name">John Doe</div>
+                        <div class="stars">★★★★★</div>
+                        <p>Great service! Highly recommend to everyone.</p>
+                        <div class="platform">Google</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Alerts -->
+        <div class="guide-section">
+            <h2>Alerts</h2>
+            <div class="component-demo">
+                <div class="alert-showcase">
+                    <div class="alert alert-success">
+                        <span>✓</span>
+                        <span>Success! Your changes have been saved successfully.</span>
+                    </div>
+                    <div class="alert alert-danger">
+                        <span>⚠</span>
+                        <span>Error! There was a problem processing your request.</span>
+                    </div>
+                    <div class="alert alert-info">
+                        <span>ℹ</span>
+                        <span>Info: Your trial expires in 7 days. Upgrade to continue.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Forms -->
+        <div class="guide-section">
+            <h2>Form Elements</h2>
+            <div class="component-demo">
+                <div class="form-showcase">
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <input type="email" placeholder="Enter your email">
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" placeholder="Enter your password">
+                    </div>
+                    <div class="form-group">
+                        <label>Business Name</label>
+                        <input type="text" placeholder="Your business name" value="Sample Business">
+                    </div>
+                    <button class="btn btn-primary btn-full">Submit Form</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Typography -->
+        <div class="guide-section">
+            <h2>Typography</h2>
+            <div class="component-demo">
+                <h1 style="color: var(--color-text-primary); margin-bottom: 10px;">Heading 1</h1>
+                <h2 style="color: var(--color-text-primary); margin-bottom: 10px;">Heading 2</h2>
+                <h3 style="color: var(--color-text-primary); margin-bottom: 10px;">Heading 3</h3>
+                <p style="color: var(--color-text-primary); margin-bottom: 10px;">
+                    Primary text color for main content and headings. This ensures good readability and hierarchy.
+                </p>
+                <p style="color: var(--color-text-secondary); margin-bottom: 10px;">
+                    Secondary text color for supporting information, captions, and less important content.
+                </p>
+                <a href="#" class="link">Link color using primary blue</a>
+            </div>
+        </div>
+        
+        <!-- Dashboard Components -->
+        <div class="guide-section">
+            <h2>Dashboard Components</h2>
+            <div class="component-demo">
+                <div class="demo-grid">
+                    <div class="stat-card">
+                        <div class="stat-value">1,234</div>
+                        <div class="stat-label">Total Reviews</div>
+                    </div>
+                    <div class="stat-card positive">
+                        <div class="stat-value">4.8</div>
+                        <div class="stat-label">Average Rating</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
