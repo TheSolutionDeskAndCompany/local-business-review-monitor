@@ -1,7 +1,8 @@
 {
   "version": 2,
-  "buildCommand": "cd client && npm install && npm run build",
+  "buildCommand": "cd client && npm ci && npm run build",
   "outputDirectory": "client/build",
+  "installCommand": "npm install",
   "builds": [
     {
       "src": "client/package.json",
@@ -31,6 +32,10 @@
     {
       "src": "/favicon.ico",
       "dest": "/client/build/favicon.ico"
+    },
+    {
+      "src": "/(.*\\.(js|css|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot))",
+      "dest": "/client/build/$1"
     },
     {
       "src": "/(.*)",
