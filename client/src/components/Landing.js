@@ -1,74 +1,13 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Bell, Shield, CheckCircle, Mail, MessageSquare, CreditCard } from 'lucide-react';
-import { PRODUCT_NAME, TRIAL_DAYS, SHOW_SOCIAL_PROOF, ALERT_FREQUENCY_COPY } from '../lib/marketing';
+import { TRIAL_DAYS, SHOW_SOCIAL_PROOF, ALERT_FREQUENCY_COPY } from '../lib/marketing';
 
 const Landing = () => {
   const [billingCycle, setBillingCycle] = useState('monthly');
 
   return (
     <div className="landing-page">
-      {/* JSON-LD Schema */}
-      <script type="application/ld+json">
-        {JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "Product",
-          "name": PRODUCT_NAME,
-          "description": "Instant alerts from Google, Yelp, and Facebook. Reply fast from one dashboard. Setup in 2 minutes.",
-          "offers": [
-            {
-              "@type": "Offer",
-              "name": "Basic Plan",
-              "price": billingCycle === 'monthly' ? "19" : "182.4",
-              "priceCurrency": "USD",
-              "billingIncrement": billingCycle === 'monthly' ? "P1M" : "P1Y",
-              "description": `${TRIAL_DAYS}-day free trial included`
-            },
-            {
-              "@type": "Offer",
-              "name": "Pro Plan",
-              "price": billingCycle === 'monthly' ? "39" : "374.4",
-              "priceCurrency": "USD",
-              "billingIncrement": billingCycle === 'monthly' ? "P1M" : "P1Y",
-              "description": `${TRIAL_DAYS}-day free trial included`
-            }
-          ]
-        })}
-      </script>
-      
-      {/* FAQ Schema */}
-      <script type="application/ld+json">
-        {JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "FAQPage",
-          "mainEntity": [
-            {
-              "@type": "Question",
-              "name": "How fast are alerts?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": `You receive ${ALERT_FREQUENCY_COPY} via email and SMS when new reviews are posted.`
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "Which sites do you monitor?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "We monitor Google Business Profile, Facebook, and Yelp for comprehensive review coverage."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "Do I need a credit card for the trial?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": `No credit card required for the ${TRIAL_DAYS}-day free trial.`
-              }
-            }
-          ]
-        })}
-      </script>
       {/* Header */}
       <header className="header">
         <div className="container">
@@ -89,7 +28,7 @@ const Landing = () => {
         <div className="hero-background"></div>
         <div className="container">
           <div className="hero-content">
-            <h1>Never miss a review.</h1>
+            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">Never miss a review.</h1>
             <p className="hero-subtitle">
               Get {ALERT_FREQUENCY_COPY} from Google, Yelp, and Facebook, and reply from one dashboard. Setup in 2 minutes.
             </p>
@@ -107,24 +46,27 @@ const Landing = () => {
             <div className="trust-badges">
               <div className="trust-badge">
                 <CreditCard size={16} />
-                <Link to="/security" aria-label="Learn about Stripe secure payments">Stripe secure payments</Link>
+                <a href="/security" target="_blank" rel="noopener" aria-label="Learn about Stripe secure payments">Stripe secure payments</a>
               </div>
               <div className="trust-badge">
                 <CheckCircle size={16} />
-                <Link to="/login" aria-label="Sign in with Google OAuth">Sign in with Google</Link>
+                <a href="/login" target="_blank" rel="noopener" aria-label="Sign in with Google OAuth">Sign in with Google</a>
               </div>
               <div className="trust-badge">
                 <Shield size={16} />
-                <Link to="/privacy" aria-label="Learn about GDPR and PIPEDA compliance">GDPR + PIPEDA compliant</Link>
+                <a href="/privacy" target="_blank" rel="noopener" aria-label="Learn about GDPR and PIPEDA compliance">GDPR + PIPEDA compliant</a>
               </div>
             </div>
           </div>
           <div className="hero-image">
             <img 
               src="/images/hero-dashboard.png" 
-              alt="ReviewReady dashboard showing review monitoring interface" 
-              className="dashboard-screenshot"
+              alt="ReviewReady dashboard showing review monitoring across Google, Facebook, and Yelp" 
+              width={1280}
+              height={720}
               loading="eager"
+              sizes="(min-width:1024px) 50vw, 100vw"
+              className="dashboard-screenshot rounded-xl shadow-lg ring-1 ring-black/5"
             />
           </div>
         </div>
@@ -133,7 +75,7 @@ const Landing = () => {
       {/* How It Works Section */}
       <section className="how-it-works">
         <div className="container">
-          <h2>How it works</h2>
+          <h2 className="section-title">How it works</h2>
           <div className="steps-grid">
             <div className="step">
               <div className="step-number">1</div>
@@ -157,7 +99,7 @@ const Landing = () => {
       {/* Features Section */}
       <section className="features">
         <div className="container">
-          <h2>Everything you need to monitor reviews</h2>
+          <h2 className="section-title">Everything you need to stay on top of reviews</h2>
           <div className="features-grid">
             <div className="feature">
               <div className="platform-logos">
@@ -219,7 +161,7 @@ const Landing = () => {
       {/* Pricing Preview */}
       <section className="pricing-preview">
         <div className="container">
-          <h2>Simple, Affordable Pricing</h2>
+          <h2 className="section-title">Simple, Affordable Pricing</h2>
           
           {/* Billing Toggle */}
           <div className="billing-toggle">
