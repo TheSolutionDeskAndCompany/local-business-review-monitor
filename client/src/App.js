@@ -8,6 +8,10 @@ import ForgotPassword from './components/ForgotPassword';
 import Dashboard from './components/Dashboard';
 import Landing from './components/Landing';
 import Pricing from './components/Pricing';
+import Privacy from './components/Privacy';
+import Terms from './components/Terms';
+import Security from './components/Security';
+import Contact from './components/Contact';
 import './App.css';
 
 function ProtectedRoute({ children }) {
@@ -31,6 +35,10 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/pricing" element={<Pricing />} />
+            <Route path="/privacy" element={<Privacy />} />
+            <Route path="/terms" element={<Terms />} />
+            <Route path="/security" element={<Security />} />
+            <Route path="/contact" element={<Contact />} />
             <Route 
               path="/dashboard" 
               element={

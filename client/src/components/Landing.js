@@ -1,10 +1,74 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Star, Bell, Shield, Clock, CheckCircle, Award } from 'lucide-react';
+import { Bell, Shield, CheckCircle, Mail, MessageSquare, CreditCard } from 'lucide-react';
+import { PRODUCT_NAME, TRIAL_DAYS, SHOW_SOCIAL_PROOF, ALERT_FREQUENCY_COPY } from '../lib/marketing';
 
 const Landing = () => {
+  const [billingCycle, setBillingCycle] = useState('monthly');
+
   return (
     <div className="landing-page">
+      {/* JSON-LD Schema */}
+      <script type="application/ld+json">
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Product",
+          "name": PRODUCT_NAME,
+          "description": "Instant alerts from Google, Yelp, and Facebook. Reply fast from one dashboard. Setup in 2 minutes.",
+          "offers": [
+            {
+              "@type": "Offer",
+              "name": "Basic Plan",
+              "price": billingCycle === 'monthly' ? "19" : "182.4",
+              "priceCurrency": "USD",
+              "billingIncrement": billingCycle === 'monthly' ? "P1M" : "P1Y",
+              "description": `${TRIAL_DAYS}-day free trial included`
+            },
+            {
+              "@type": "Offer",
+              "name": "Pro Plan",
+              "price": billingCycle === 'monthly' ? "39" : "374.4",
+              "priceCurrency": "USD",
+              "billingIncrement": billingCycle === 'monthly' ? "P1M" : "P1Y",
+              "description": `${TRIAL_DAYS}-day free trial included`
+            }
+          ]
+        })}
+      </script>
+      
+      {/* FAQ Schema */}
+      <script type="application/ld+json">
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "How fast are alerts?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": `You receive ${ALERT_FREQUENCY_COPY} via email and SMS when new reviews are posted.`
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Which sites do you monitor?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "We monitor Google Business Profile, Facebook, and Yelp for comprehensive review coverage."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Do I need a credit card for the trial?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": `No credit card required for the ${TRIAL_DAYS}-day free trial.`
+              }
+            }
+          ]
+        })}
+      </script>
       {/* Header */}
       <header className="header">
         <div className="container">
@@ -25,51 +89,66 @@ const Landing = () => {
         <div className="hero-background"></div>
         <div className="container">
           <div className="hero-content">
-            <div className="hero-badge">
-              <Award size={16} />
-              <span>Trusted by 500+ Local Businesses</span>
-            </div>
-            <h1>Never Miss Another Review Again</h1>
+            <h1>Never miss a review.</h1>
             <p className="hero-subtitle">
-              Stay one step ahead—catch, respond, and turn every review into an opportunity.
-              Get instant email alerts, see all feedback in one dashboard, and impress every customer.
+              Get {ALERT_FREQUENCY_COPY} from Google, Yelp, and Facebook, and reply from one dashboard. Setup in 2 minutes.
             </p>
             <div className="hero-cta">
-              <Link to="/register" className="btn btn-primary btn-large">
-                Start 7-Day Free Trial
+              <Link to="/register" className="btn btn-primary btn-large" aria-label={`Start ${TRIAL_DAYS}-day free trial`}>
+                Start {TRIAL_DAYS}-Day Free Trial
               </Link>
-              <Link to="/pricing" className="btn btn-secondary btn-large">
+              <Link to="/pricing" className="btn btn-secondary btn-large" aria-label="View pricing plans">
                 View Pricing
               </Link>
             </div>
-            <p className="trial-note">No credit card required • Setup in 2 minutes</p>
+            <p className="trial-note">No credit card required</p>
             
             {/* Trust Badges */}
             <div className="trust-badges">
               <div className="trust-badge">
-                <div className="trust-stars">★★★★★</div>
-                <span>4.9/5 Customer Rating</span>
+                <CreditCard size={16} />
+                <a href="#security" aria-label="Learn about Stripe secure payments">Stripe secure payments</a>
               </div>
               <div className="trust-badge">
                 <CheckCircle size={16} />
-                <span>GDPR Compliant</span>
+                <a href="#privacy" aria-label="Learn about Google sign-in">Sign in with Google</a>
               </div>
               <div className="trust-badge">
                 <Shield size={16} />
-                <span>Bank-Level Security</span>
+                <a href="#privacy" aria-label="Learn about GDPR and PIPEDA compliance">GDPR + PIPEDA compliant</a>
               </div>
             </div>
           </div>
           <div className="hero-image">
-            <div className="dashboard-preview">
-              <div className="review-card">
-                <div className="review-header">
-                  <span className="reviewer">Sarah M.</span>
-                  <div className="stars">★★★★★</div>
-                </div>
-                <p>"Amazing service! Will definitely come back."</p>
-                <span className="platform">Google • 2 minutes ago</span>
-              </div>
+            <img 
+              src="/images/hero-dashboard.png" 
+              alt="ReviewReady dashboard showing review monitoring interface" 
+              className="dashboard-screenshot"
+              loading="eager"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* How It Works Section */}
+      <section className="how-it-works">
+        <div className="container">
+          <h2>How it works</h2>
+          <div className="steps-grid">
+            <div className="step">
+              <div className="step-number">1</div>
+              <h3>Connect your locations</h3>
+              <p>Sign in with Google. Import from Google, CSV, or add manually.</p>
+            </div>
+            <div className="step">
+              <div className="step-number">2</div>
+              <h3>Get {ALERT_FREQUENCY_COPY}</h3>
+              <p>Email and SMS alerts for new reviews.</p>
+            </div>
+            <div className="step">
+              <div className="step-number">3</div>
+              <h3>Reply fast</h3>
+              <p>Jump straight to the review from your inbox or dashboard.</p>
             </div>
           </div>
         </div>
@@ -78,76 +157,121 @@ const Landing = () => {
       {/* Features Section */}
       <section className="features">
         <div className="container">
-          <h2>Everything You Need to Monitor Reviews</h2>
+          <h2>Everything you need to monitor reviews</h2>
           <div className="features-grid">
             <div className="feature">
+              <div className="platform-logos">
+                <span className="platform-logo google">G</span>
+                <span className="platform-logo facebook">f</span>
+                <span className="platform-logo yelp">Y</span>
+              </div>
+              <h3>Monitors</h3>
+              <p>Google Business Profile, Facebook, Yelp with platform logos.</p>
+            </div>
+            <div className="feature">
+              <div className="feature-icons">
+                <Mail size={20} />
+                <MessageSquare size={20} />
+              </div>
+              <h3>Alerts</h3>
+              <p>Email + SMS, configurable per location.</p>
+            </div>
+            <div className="feature">
               <Bell className="feature-icon" />
-              <h3>Instant Notifications</h3>
-              <p>Get email or SMS alerts the moment a new review is posted</p>
-            </div>
-            <div className="feature">
-              <Shield className="feature-icon" />
-              <h3>Reputation Protection</h3>
-              <p>Respond quickly to negative reviews before they hurt your business</p>
-            </div>
-            <div className="feature">
-              <Clock className="feature-icon" />
-              <h3>Save Time</h3>
-              <p>No more manually checking multiple review sites every day</p>
+              <h3>Dashboard</h3>
+              <p>All feedback in one place, exports, multi-location support.</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* Social Proof */}
-      <section className="social-proof">
-        <div className="container">
-          <h2>Join 500+ Local Businesses</h2>
-          <div className="testimonials">
-            <div className="testimonial">
-              <p>"ReviewReady helped us catch a bad review within minutes. We responded quickly and turned an angry customer into a happy one!"</p>
-              <div className="author">
-                <strong>Mike Chen</strong>
-                <span>Chen's Restaurant</span>
+      {SHOW_SOCIAL_PROOF && (
+        <section className="social-proof">
+          <div className="container">
+            <h2>Trusted by 500+ Local Businesses</h2>
+            <div className="testimonials">
+              <div className="testimonial">
+                <p>"ReviewReady helped us catch a bad review within minutes. We responded quickly and turned an angry customer into a happy one!"</p>
+                <div className="author">
+                  <img src="/images/testimonial-mike.jpg" alt="Mike Chen" className="author-photo" />
+                  <div>
+                    <strong>Mike Chen</strong>
+                    <span>Chen's Restaurant, Toronto</span>
+                  </div>
+                </div>
               </div>
-            </div>
-            <div className="testimonial">
-              <p>"I used to check Google and Yelp manually every morning. Now I just get alerts and can focus on running my business."</p>
-              <div className="author">
-                <strong>Lisa Rodriguez</strong>
-                <span>Rodriguez Auto Repair</span>
+              <div className="testimonial">
+                <p>"I used to check Google and Yelp manually every morning. Now I just get alerts and can focus on running my business."</p>
+                <div className="author">
+                  <img src="/images/testimonial-lisa.jpg" alt="Lisa Rodriguez" className="author-photo" />
+                  <div>
+                    <strong>Lisa Rodriguez</strong>
+                    <span>Rodriguez Auto Repair, Vancouver</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* Pricing Preview */}
       <section className="pricing-preview">
         <div className="container">
           <h2>Simple, Affordable Pricing</h2>
+          
+          {/* Billing Toggle */}
+          <div className="billing-toggle">
+            <span className={billingCycle === 'monthly' ? 'active' : ''}>Monthly</span>
+            <button 
+              className="toggle-switch" 
+              onClick={() => setBillingCycle(billingCycle === 'monthly' ? 'annual' : 'monthly')}
+              aria-label="Toggle between monthly and annual billing"
+            >
+              <div className={`toggle-slider ${billingCycle === 'annual' ? 'annual' : 'monthly'}`}></div>
+            </button>
+            <span className={billingCycle === 'annual' ? 'active' : ''}>
+              Annual <span className="savings">(Save 20%)</span>
+            </span>
+          </div>
+
           <div className="pricing-cards">
             <div className="pricing-card">
               <h3>Basic</h3>
-              <div className="price">$19<span>/month</span></div>
+              <div className="price">
+                ${billingCycle === 'monthly' ? '19' : '15.20'}
+                <span>/{billingCycle === 'monthly' ? 'month' : 'month'}</span>
+                {billingCycle === 'annual' && <div className="billed-annually">Billed annually</div>}
+              </div>
               <ul>
                 <li><CheckCircle className="check" /> Google Business Profile monitoring</li>
-                <li><CheckCircle className="check" /> Email notifications</li>
-                <li><CheckCircle className="check" /> Review dashboard</li>
-                <li><CheckCircle className="check" /> Export reports</li>
+                <li><CheckCircle className="check" /> Email alerts</li>
+                <li><CheckCircle className="check" /> Dashboard</li>
+                <li><CheckCircle className="check" /> Exports</li>
               </ul>
-              <Link to="/register" className="btn btn-primary">Start Free Trial</Link>
+              <Link to="/register" className="btn btn-primary" aria-label={`Start ${TRIAL_DAYS}-day free trial for Basic plan`}>
+                Start {TRIAL_DAYS}-Day Free Trial
+              </Link>
+              <p className="trial-note">No credit card required</p>
             </div>
             <div className="pricing-card featured">
               <h3>Pro</h3>
-              <div className="price">$39<span>/month</span></div>
+              <div className="price">
+                ${billingCycle === 'monthly' ? '39' : '31.20'}
+                <span>/{billingCycle === 'monthly' ? 'month' : 'month'}</span>
+                {billingCycle === 'annual' && <div className="billed-annually">Billed annually</div>}
+              </div>
               <ul>
                 <li><CheckCircle className="check" /> Everything in Basic</li>
-                <li><CheckCircle className="check" /> Yelp & Facebook monitoring</li>
-                <li><CheckCircle className="check" /> SMS notifications</li>
+                <li><CheckCircle className="check" /> Facebook + Yelp monitoring</li>
+                <li><CheckCircle className="check" /> SMS alerts</li>
                 <li><CheckCircle className="check" /> Priority support</li>
               </ul>
-              <Link to="/register" className="btn btn-primary">Start Free Trial</Link>
+              <Link to="/register" className="btn btn-primary" aria-label={`Start ${TRIAL_DAYS}-day free trial for Pro plan`}>
+                Start {TRIAL_DAYS}-Day Free Trial
+              </Link>
+              <p className="trial-note">No credit card required</p>
             </div>
           </div>
         </div>
@@ -156,10 +280,10 @@ const Landing = () => {
       {/* CTA Section */}
       <section className="final-cta">
         <div className="container">
-          <h2>Ready to Protect Your Reputation?</h2>
+          <h2>Ready to protect your reputation?</h2>
           <p>Join hundreds of local businesses who never miss a review</p>
-          <Link to="/register" className="btn btn-primary btn-large">
-            Start Your Free Trial
+          <Link to="/register" className="btn btn-primary btn-large" aria-label={`Start your ${TRIAL_DAYS}-day free trial`}>
+            Start Your {TRIAL_DAYS}-Day Free Trial
           </Link>
         </div>
       </section>
@@ -169,17 +293,20 @@ const Landing = () => {
         <div className="container">
           <div className="footer-content">
             <div className="logo">
-              <Star className="icon" />
-              <span>ReviewReady</span>
+              <img src="/Review-Ready-logo.png" alt="ReviewReady" className="footer-logo" />
             </div>
             <div className="footer-links">
               <Link to="/pricing">Pricing</Link>
               <Link to="/login">Login</Link>
-              <a href="mailto:support@reviewmonitor.com">Support</a>
+              <a href="mailto:support@reviewready.ca">Support</a>
+              <Link to="/privacy" id="privacy">Privacy</Link>
+              <Link to="/terms">Terms</Link>
+              <Link to="/security" id="security">Security</Link>
+              <Link to="/contact">Contact</Link>
             </div>
           </div>
           <div className="footer-bottom">
-            <p>&copy; 2025 ReviewReady / The Solution Desk Inc. All rights reserved.</p>
+            <p>&copy; 2025 ReviewReady / The Solution Desk Inc.</p>
           </div>
         </div>
       </footer>

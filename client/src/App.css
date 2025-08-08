@@ -2036,6 +2036,348 @@ body {
   margin: 0;
 }
 
+/* How It Works Section */
+.how-it-works {
+  padding: 80px 0;
+  background: var(--color-card);
+}
+
+.how-it-works h2 {
+  text-align: center;
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 60px;
+  color: var(--color-text-primary);
+}
+
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 40px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.step {
+  text-align: center;
+  padding: 30px 20px;
+}
+
+.step-number {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0 auto 20px;
+}
+
+.step h3 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: var(--color-text-primary);
+}
+
+.step p {
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+
+/* Updated Features Section */
+.platform-logos {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+  justify-content: center;
+}
+
+.platform-logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 18px;
+  color: white;
+}
+
+.platform-logo.google {
+  background: #4285f4;
+}
+
+.platform-logo.facebook {
+  background: #1877f2;
+}
+
+.platform-logo.yelp {
+  background: #d32323;
+}
+
+.feature-icons {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+  justify-content: center;
+  color: var(--color-primary);
+}
+
+/* Billing Toggle */
+.billing-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 40px;
+  font-weight: 600;
+}
+
+.billing-toggle span {
+  color: var(--color-text-secondary);
+  transition: color 0.2s ease;
+}
+
+.billing-toggle span.active {
+  color: var(--color-text-primary);
+}
+
+.toggle-switch {
+  position: relative;
+  width: 60px;
+  height: 30px;
+  background: var(--color-border);
+  border-radius: 15px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.toggle-switch:hover {
+  background: var(--color-border-light);
+}
+
+.toggle-slider {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 24px;
+  height: 24px;
+  background: white;
+  border-radius: 50%;
+  transition: transform 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.toggle-slider.annual {
+  transform: translateX(30px);
+}
+
+.savings {
+  color: var(--color-primary);
+  font-size: 14px;
+}
+
+.billed-annually {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  margin-top: 4px;
+}
+
+/* Updated Pricing Cards */
+.pricing-card .trial-note {
+  font-size: 14px;
+  color: var(--color-text-secondary);
+  margin-top: 12px;
+  text-align: center;
+}
+
+/* Trust Badges Updates */
+.trust-badges {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 30px;
+}
+
+.trust-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-text-secondary);
+  font-size: 14px;
+}
+
+.trust-badge a {
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.trust-badge a:hover {
+  color: var(--color-accent-blue);
+}
+
+/* Hero Image Updates */
+.dashboard-screenshot {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--color-border);
+}
+
+/* Legal Pages */
+.legal-page {
+  min-height: 100vh;
+  background: var(--color-background);
+}
+
+.legal-content {
+  padding: 80px 0;
+}
+
+.legal-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.legal-icon {
+  color: var(--color-primary);
+  margin-bottom: 20px;
+}
+
+.legal-header h1 {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: var(--color-text-primary);
+}
+
+.legal-header p {
+  color: var(--color-text-secondary);
+  font-size: 16px;
+}
+
+.legal-body {
+  max-width: 800px;
+  margin: 0 auto;
+  background: var(--color-card);
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.legal-body section {
+  margin-bottom: 40px;
+}
+
+.legal-body section:last-child {
+  margin-bottom: 0;
+}
+
+.legal-body h2 {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: var(--color-text-primary);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.legal-body p {
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+.legal-body p:last-child {
+  margin-bottom: 0;
+}
+
+.legal-body ul {
+  list-style: none;
+  padding: 0;
+}
+
+.legal-body li {
+  padding: 8px 0;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+
+.legal-body a {
+  color: var(--color-accent-blue);
+  text-decoration: none;
+}
+
+.legal-body a:hover {
+  text-decoration: underline;
+}
+
+.legal-footer {
+  text-align: center;
+  margin-top: 40px;
+}
+
+/* Footer Updates */
+.footer-logo {
+  height: 32px;
+  width: auto;
+}
+
+.footer-links {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .steps-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  
+  .billing-toggle {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .trust-badges {
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+  
+  .legal-body {
+    padding: 24px;
+    margin: 0 16px;
+  }
+  
+  .footer-links {
+    justify-content: center;
+    gap: 16px;
+  }
+  
+  .hero-content {
+    text-align: center;
+  }
+  
+  .hero-image {
+    margin-top: 40px;
+  }
+}
+
 .checkmark {
   display: none;
 }
