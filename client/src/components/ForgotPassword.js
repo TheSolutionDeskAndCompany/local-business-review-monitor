@@ -16,13 +16,30 @@ const ForgotPassword = () => {
     setLoading(true);
 
     try {
-      // Simulate API call for forgot password
-      // In a real app, this would call your backend API
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      
-      setEmailSent(true);
-      setMessage('Password reset instructions have been sent to your email address.');
+      const response = await fetch('/api/auth/forgot-password', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setEmailSent(true);
+        setMessage(data.message);
+        
+        // In development, show the reset link
+        if (data.resetLink) {
+          console.log('Password reset link:', data.resetLink);
+          setMessage(data.message + ' Check the console for the reset link (development mode).');
+        }
+      } else {
+        setError(data.message || 'Failed to send reset email. Please try again.');
+      }
     } catch (err) {
+      console.error('Forgot password error:', err);
       setError('Failed to send reset email. Please try again.');
     }
     
