@@ -10,11 +10,11 @@ We currently support the following versions with security updates:
 
 ## Reporting a Vulnerability
 
-We take security seriously. If you discover a security vulnerability in ReviewMonitor, please report it responsibly.
+We take security seriously. If you discover a security vulnerability in ReviewReady, please report it responsibly.
 
 ### How to Report
 
-1. **Email**: Send details to security@reviewmonitor.com
+1. **Email**: Send details to security@reviewready.com
 2. **Include**: 
    - Description of the vulnerability
    - Steps to reproduce
@@ -48,4 +48,4 @@ Please do not:
 - Access user data or disrupt our services
 - Perform testing that could harm our users
 
-We appreciate your help in keeping ReviewMonitor secure!
+We appreciate your help in keeping ReviewReady secure!
