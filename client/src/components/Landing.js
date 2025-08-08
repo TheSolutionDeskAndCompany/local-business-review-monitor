@@ -78,7 +78,7 @@ const Landing = () => {
             </div>
             <div className="nav-links">
               <Link to="/login" className="btn btn-outline">Login</Link>
-              <Link to="/register" className="btn btn-primary">Start Free Trial</Link>
+              <Link to="/register" className="btn btn-primary">Start 7-Day Free Trial</Link>
             </div>
           </div>
         </div>
@@ -107,15 +107,15 @@ const Landing = () => {
             <div className="trust-badges">
               <div className="trust-badge">
                 <CreditCard size={16} />
-                <a href="#security" aria-label="Learn about Stripe secure payments">Stripe secure payments</a>
+                <Link to="/security" aria-label="Learn about Stripe secure payments">Stripe secure payments</Link>
               </div>
               <div className="trust-badge">
                 <CheckCircle size={16} />
-                <a href="#privacy" aria-label="Learn about Google sign-in">Sign in with Google</a>
+                <Link to="/login" aria-label="Sign in with Google OAuth">Sign in with Google</Link>
               </div>
               <div className="trust-badge">
                 <Shield size={16} />
-                <a href="#privacy" aria-label="Learn about GDPR and PIPEDA compliance">GDPR + PIPEDA compliant</a>
+                <Link to="/privacy" aria-label="Learn about GDPR and PIPEDA compliance">GDPR + PIPEDA compliant</Link>
               </div>
             </div>
           </div>
@@ -161,12 +161,12 @@ const Landing = () => {
           <div className="features-grid">
             <div className="feature">
               <div className="platform-logos">
-                <span className="platform-logo google">G</span>
-                <span className="platform-logo facebook">f</span>
-                <span className="platform-logo yelp">Y</span>
+                <span className="platform-logo google" aria-label="Google Business Profile" role="img">G</span>
+                <span className="platform-logo facebook" aria-label="Facebook" role="img">f</span>
+                <span className="platform-logo yelp" aria-label="Yelp" role="img">Y</span>
               </div>
               <h3>Monitors</h3>
-              <p>Google Business Profile, Facebook, Yelp with platform logos.</p>
+              <p>Google Business Profile, Facebook, Yelp.</p>
             </div>
             <div className="feature">
               <div className="feature-icons">
@@ -281,7 +281,7 @@ const Landing = () => {
       <section className="final-cta">
         <div className="container">
           <h2>Ready to protect your reputation?</h2>
-          <p>Join hundreds of local businesses who never miss a review</p>
+          <p>Join businesses who never miss a review.</p>
           <Link to="/register" className="btn btn-primary btn-large" aria-label={`Start your ${TRIAL_DAYS}-day free trial`}>
             Start Your {TRIAL_DAYS}-Day Free Trial
           </Link>

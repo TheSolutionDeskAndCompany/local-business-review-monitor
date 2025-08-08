@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Shield, Lock, CreditCard } from 'lucide-react';
+import { Shield } from 'lucide-react';
 
 const Security = () => {
   return (
@@ -13,50 +13,62 @@ const Security = () => {
             </div>
             <div className="nav-links">
               <Link to="/login" className="btn btn-outline">Login</Link>
-              <Link to="/register" className="btn btn-primary">Start Free Trial</Link>
+              <Link to="/register" className="btn btn-primary">Start 7-Day Free Trial</Link>
             </div>
           </div>
         </div>
       </header>
 
-      <main className="legal-content">
-        <div className="container">
-          <div className="legal-header">
-            <Shield size={48} className="legal-icon" />
-            <h1>Security</h1>
-            <p>How we protect your data</p>
-          </div>
+      <main className="max-w-3xl mx-auto px-4 py-12 space-y-8">
+        <div className="text-center">
+          <Shield size={48} className="mx-auto mb-4 text-green-600" />
+          <h1 className="text-4xl font-bold mb-2">Security</h1>
+          <p className="text-gray-600">How ReviewReady protects your data.</p>
+        </div>
 
-          <div className="legal-body">
-            <section>
-              <h2><Lock size={24} /> Data Encryption</h2>
-              <p>All data is encrypted in transit using TLS 1.3 and at rest using AES-256 encryption. Your business data and review information are always protected.</p>
-            </section>
+        <div className="prose prose-lg max-w-none">
+          <h2>Our approach</h2>
+          <p>We follow industry-standard practices to keep customer data safe.</p>
 
-            <section>
-              <h2><CreditCard size={24} /> Secure Payments</h2>
-              <p>We use Stripe for all payment processing. We never store your credit card information on our servers.</p>
-            </section>
+          <h2>Application security</h2>
+          <ul>
+            <li>Enforced HTTPS; HSTS enabled.</li>
+            <li>Authentication with secure password hashing; optional OAuth (Google).</li>
+            <li>Role-based access for team features (if enabled).</li>
+          </ul>
 
-            <section>
-              <h2><Shield size={24} /> Infrastructure Security</h2>
-              <p>Our infrastructure is hosted on secure cloud platforms with regular security audits and monitoring.</p>
-            </section>
+          <h2>Data protection</h2>
+          <ul>
+            <li>Encryption <strong>in transit</strong> (TLS) and <strong>at rest</strong> (cloud-provider encryption).</li>
+            <li>Secrets stored in managed secrets/ENV, rotated when necessary.</li>
+            <li>Backups for critical data with periodic restore tests.</li>
+          </ul>
 
-            <section>
-              <h2>Compliance</h2>
-              <p>We maintain compliance with GDPR, PIPEDA, and other relevant data protection regulations.</p>
-            </section>
+          <h2>Infrastructure</h2>
+          <ul>
+            <li>Hosted on <strong>Vercel</strong> with regional CDN and DDoS protections.</li>
+            <li>Separate production/staging environments.</li>
+          </ul>
 
-            <section>
-              <h2>Contact Us</h2>
-              <p>For security-related questions, contact us at <a href="mailto:security@reviewready.ca">security@reviewready.ca</a></p>
-            </section>
-          </div>
+          <h2>Operational security</h2>
+          <ul>
+            <li>Principle of least privilege for staff access.</li>
+            <li>Audit logging for security-sensitive actions.</li>
+            <li>Vendor risk review for subprocessors.</li>
+          </ul>
 
-          <div className="legal-footer">
-            <Link to="/" className="btn btn-outline">Back to Home</Link>
-          </div>
+          <h2>Responsible disclosure</h2>
+          <p>Found a security issue? Email <strong><a href="mailto:security@reviewready.ca">security@reviewready.ca</a></strong>. We'll acknowledge receipt and work to resolve promptly. Please avoid accessing other users' data and allow us time to fix the issue.</p>
+
+          <h2>Subprocessors</h2>
+          <p>Payments: <strong>Stripe</strong><br />
+          Hosting: <strong>Vercel</strong><br />
+          Email: <strong>Email provider</strong><br />
+          SMS: <strong>SMS provider</strong></p>
+        </div>
+
+        <div className="text-center">
+          <Link to="/" className="btn btn-outline">Back to Home</Link>
         </div>
       </main>
     </div>
