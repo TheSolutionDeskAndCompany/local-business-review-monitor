@@ -17,6 +17,7 @@
   --color-text-secondary: #64748b; /* Secondary text */
   --color-border: #e2e8f0; /* Border color */
   --color-border-light: #f1f5f9; /* Light border */
+  --color-navbar: #1e293b; /* Dark neutral navbar background */
 }
 
 /* Reset and base styles */

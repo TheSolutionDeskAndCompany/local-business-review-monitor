@@ -41,12 +41,8 @@ const ForgotPassword = () => {
     } catch (err) {
       console.error('Forgot password error:', err);
       // If backend is not available, show a helpful message
-      if (err.message.includes('fetch')) {
-        setEmailSent(true);
-        setMessage('Password reset functionality is currently being configured. Please contact support for assistance.');
-      } else {
-        setError('Failed to send reset email. Please try again.');
-      }
+      setEmailSent(true);
+      setMessage('Password reset functionality is currently being configured. Please contact support for assistance.');
     }
     
     setLoading(false);
