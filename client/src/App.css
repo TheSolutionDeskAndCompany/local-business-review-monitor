@@ -224,7 +224,7 @@ body {
   max-width: 600px;
   height: auto;
   display: block;
-  margin: 0 auto;
+  margin: 0 auto 20px auto;
   opacity: 0.9;
   filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
 }
