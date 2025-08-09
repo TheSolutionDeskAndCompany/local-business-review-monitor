@@ -38,14 +38,35 @@ const Login = () => {
 
   return (
     <div className="auth-page">
-      <div className="auth-container">
-        <div className="auth-header">
-          <Link to="/" className="logo">
-            <img src="/Review-Ready-logo.png" alt="ReviewReady" className="logo-image" />
+      {/* Auth Header with Home Button */}
+      <header className="sticky top-0 z-50 bg-white/95 backdrop-blur border-b">
+        <div className="mx-auto max-w-7xl px-4 py-3.5 flex items-center justify-between">
+          <Link to="/" className="flex items-center gap-3" aria-label="ReviewReady home">
+            <img
+              src="/Review-Ready-logo.png"
+              alt=""
+              className="h-10 w-10 md:h-12 md:w-12"
+            />
+            <span className="text-xl md:text-2xl font-semibold tracking-tight text-gray-900">
+              ReviewReady
+            </span>
           </Link>
-          <h1>Welcome Back</h1>
-          <p>Sign in to your account to continue monitoring reviews</p>
+          <Link
+            to="/"
+            className="text-sm font-medium hover:text-brand-700"
+          >
+            ← Back to Home
+          </Link>
         </div>
+      </header>
+
+      <main className="pt-24">
+        <div className="auth-container">
+          <div className="auth-header">
+            <img src="/Review-Ready-logo.png" alt="ReviewReady" className="h-12 w-12 mx-auto mb-4" />
+            <h1>Welcome Back</h1>
+            <p>Sign in to your account to continue monitoring reviews</p>
+          </div>
 
         <form onSubmit={handleSubmit} className="auth-form">
           {error && <div className="error-message">{error}</div>}
@@ -90,13 +111,14 @@ const Login = () => {
           </button>
         </form>
 
-        <div className="auth-footer">
-          <p>
-            Don't have an account? {' '}
-            <Link to="/register" className="link">Start your free trial</Link>
-          </p>
+          <div className="auth-footer">
+            <p>
+              Don't have an account? {' '}
+              <Link to="/register" className="link">Start your free trial</Link>
+            </p>
+          </div>
         </div>
-      </div>
+      </main>
     </div>
   );
 };
