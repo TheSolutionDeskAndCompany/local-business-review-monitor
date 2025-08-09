@@ -66,6 +66,29 @@ const Landing = () => {
         </div>
       </section>
 
+      {/* Platform Logos Section */}
+      <section className="py-8 bg-gray-50/50">
+        <div className="mx-auto max-w-6xl px-4">
+          <p className="text-center text-sm font-medium text-gray-600 mb-6">Integrates with the platforms you use</p>
+          <div className="flex justify-center items-center gap-12 flex-wrap">
+            <div className="flex items-center gap-3">
+              <div className="platform-logo-large google" aria-label="Google Business Profile" role="img">G</div>
+              <span className="text-lg font-semibold text-gray-700">Google Business</span>
+            </div>
+            <div className="flex items-center gap-3 opacity-60">
+              <div className="platform-logo-large facebook" aria-label="Facebook" role="img">f</div>
+              <span className="text-lg font-semibold text-gray-700">Facebook</span>
+              <span className="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full">Coming Soon</span>
+            </div>
+            <div className="flex items-center gap-3 opacity-60">
+              <div className="platform-logo-large yelp" aria-label="Yelp" role="img">Y</div>
+              <span className="text-lg font-semibold text-gray-700">Yelp</span>
+              <span className="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full">Coming Soon</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* How It Works Section */}
       <section className="py-12 sm:py-16">
         <div className="mx-auto max-w-6xl px-4">
