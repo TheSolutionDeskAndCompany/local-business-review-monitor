@@ -47,15 +47,15 @@ const Landing = () => {
             {/* Trust Badges */}
             <div className="trust-badges">
               <div className="trust-badge">
-                <CreditCard size={16} />
+                <CreditCard size={24} aria-hidden="true" />
                 <a href="/security" target="_blank" rel="noopener" aria-label="Learn about Stripe secure payments" title={`Billing questions? Email ${CONTACT.billing}`}>Stripe secure payments</a>
               </div>
               <div className="trust-badge">
-                <CheckCircle size={16} />
+                <CheckCircle size={24} aria-hidden="true" />
                 <a href="/login" target="_blank" rel="noopener" aria-label="Sign in with Google OAuth">Sign in with Google</a>
               </div>
               <div className="trust-badge">
-                <Shield size={16} />
+                <Shield size={24} aria-hidden="true" />
                 <a href="/privacy" target="_blank" rel="noopener" aria-label="Learn about GDPR and PIPEDA compliance">GDPR + PIPEDA compliant</a>
               </div>
             </div>
@@ -67,24 +67,24 @@ const Landing = () => {
       </section>
 
       {/* How It Works Section */}
-      <section className="how-it-works">
-        <div className="container">
-          <h2 className="section-title">How it works</h2>
-          <div className="steps-grid">
-            <div className="step">
-              <div className="step-number">1</div>
-              <h3>Connect your locations</h3>
-              <p>Sign in with Google. Import from Google, CSV, or add manually.</p>
+      <section className="py-12 sm:py-16">
+        <div className="mx-auto max-w-6xl px-4">
+          <h2 className="text-center text-3xl font-bold tracking-tight sm:text-4xl">How it works</h2>
+          <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10 items-start">
+            <div className="text-center">
+              <div className="inline-flex items-center justify-center rounded-full bg-brand-600 text-white font-semibold h-10 w-10 text-base mb-4">1</div>
+              <h3 className="text-lg font-semibold mb-2">Connect your locations</h3>
+              <p className="text-gray-600">Sign in with Google. Import from Google, CSV, or add manually.</p>
             </div>
-            <div className="step">
-              <div className="step-number">2</div>
-              <h3>Get {ALERT_FREQUENCY_COPY}</h3>
-              <p>Email and SMS alerts for new reviews.</p>
+            <div className="text-center">
+              <div className="inline-flex items-center justify-center rounded-full bg-brand-600 text-white font-semibold h-10 w-10 text-base mb-4">2</div>
+              <h3 className="text-lg font-semibold mb-2">Get {ALERT_FREQUENCY_COPY}</h3>
+              <p className="text-gray-600">Email and SMS alerts for new reviews.</p>
             </div>
-            <div className="step">
-              <div className="step-number">3</div>
-              <h3>Reply fast</h3>
-              <p>Jump straight to the review from your inbox or dashboard.</p>
+            <div className="text-center">
+              <div className="inline-flex items-center justify-center rounded-full bg-brand-600 text-white font-semibold h-10 w-10 text-base mb-4">3</div>
+              <h3 className="text-lg font-semibold mb-2">Reply fast</h3>
+              <p className="text-gray-600">Jump straight to the review from your inbox or dashboard.</p>
             </div>
           </div>
         </div>

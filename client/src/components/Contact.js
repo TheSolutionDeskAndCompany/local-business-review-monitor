@@ -1,22 +1,78 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Mail, MessageCircle, Shield, CreditCard, Users } from 'lucide-react';
 import { CONTACT } from '../lib/contacts';
 
-function CopyButton({ text }) {
+function mailtoHref(email, subject, body) {
+  const params = new URLSearchParams({ subject, body });
+  return `mailto:${email}?${params.toString()}`;
+}
+
+function ContactCard({ title, desc, email, subject, body, icon: Icon }) {
+  const [copied, setCopied] = useState(false);
+  const href = mailtoHref(email, subject, body);
+  
+  const handleCopy = async () => {
+    await navigator.clipboard.writeText(body);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 1500);
+  };
+  
   return (
-    <button
-      onClick={() => navigator.clipboard.writeText(text)}
-      className="text-sm rounded-md border px-3 py-1 hover:bg-black/5"
-      aria-label="Copy template"
-    >
-      Copy
-    </button>
+    <div className="bg-white p-6 rounded-lg border shadow-sm">
+      <Icon className="w-8 h-8 text-green-600 mb-4" aria-hidden="true" />
+      <h3 className="text-lg font-semibold mb-2">{title}</h3>
+      <p className="text-gray-600 mb-4">{desc}</p>
+      <div className="flex gap-2 mb-3">
+        <a
+          href={href}
+          className="inline-flex items-center rounded-md bg-brand-600 px-3 py-2 text-sm font-medium text-white hover:bg-brand-700 focus-visible:ring-2 focus-visible:ring-brand-500"
+          aria-label={`Email ${title}`}
+        >
+          Email {title}
+        </a>
+        <button
+          onClick={handleCopy}
+          className="inline-flex items-center rounded-md border px-3 py-2 text-sm hover:bg-black/5"
+          aria-label={`Copy ${title} template`}
+        >
+          {copied ? "Copied!" : "Copy template"}
+        </button>
+      </div>
+      <p className="text-xs text-gray-500">{email}</p>
+    </div>
+  );
+}
+
+function TemplateCard({ title, body }) {
+  const [copied, setCopied] = useState(false);
+  
+  const handleCopy = async () => {
+    await navigator.clipboard.writeText(body);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 1500);
+  };
+  
+  return (
+    <div className="rounded-xl border p-4">
+      <div className="flex items-center justify-between">
+        <h3 className="text-sm font-medium">{title}</h3>
+        <button
+          onClick={handleCopy}
+          className="text-xs rounded-md border px-2 py-1 hover:bg-black/5"
+          aria-label={`Copy ${title}`}
+        >
+          {copied ? "Copied!" : "Copy"}
+        </button>
+      </div>
+      <pre className="mt-3 whitespace-pre-wrap text-sm bg-gray-50 p-4 rounded-md border">{body}</pre>
+    </div>
   );
 }
 
 const Contact = () => {
-  const accessExportTemplate = `Subject: Data access/export request — ReviewReady
+  const TPL = {
+    privacyAccess: `Subject: Data access/export request — ReviewReady
 
 Hello ReviewReady Privacy Team,
 
@@ -29,9 +85,9 @@ Request type: Access + Export
 Please confirm receipt and the expected timeline.
 
 Thank you,
-[your name]`;
+[your name]`,
 
-  const deletionTemplate = `Subject: Delete my account and personal data — ReviewReady
+    privacyDelete: `Subject: Delete my account and personal data — ReviewReady
 
 Hello ReviewReady Privacy Team,
 
@@ -42,9 +98,9 @@ Business name(s): [business name(s)]
 I understand this action is permanent and may affect billing/exports.
 
 Thank you,
-[your name]`;
+[your name]`,
 
-  const marketingOptOutTemplate = `Subject: Unsubscribe from marketing — ReviewReady
+    optOut: `Subject: Unsubscribe from marketing — ReviewReady
 
 Hello,
 
@@ -53,9 +109,9 @@ Please remove this email from all marketing communications. Transactional emails
 Account email: [your account email]
 
 Thank you,
-[your name]`;
+[your name]`,
 
-  const securityReportTemplate = `Subject: Security report — ReviewReady
+    security: `Subject: Security report — ReviewReady
 
 Hello Security Team,
 
@@ -71,7 +127,17 @@ I confirm I will not access other users' data and will allow a reasonable time t
 
 Thank you,
 [your name or handle]
-Preferred contact: [email]`;
+Preferred contact: [email]`
+  };
+
+  const CARDS = [
+    { title: "Support", desc: "Technical issues, setup help.", email: CONTACT.support, subject: "Support request — ReviewReady", body: "Hello Support,\n\n[describe the issue]\n\nThanks,\n[your name]", icon: Mail },
+    { title: "Sales", desc: "Pricing, multi-location, procurement.", email: CONTACT.sales, subject: "Sales inquiry — ReviewReady", body: "Hello Sales,\n\n[what you need]\n\nThanks,\n[your name]", icon: Users },
+    { title: "Billing", desc: "Invoices, charges, payment methods.", email: CONTACT.billing, subject: "Billing question — ReviewReady", body: "Hello Billing,\n\n[details]\n\nThanks,\n[your name]", icon: CreditCard },
+    { title: "Privacy", desc: "Access/export/deletion (PIPEDA/GDPR).", email: CONTACT.privacy, subject: "Privacy request — ReviewReady", body: TPL.privacyAccess, icon: Shield },
+    { title: "Security", desc: "Report a vulnerability (24h ack).", email: CONTACT.security, subject: "Security report — ReviewReady", body: TPL.security, icon: Shield },
+    { title: "Abuse", desc: "Spam, impersonation, misuse reports.", email: CONTACT.abuse, subject: "Abuse report — ReviewReady", body: "Hello,\n\n[describe abuse/misuse]\n\nThanks,\n[your name]", icon: MessageCircle }
+  ];
 
   return (
     <div className="legal-page">
@@ -90,140 +156,15 @@ Preferred contact: [email]`;
       </header>
 
       <main className="max-w-3xl mx-auto px-4 py-12 space-y-10">
-        <div className="text-center">
-          <MessageCircle size={48} className="mx-auto mb-4 text-green-600" />
-          <h1 className="text-4xl font-bold mb-2">Contact us</h1>
-          <p className="text-gray-600">We typically respond within 1 business day.</p>
+        <div className="text-center mb-8">
+          <MessageCircle size={48} className="mx-auto mb-4 text-green-600" aria-hidden="true" />
+          <h1 className="text-3xl font-bold tracking-tight">Contact us</h1>
+          <p className="mt-1 text-sm text-gray-600">Hours: Mon–Fri 9–5 PT • Typical reply: 1 business day • Security: 24h acknowledgement</p>
         </div>
 
         {/* Contact Cards */}
-        <div className="grid gap-6 lg:grid-cols-3">
-          {/* Support */}
-          <div className="bg-white p-6 rounded-lg border shadow-sm">
-            <div className="flex items-center space-y-2">
-              <Mail className="w-8 h-8 text-green-600 mb-2" />
-              <div>
-                <h2 className="text-xl font-semibold mb-2">Support</h2>
-                <p className="text-gray-600 mb-3">Technical help and account questions</p>
-                <a 
-                  href={`mailto:${CONTACT.support}`}
-                  className="text-green-600 font-medium hover:text-green-700"
-                  aria-label={`Email Support (${CONTACT.support})`}
-                  rel="noopener"
-                >
-                  {CONTACT.support}
-                </a>
-                <p className="text-sm text-gray-500 mt-2">Mon-Fri 9 AM - 5 PM PST</p>
-              </div>
-            </div>
-          </div>
-
-          {/* Sales */}
-          <div className="bg-white p-6 rounded-lg border shadow-sm">
-            <div className="flex items-center space-y-2">
-              <Users className="w-8 h-8 text-green-600 mb-2" />
-              <div>
-                <h2 className="text-xl font-semibold mb-2">Sales</h2>
-                <p className="text-gray-600 mb-3">Questions about plans and pricing</p>
-                <a 
-                  href={`mailto:${CONTACT.sales}`}
-                  className="text-green-600 font-medium hover:text-green-700"
-                  aria-label={`Email Sales (${CONTACT.sales})`}
-                  rel="noopener"
-                >
-                  {CONTACT.sales}
-                </a>
-                <p className="text-sm text-gray-500 mt-2">Mon-Fri 8 AM - 6 PM PST</p>
-              </div>
-            </div>
-          </div>
-
-          {/* Billing */}
-          <div className="bg-white p-6 rounded-lg border shadow-sm">
-            <div className="flex items-center space-y-2">
-              <CreditCard className="w-8 h-8 text-green-600 mb-2" />
-              <div>
-                <h2 className="text-xl font-semibold mb-2">Billing</h2>
-                <p className="text-gray-600 mb-3">Invoices, payments, and subscription questions</p>
-                <a 
-                  href={`mailto:${CONTACT.billing}`}
-                  className="text-green-600 font-medium hover:text-green-700"
-                  aria-label={`Email Billing (${CONTACT.billing})`}
-                  rel="noopener"
-                >
-                  {CONTACT.billing}
-                </a>
-                <p className="text-sm text-gray-500 mt-2">Mon-Fri 9 AM - 5 PM PST</p>
-              </div>
-            </div>
-          </div>
-
-          {/* Privacy */}
-          <div className="bg-white p-6 rounded-lg border shadow-sm">
-            <div className="flex items-center space-y-2">
-              <Shield className="w-8 h-8 text-green-600 mb-2" />
-              <div>
-                <h2 className="text-xl font-semibold mb-2">Privacy (PIPEDA/GDPR)</h2>
-                <p className="text-gray-600 mb-3">Data access, export, and deletion requests</p>
-                <a 
-                  href={`mailto:${CONTACT.privacy}`}
-                  className="text-green-600 font-medium hover:text-green-700"
-                  aria-label={`Email Privacy (${CONTACT.privacy})`}
-                  rel="noopener"
-                >
-                  {CONTACT.privacy}
-                </a>
-                <p className="text-sm text-gray-500 mt-2">Response within 30 days</p>
-              </div>
-            </div>
-          </div>
-
-          {/* Security */}
-          <div className="bg-white p-6 rounded-lg border shadow-sm">
-            <div className="flex items-center space-y-2">
-              <Shield className="w-8 h-8 text-green-600 mb-2" />
-              <div>
-                <h2 className="text-xl font-semibold mb-2">Security</h2>
-                <p className="text-gray-600 mb-3">Vulnerability reports and security concerns</p>
-                <a 
-                  href={`mailto:${CONTACT.security}`}
-                  className="text-green-600 font-medium hover:text-green-700"
-                  aria-label={`Email Security (${CONTACT.security})`}
-                  rel="noopener"
-                >
-                  {CONTACT.security}
-                </a>
-                <Link 
-                  to="/security" 
-                  className="block text-sm text-brand-600 hover:text-brand-700 mt-2"
-                  target="_blank" 
-                  rel="noopener"
-                >
-                  View Security Policy →
-                </Link>
-              </div>
-            </div>
-          </div>
-
-          {/* Media/Press */}
-          <div className="bg-white p-6 rounded-lg border shadow-sm">
-            <div className="flex items-center space-y-2">
-              <Mail className="w-8 h-8 text-green-600 mb-2" />
-              <div>
-                <h2 className="text-xl font-semibold mb-2">Media/Press</h2>
-                <p className="text-gray-600 mb-3">Press inquiries and general contact</p>
-                <a 
-                  href={`mailto:${CONTACT.contact}`}
-                  className="text-green-600 font-medium hover:text-green-700"
-                  aria-label={`Email General Contact (${CONTACT.contact})`}
-                  rel="noopener"
-                >
-                  {CONTACT.contact}
-                </a>
-                <p className="text-sm text-gray-500 mt-2">Mon-Fri 9 AM - 5 PM PST</p>
-              </div>
-            </div>
-          </div>
+        <div className="grid gap-6 md:grid-cols-3">
+          {CARDS.map(card => <ContactCard key={card.title} {...card} />)}
         </div>
 
         {/* Additional Contact Methods */}
@@ -248,54 +189,24 @@ Preferred contact: [email]`;
           </Link>
         </div>
 
-        {/* Email Templates */}
-        <div className="space-y-6">
-          <h2 className="text-2xl font-bold">Email Templates</h2>
-          <p className="text-gray-600">Copy and customize these templates for common requests:</p>
-
-          {/* Template 1: Access/Export */}
-          <div className="bg-white p-6 rounded-lg border shadow-sm">
-            <div className="flex justify-between items-center mb-4">
-              <h3 className="text-lg font-semibold">Privacy – Access/Export Request</h3>
-              <CopyButton text={accessExportTemplate} />
+        {/* Email Templates Accordion */}
+        <div className="mt-12">
+          <details className="group rounded-xl border p-5">
+            <summary className="cursor-pointer list-none text-lg font-semibold">
+              Email templates (optional)
+              <span className="ml-2 text-sm font-normal text-gray-500">(copy text if your mail app strips formatting)</span>
+            </summary>
+            <div className="mt-4 grid gap-6 md:grid-cols-2">
+              {[
+                {title: "Privacy – Access/Export", body: TPL.privacyAccess},
+                {title: "Privacy – Deletion", body: TPL.privacyDelete},
+                {title: "CASL/GDPR – Marketing Opt-Out", body: TPL.optOut},
+                {title: "Security – Vulnerability Report", body: TPL.security}
+              ].map(t => (
+                <TemplateCard key={t.title} title={t.title} body={t.body} />
+              ))}
             </div>
-            <pre className="whitespace-pre-wrap text-sm bg-gray-50 p-4 rounded-md border overflow-x-auto">
-              {accessExportTemplate}
-            </pre>
-          </div>
-
-          {/* Template 2: Deletion */}
-          <div className="bg-white p-6 rounded-lg border shadow-sm">
-            <div className="flex justify-between items-center mb-4">
-              <h3 className="text-lg font-semibold">Privacy – Deletion Request</h3>
-              <CopyButton text={deletionTemplate} />
-            </div>
-            <pre className="whitespace-pre-wrap text-sm bg-gray-50 p-4 rounded-md border overflow-x-auto">
-              {deletionTemplate}
-            </pre>
-          </div>
-
-          {/* Template 3: Marketing Opt-Out */}
-          <div className="bg-white p-6 rounded-lg border shadow-sm">
-            <div className="flex justify-between items-center mb-4">
-              <h3 className="text-lg font-semibold">CASL/GDPR – Marketing Opt-Out</h3>
-              <CopyButton text={marketingOptOutTemplate} />
-            </div>
-            <pre className="whitespace-pre-wrap text-sm bg-gray-50 p-4 rounded-md border overflow-x-auto">
-              {marketingOptOutTemplate}
-            </pre>
-          </div>
-
-          {/* Template 4: Security Report */}
-          <div className="bg-white p-6 rounded-lg border shadow-sm">
-            <div className="flex justify-between items-center mb-4">
-              <h3 className="text-lg font-semibold">Security – Vulnerability Report</h3>
-              <CopyButton text={securityReportTemplate} />
-            </div>
-            <pre className="whitespace-pre-wrap text-sm bg-gray-50 p-4 rounded-md border overflow-x-auto">
-              {securityReportTemplate}
-            </pre>
-          </div>
+          </details>
         </div>
 
         <div className="text-center">

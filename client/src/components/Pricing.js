@@ -187,6 +187,14 @@ const Pricing = () => {
               <h3>Do you offer support?</h3>
               <p>Yes! Basic plan includes email support, Pro plan includes priority support with faster response times. Contact <a href={`mailto:${CONTACT.support}`} className="text-brand-600 hover:text-brand-700" aria-label={`Email Support (${CONTACT.support})`} rel="noopener">{CONTACT.support}</a> for assistance.</p>
             </div>
+            <div className="faq-item">
+              <h3>Do you support multiple locations?</h3>
+              <p>Yes. Pricing is per location. Add or remove locations anytime from your dashboard.</p>
+            </div>
+            <div className="faq-item">
+              <h3>Do I need a credit card for the trial?</h3>
+              <p>No. Start a 7-day free trial without a credit card. Cancel anytime.</p>
+            </div>
           </div>
         </div>
       </section>
