@@ -1,21 +1,39 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Star, CheckCircle } from 'lucide-react';
+import { CheckCircle } from 'lucide-react';
+import { TRIAL_DAYS } from '../lib/marketing';
 
 const Pricing = () => {
+  const [billingCycle, setBillingCycle] = useState('monthly');
+  const [locations, setLocations] = useState(1);
+
+  const MONTHLY_PRICES = { basic: 19, pro: 39 };
+  const ANNUAL_DISCOUNT = 0.2; // 20% off
+
+  const calculatePrice = (tier, isAnnual = false) => {
+    const basePrice = MONTHLY_PRICES[tier];
+    const discountedPrice = isAnnual ? basePrice * (1 - ANNUAL_DISCOUNT) : basePrice;
+    return Math.round(discountedPrice * locations);
+  };
+
+  const getDisplayPrice = (tier) => {
+    const price = calculatePrice(tier, billingCycle === 'annual');
+    return billingCycle === 'annual' ? Math.round(price / 12) : price;
+  };
+
   return (
     <div className="pricing-page">
+      <title>Simple, Transparent Pricing — ReviewReady</title>
       {/* Header */}
       <header className="header">
         <div className="container">
           <div className="nav">
             <Link to="/" className="logo">
-              <Star className="icon" />
-              <span>ReviewReady</span>
+              <img src="/Review-Ready-logo.png" alt="ReviewReady" className="logo-image" />
             </Link>
             <div className="nav-links">
               <Link to="/login" className="btn btn-outline">Login</Link>
-              <Link to="/register" className="btn btn-primary">Start Free Trial</Link>
+              <Link to="/register" className="btn btn-primary">Start {TRIAL_DAYS}-Day Free Trial</Link>
             </div>
           </div>
         </div>
@@ -26,7 +44,39 @@ const Pricing = () => {
         <div className="container">
           <div className="pricing-header">
             <h1>Simple, Transparent Pricing</h1>
-            <p>Start with a 7-day free trial. No credit card required.</p>
+            <p>Start with a {TRIAL_DAYS}-day free trial. No credit card required.</p>
+          </div>
+
+          {/* Billing Toggle */}
+          <div className="billing-toggle">
+            <div className="toggle-container">
+              <span className={billingCycle === 'monthly' ? 'active' : ''}>Monthly</span>
+              <button 
+                className="toggle-switch"
+                onClick={() => setBillingCycle(billingCycle === 'monthly' ? 'annual' : 'monthly')}
+                aria-label="Toggle between monthly and annual billing"
+              >
+                <div className={`toggle-slider ${billingCycle === 'annual' ? 'annual' : 'monthly'}`}></div>
+              </button>
+              <span className={billingCycle === 'annual' ? 'active' : ''}>
+                Annual <span className="discount-badge">20% off</span>
+              </span>
+            </div>
+          </div>
+
+          {/* Location Selector */}
+          <div className="location-selector">
+            <label htmlFor="locations">Number of locations:</label>
+            <select 
+              id="locations"
+              value={locations} 
+              onChange={(e) => setLocations(parseInt(e.target.value))}
+              className="location-input"
+            >
+              {[1,2,3,4,5,6,7,8,9,10].map(num => (
+                <option key={num} value={num}>{num}</option>
+              ))}
+            </select>
           </div>
 
           <div className="pricing-cards">
@@ -34,9 +84,10 @@ const Pricing = () => {
               <div className="card-header">
                 <h3>Basic</h3>
                 <div className="price">
-                  <span className="amount">$19</span>
-                  <span className="period">/month</span>
+                  <span className="amount">${getDisplayPrice('basic')}</span>
+                  <span className="period">/{billingCycle === 'monthly' ? 'month' : 'month'}</span>
                 </div>
+                <p className="price-note">Per location. Cancel anytime.</p>
                 <p>Perfect for single-location businesses</p>
               </div>
               
@@ -52,8 +103,9 @@ const Pricing = () => {
               
               <div className="card-footer">
                 <Link to="/register" className="btn btn-primary btn-full">
-                  Start Free Trial
+                  Start {TRIAL_DAYS}-Day Free Trial
                 </Link>
+                <p className="trial-note">No credit card required</p>
               </div>
             </div>
 
@@ -62,33 +114,41 @@ const Pricing = () => {
               <div className="card-header">
                 <h3>Pro</h3>
                 <div className="price">
-                  <span className="amount">$39</span>
-                  <span className="period">/month</span>
+                  <span className="amount">${getDisplayPrice('pro')}</span>
+                  <span className="period">/{billingCycle === 'monthly' ? 'month' : 'month'}</span>
                 </div>
+                <p className="price-note">Per location. Cancel anytime.</p>
                 <p>For businesses that want it all</p>
               </div>
               
               <div className="card-features">
                 <ul>
                   <li><CheckCircle className="check" /> Everything in Basic</li>
-                  <li><CheckCircle className="check" /> Yelp monitoring</li>
-                  <li><CheckCircle className="check" /> Facebook monitoring</li>
+                  <li><CheckCircle className="check" /> Yelp monitoring <span className="coming-soon">Coming soon*</span></li>
+                  <li><CheckCircle className="check" /> Facebook monitoring <span className="coming-soon">Coming soon*</span></li>
                   <li><CheckCircle className="check" /> SMS notifications</li>
                   <li><CheckCircle className="check" /> Priority support</li>
-                  <li><CheckCircle className="check" /> Advanced analytics</li>
+                  <li><CheckCircle className="check" /> Sentiment trends & volume by source</li>
                 </ul>
               </div>
               
               <div className="card-footer">
                 <Link to="/register" className="btn btn-primary btn-full">
-                  Start Free Trial
+                  Start {TRIAL_DAYS}-Day Free Trial
                 </Link>
+                <p className="trial-note">No credit card required</p>
               </div>
             </div>
           </div>
 
           <div className="trial-info">
-            <p><strong>7-day free trial</strong> • No credit card required • Cancel anytime</p>
+            <p><strong>{TRIAL_DAYS}-day free trial</strong> • No credit card required • Cancel anytime</p>
+          </div>
+
+          {/* Footnotes */}
+          <div className="pricing-footnotes">
+            <p>* "Coming soon" features will be enabled automatically on Pro plans when released.</p>
+            <p>SMS: standard messaging fees may apply.</p>
           </div>
         </div>
       </section>
@@ -112,7 +172,11 @@ const Pricing = () => {
             </div>
             <div className="faq-item">
               <h3>How fast are the notifications?</h3>
-              <p>We check for new reviews every 15 minutes and send notifications immediately when found.</p>
+              <p>We poll every 15 minutes and notify immediately when found.</p>
+            </div>
+            <div className="faq-item">
+              <h3>How does pricing work?</h3>
+              <p>Per business location, per month. Add/remove locations anytime.</p>
             </div>
             <div className="faq-item">
               <h3>Can I cancel anytime?</h3>
@@ -130,9 +194,9 @@ const Pricing = () => {
       <section className="pricing-cta">
         <div className="container">
           <h2>Ready to Never Miss a Review Again?</h2>
-          <p>Join hundreds of local businesses protecting their reputation</p>
+          <p>Join businesses who never miss a review</p>
           <Link to="/register" className="btn btn-primary btn-large">
-            Start Your Free Trial
+            Start {TRIAL_DAYS}-Day Free Trial
           </Link>
         </div>
       </section>
@@ -142,13 +206,16 @@ const Pricing = () => {
         <div className="container">
           <div className="footer-content">
             <Link to="/" className="logo">
-              <Star className="icon" />
-              <span>ReviewReady</span>
+              <img src="/Review-Ready-logo.png" alt="ReviewReady" className="logo-image" />
             </Link>
             <div className="footer-links">
-              <Link to="/">Home</Link>
+              <Link to="/pricing">Pricing</Link>
               <Link to="/login">Login</Link>
-              <a href="mailto:support@reviewmonitor.com">Support</a>
+              <Link to="/contact">Support</Link>
+              <Link to="/privacy">Privacy</Link>
+              <Link to="/terms">Terms</Link>
+              <Link to="/security">Security</Link>
+              <Link to="/contact">Contact</Link>
             </div>
           </div>
           <div className="footer-bottom">
