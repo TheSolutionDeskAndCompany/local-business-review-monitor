@@ -23,28 +23,28 @@ function resetTemplate({ appName, resetUrl }) {
         </div>
         
         <!-- Main content -->
-        <div style="padding: 40px;">
+        <div style="padding: 40px; text-align: center;">
           <h2 style="margin: 0 0 24px 0; font-size: 24px; font-weight: 700; color: #1f2937;">Reset Your Password</h2>
           
-          <p style="margin: 0 0 24px 0; font-size: 16px; line-height: 1.6; color: #374151;">
+          <p style="margin: 0 auto 24px auto; font-size: 16px; line-height: 1.6; color: #374151; max-width: 500px;">
             We received a request to reset your password for your ${appName} account. Click the button below to create a new password.
           </p>
           
           <!-- Reset button with ReviewReady styling -->
-          <div style="text-align: center; margin: 32px 0;">
-            <a href="${resetUrl}" style="display: inline-block; padding: 16px 32px; background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: #ffffff; text-decoration: none; border-radius: 12px; font-weight: 600; font-size: 16px; box-shadow: 0 4px 14px 0 rgba(16, 185, 129, 0.3); transition: all 0.2s ease;">
+          <div style="text-align: center; margin: 40px 0;">
+            <a href="${resetUrl}" style="display: inline-block; padding: 18px 40px; background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: #ffffff; text-decoration: none; border-radius: 12px; font-weight: 600; font-size: 18px; box-shadow: 0 6px 20px 0 rgba(16, 185, 129, 0.25); letter-spacing: 0.5px;">
               Reset Password
             </a>
           </div>
           
-          <p style="margin: 24px 0 0 0; font-size: 14px; line-height: 1.5; color: #6b7280;">
+          <p style="margin: 24px auto 0 auto; font-size: 14px; line-height: 1.5; color: #6b7280; max-width: 500px;">
             If the button doesn't work, you can copy and paste this link into your browser:
           </p>
-          <p style="margin: 8px 0 0 0; font-size: 14px; word-break: break-all; color: #10b981;">
+          <p style="margin: 8px auto 0 auto; font-size: 14px; word-break: break-all; color: #10b981; max-width: 500px;">
             ${resetUrl}
           </p>
           
-          <div style="margin-top: 32px; padding-top: 24px; border-top: 1px solid #e5e7eb;">
+          <div style="margin: 32px auto 0 auto; padding-top: 24px; border-top: 1px solid #e5e7eb; max-width: 500px;">
             <p style="margin: 0 0 8px 0; font-size: 14px; color: #6b7280;">
               This password reset link will expire in 30 minutes for security reasons.
             </p>
