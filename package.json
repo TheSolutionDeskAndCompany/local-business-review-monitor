@@ -20,7 +20,7 @@
     "helmet": "^7.0.0",
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.18.0",
-    "mongoose": "^7.5.0",
+    "mongoose": "^8.17.1",
     "node-cron": "^3.0.2",
     "nodemailer": "^6.10.1",
     "stripe": "^13.5.0"
