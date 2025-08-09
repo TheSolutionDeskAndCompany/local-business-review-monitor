@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const auth = require('../middleware/auth');
 const logger = require('../utils/logger');
+const { sendPasswordResetEmail } = require('../services/emailService');
 
 const router = express.Router();
 
@@ -171,18 +172,30 @@ router.post('/forgot-password', async (req, res) => {
       { expiresIn: '1h' }
     );
 
-    // In a real app, you would send an email here
-    // For now, we'll log the reset link to console
+    // Generate reset link and send email
     const resetLink = `${process.env.CLIENT_URL || 'http://localhost:3000'}/reset-password?token=${resetToken}`;
     logger.info('Password reset link generated', { email: user.email, resetLink });
 
-    // TODO: Send email with reset link
-    // await sendPasswordResetEmail(user.email, resetLink);
+    // Try to send password reset email, fallback to showing link if email not configured
+    let emailSent = false;
+    try {
+      // Only attempt to send email if credentials are properly configured
+      if (process.env.EMAIL_USER && process.env.EMAIL_PASS && 
+          !process.env.EMAIL_USER.includes('your-gmail') && 
+          !process.env.EMAIL_PASS.includes('your-app-password')) {
+        await sendPasswordResetEmail(user.email, resetLink);
+        emailSent = true;
+      }
+    } catch (emailError) {
+      logger.warn('Failed to send password reset email', { email: user.email, error: emailError.message });
+    }
 
     res.json({ 
-      message: 'If an account with that email exists, a password reset link has been sent.',
-      // In development, include the reset link
-      ...(process.env.NODE_ENV === 'development' && { resetLink })
+      message: emailSent 
+        ? 'If an account with that email exists, a password reset link has been sent.'
+        : 'Password reset link generated. Check console for development link.',
+      // In development or when email fails, include the reset link
+      ...((process.env.NODE_ENV === 'development' || !emailSent) && { resetLink })
     });
 
   } catch (error) {

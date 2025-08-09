@@ -167,8 +167,69 @@ async function sendTrialEndingEmail(user, daysLeft) {
   }
 }
 
+// Send password reset email
+async function sendPasswordResetEmail(email, resetLink) {
+  try {
+    const subject = 'Reset Your ReviewReady Password';
+    
+    const html = `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+        <div style="text-align: center; margin-bottom: 30px;">
+          <img src="${process.env.CLIENT_URL}/Review-Ready-logo.png" alt="ReviewReady" style="height: 60px;">
+        </div>
+        
+        <h2 style="color: #333; text-align: center;">Reset Your Password</h2>
+        
+        <p style="font-size: 16px; line-height: 1.5; color: #555;">
+          We received a request to reset your password for your ReviewReady account. 
+          Click the button below to create a new password:
+        </p>
+        
+        <div style="text-align: center; margin: 30px 0;">
+          <a href="${resetLink}" 
+             style="background: #10b981; color: white; padding: 15px 30px; text-decoration: none; border-radius: 8px; display: inline-block; font-weight: bold;">
+            Reset Password
+          </a>
+        </div>
+        
+        <p style="font-size: 14px; color: #666; margin-top: 30px;">
+          This link will expire in 1 hour for security reasons.
+        </p>
+        
+        <p style="font-size: 14px; color: #666;">
+          If you didn't request this password reset, please ignore this email. Your password will remain unchanged.
+        </p>
+        
+        <div style="border-top: 1px solid #eee; padding-top: 20px; margin-top: 30px; font-size: 12px; color: #666;">
+          <p>If the button doesn't work, copy and paste this link into your browser:</p>
+          <p style="word-break: break-all;">${resetLink}</p>
+        </div>
+        
+        <div style="text-align: center; margin-top: 30px; font-size: 12px; color: #999;">
+          <p>© 2025 ReviewReady / The Solution Desk Inc.</p>
+        </div>
+      </div>
+    `;
+
+    const mailOptions = {
+      from: `"ReviewReady" <${process.env.EMAIL_USER}>`,
+      to: email,
+      subject: subject,
+      html: html
+    };
+
+    await transporter.sendMail(mailOptions);
+    logger.info('Password reset email sent successfully', { email });
+    
+  } catch (error) {
+    logger.error('Failed to send password reset email', { email, error: error.message });
+    throw error;
+  }
+}
+
 module.exports = {
   sendNewReviewNotification,
   sendWelcomeEmail,
-  sendTrialEndingEmail
+  sendTrialEndingEmail,
+  sendPasswordResetEmail
 };

@@ -30,19 +30,17 @@ const ForgotPassword = () => {
         setEmailSent(true);
         setMessage(data.message);
         
-        // In development, show the reset link
+        // In development or when email fails, show the reset link
         if (data.resetLink) {
           console.log('Password reset link:', data.resetLink);
-          setMessage(data.message + ' Check the console for the reset link (development mode).');
+          setMessage(data.message + ' For development: ' + data.resetLink);
         }
       } else {
         setError(data.message || 'Failed to send reset email. Please try again.');
       }
     } catch (err) {
       console.error('Forgot password error:', err);
-      // If backend is not available, show a helpful message
-      setEmailSent(true);
-      setMessage('Password reset functionality is currently being configured. Please contact support for assistance.');
+      setError('Network error. Please check your connection and try again.');
     }
     
     setLoading(false);

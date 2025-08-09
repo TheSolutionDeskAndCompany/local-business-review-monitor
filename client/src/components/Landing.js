@@ -27,7 +27,10 @@ const Landing = () => {
       {/* Banner Logo */}
       <div className="banner-logo-section">
         <div className="container">
-          <img src="/Review-Ready-logo.png" alt="ReviewReady" className="banner-logo" />
+          <img src="/Review-Ready-logo.png?v=3" alt="ReviewReady" className="banner-logo" />
+          <p className="hero-subtitle" style={{marginTop: '20px'}}>
+            Get {ALERT_FREQUENCY_COPY} from Google, Facebook, Yelp & more—all in one unified dashboard. Never miss a review across any platform. Setup in 2 minutes.
+          </p>
         </div>
       </div>
 
@@ -36,16 +39,9 @@ const Landing = () => {
         <div className="hero-background"></div>
         <div className="container">
           <div className="hero-content">
-            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">Stop Juggling 5 Different Apps for Reviews</h1>
-            <p className="hero-subtitle">
-              Get {ALERT_FREQUENCY_COPY} from Google, Facebook, Yelp & more—all in one unified dashboard. Never miss a review across any platform. Setup in 2 minutes.
-            </p>
             <div className="hero-cta">
-              <Link to="/register" className="btn btn-primary btn-large" aria-label={`Start ${TRIAL_DAYS}-day free trial`}>
-                Start {TRIAL_DAYS}-Day Free Trial
-              </Link>
-              <Link to="/pricing" className="btn btn-secondary btn-large" aria-label="View pricing plans">
-                View Pricing
+              <Link to="/register" className="btn btn-primary btn-large" aria-label="Get instant review alerts">
+                Get Instant Review Alerts
               </Link>
             </div>
             <p className="trial-note">No credit card required</p>
