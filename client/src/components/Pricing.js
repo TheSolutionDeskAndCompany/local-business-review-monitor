@@ -8,18 +8,37 @@ const Pricing = () => {
   const [billingCycle, setBillingCycle] = useState('monthly');
   const [locations, setLocations] = useState(1);
 
-  const MONTHLY_PRICES = { basic: 19, pro: 39 };
-  const ANNUAL_DISCOUNT = 0.2; // 20% off
-
-  const calculatePrice = (tier, isAnnual = false) => {
-    const basePrice = MONTHLY_PRICES[tier];
-    const discountedPrice = isAnnual ? basePrice * (1 - ANNUAL_DISCOUNT) : basePrice;
-    return Math.round(discountedPrice * locations);
+  // Simplified 2-tier pricing for better conversion
+  const PRICING_TIERS = {
+    starter: {
+      name: 'Starter',
+      price: 29,
+      features: [
+        '1 location',
+        'Google Reviews monitoring',
+        'Basic email alerts',
+        '20 AI replies/month',
+        'Email support'
+      ]
+    },
+    pro: {
+      name: 'Pro',
+      price: 79,
+      features: [
+        'Up to 10 locations',
+        'Multi-platform (Google, Facebook, Yelp)',
+        'Real-time alerts (email + SMS)',
+        'Unlimited AI replies',
+        'Policy violation detection',
+        'Priority support',
+        'Custom integrations'
+      ]
+    }
   };
 
   const getDisplayPrice = (tier) => {
-    const price = calculatePrice(tier, billingCycle === 'annual');
-    return billingCycle === 'annual' ? Math.round(price / 12) : price;
+    const price = PRICING_TIERS[tier].price;
+    return billingCycle === 'annual' ? Math.round(price * 0.8) : price; // 20% annual discount
   };
 
   return (
