@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Bell, Shield, CheckCircle, Mail, MessageSquare, CreditCard } from 'lucide-react';
-import { TRIAL_DAYS, SHOW_SOCIAL_PROOF, ALERT_FREQUENCY_COPY } from '../lib/marketing';
+import { Bell, Shield, CheckCircle, Mail, MessageSquare } from 'lucide-react';
+import { TRIAL_DAYS, SHOW_SOCIAL_PROOF } from '../lib/marketing';
 import { CONTACT } from '../lib/contacts';
 import MarketingDashboardMock from './MarketingDashboardMock';
 
@@ -11,52 +11,66 @@ const Landing = () => {
   return (
     <div className="landing-page">
       {/* Header */}
-      <header className="header">
-        <div className="container">
-          <div className="nav">
-            <div className="logo">
-              <img src="/Review-Ready-logo.png" alt="ReviewReady" className="logo-image" />
-            </div>
-            <div className="nav-links">
-              <Link to="/login" className="btn btn-outline">Login</Link>
-              <Link to="/register" className="btn btn-primary">Start 7-Day Free Trial</Link>
-            </div>
+      <header className="sticky top-0 z-50 bg-white/95 backdrop-blur border-b">
+        <div className="mx-auto max-w-7xl px-4 py-3.5 flex items-center justify-between">
+          <Link to="/" className="flex items-center gap-3" aria-label="ReviewReady home">
+            <img
+              src="/Review-Ready-logo.png"
+              alt=""
+              className="h-10 w-10 md:h-12 md:w-12"
+            />
+            <span className="text-xl md:text-2xl font-semibold tracking-tight text-gray-900">
+              ReviewReady
+            </span>
+          </Link>
+          
+          <div className="flex items-center">
+            <Link
+              to="/pricing"
+              className="hidden md:inline-block text-sm font-medium hover:text-brand-700"
+            >
+              Pricing
+            </Link>
+            <Link
+              to="/register"
+              className="ml-3 inline-flex items-center rounded-md bg-brand-600 px-3.5 py-2 text-sm font-semibold text-white hover:bg-brand-700 focus-visible:ring-2 focus-visible:ring-brand-500"
+            >
+              Start 7-Day Free Trial
+            </Link>
           </div>
         </div>
       </header>
 
       {/* Hero Section */}
-      <section className="hero">
+      <section className="py-14 sm:py-18">
         <div className="hero-background"></div>
         <div className="container">
           <div className="hero-content">
-            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">Never miss a review.</h1>
-            <p className="hero-subtitle">
-              Get {ALERT_FREQUENCY_COPY} from Google, Yelp, and Facebook, and reply from one dashboard. Setup in 2 minutes.
-            </p>
-            <div className="hero-cta">
-              <Link to="/register" className="btn btn-primary btn-large" aria-label={`Start ${TRIAL_DAYS}-day free trial`}>
-                Start {TRIAL_DAYS}-Day Free Trial
-              </Link>
-              <Link to="/pricing" className="btn btn-secondary btn-large" aria-label="View pricing plans">
-                View Pricing
-              </Link>
-            </div>
-            <p className="trial-note">No credit card required</p>
-            
-            {/* Trust Badges */}
-            <div className="trust-badges">
-              <div className="trust-badge">
-                <CreditCard size={24} aria-hidden="true" />
-                <a href="/security" target="_blank" rel="noopener" aria-label="Learn about Stripe secure payments" title={`Billing questions? Email ${CONTACT.billing}`}>Stripe secure payments</a>
+            <div className="hero-text">
+              <p className="mx-auto mt-4 w-fit rounded-full bg-white/70 px-3 py-1 text-xs font-medium text-gray-600 ring-1 ring-gray-200">
+                Trusted by local businesses • No credit card required
+              </p>
+              <h1 className="mt-3 text-4xl font-bold tracking-tight sm:text-5xl">Never miss a review.</h1>
+              <p className="hero-subtitle">Get near-real-time alerts from Google, Yelp, and Facebook, and reply from one dashboard. Setup in 2 minutes.</p>
+              <div className="hero-cta">
+                <Link to="/register" className="btn btn-primary btn-large">Start {TRIAL_DAYS}-Day Free Trial</Link>
+                <Link to="/pricing" className="btn btn-outline btn-large">View Pricing</Link>
               </div>
-              <div className="trust-badge">
-                <CheckCircle size={24} aria-hidden="true" />
-                <a href="/login" target="_blank" rel="noopener" aria-label="Sign in with Google OAuth">Sign in with Google</a>
-              </div>
-              <div className="trust-badge">
-                <Shield size={24} aria-hidden="true" />
-                <a href="/privacy" target="_blank" rel="noopener" aria-label="Learn about GDPR and PIPEDA compliance">GDPR + PIPEDA compliant</a>
+              <div className="hero-trust">
+                <div className="trust-badges">
+                  <div className="trust-badge">
+                    <Shield className="trust-icon" />
+                    <span>Stripe secure payments</span>
+                  </div>
+                  <div className="trust-badge">
+                    <CheckCircle className="trust-icon" />
+                    <span>Sign in with Google</span>
+                  </div>
+                  <div className="trust-badge">
+                    <CheckCircle className="trust-icon" />
+                    <span>GDPR + PIPEDA compliant</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
