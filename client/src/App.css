@@ -164,7 +164,8 @@ body {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: 1000;
+  backdrop-filter: blur(8px);
 }
 
 .nav {
@@ -180,7 +181,7 @@ body {
 }
 
 .logo-image {
-  height: 40px;
+  height: 48px;
   width: auto;
 }
 
@@ -193,6 +194,15 @@ body {
 /* Landing Page */
 .landing-page {
   min-height: 100vh;
+}
+
+/* Marketing pages with sticky header */
+.marketing-layout {
+  padding-top: 80px; /* Offset for sticky header */
+}
+
+.marketing-layout main {
+  min-height: calc(100vh - 80px);
 }
 
 .hero {

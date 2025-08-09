@@ -74,7 +74,7 @@ const Landing = () => {
           {/* desktop row with connectors */}
           <div className="relative mt-10 hidden lg:grid lg:grid-cols-3 lg:gap-8">
             {/* dashed connector line */}
-            <div className="pointer-events-none absolute left-0 right-0 top-8 mx-8 hidden lg:block">
+            <div className="pointer-events-none absolute left-0 right-0 top-8 mx-8">
               <div className="h-0.5 w-full border-t-2 border-dashed border-gray-200"></div>
             </div>
 
@@ -103,7 +103,7 @@ const Landing = () => {
             </div>
           </div>
 
-          {/* mobile vertical stepper */}
+          {/* mobile vertical stepper - only show on small screens */}
           <ol className="mt-8 space-y-6 lg:hidden">
             <li className="relative border-l-2 border-gray-200 pl-6">
               <span className="absolute -left-2 top-1.5 inline-flex h-4 w-4 items-center justify-center rounded-full bg-brand-600 ring-2 ring-white"></span>
