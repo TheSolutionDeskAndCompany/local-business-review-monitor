@@ -1,6 +1,6 @@
 {
   "name": "local-business-review-monitor",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "ReviewReady - Never miss another review. Get instant alerts for Google Business Profile reviews with MongoDB Atlas integration and complete password reset functionality.",
   "main": "server.js",
   "scripts": {
