@@ -9,13 +9,6 @@ const Landing = () => {
 
   return (
     <div className="landing-page">
-      {/* Banner Logo */}
-      <div className="banner-logo-section">
-        <div className="container">
-          <img src="/Review-Ready-logo.png" alt="ReviewReady" className="banner-logo" />
-        </div>
-      </div>
-      
       {/* Header */}
       <header className="header">
         <div className="container">
@@ -30,6 +23,13 @@ const Landing = () => {
           </div>
         </div>
       </header>
+
+      {/* Banner Logo */}
+      <div className="banner-logo-section">
+        <div className="container">
+          <img src="/Review-Ready-logo.png" alt="ReviewReady" className="banner-logo" />
+        </div>
+      </div>
 
       {/* Hero Section */}
       <section className="hero">
