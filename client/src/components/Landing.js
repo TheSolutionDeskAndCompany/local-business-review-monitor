@@ -48,13 +48,13 @@ const Landing = () => {
           <div className="hero-content">
             <div className="hero-text">
               <p className="mx-auto mt-4 w-fit rounded-full bg-white/70 px-3 py-1 text-xs font-medium text-gray-600 ring-1 ring-gray-200">
-                Trusted by local businesses • No credit card required
+                ★★★★★ Avg. rating • Free 14-day trial • No credit card required
               </p>
-              <h1 className="mt-3 text-4xl font-bold tracking-tight sm:text-5xl">Never miss a review.</h1>
-              <p className="hero-subtitle">Get near-real-time alerts from Google, Yelp, and Facebook, and reply from one dashboard. Setup in 2 minutes.</p>
+              <h1 className="mt-3 text-4xl font-bold tracking-tight sm:text-5xl">AI-Powered Google Review Monitoring</h1>
+              <p className="hero-subtitle">Detect policy violations, respond faster with AI, and protect your reputation. Setup in 2 minutes.</p>
               <div className="hero-cta">
-                <Link to="/register" className="btn btn-primary btn-large">Start {TRIAL_DAYS}-Day Free Trial</Link>
-                <Link to="/pricing" className="btn btn-outline btn-large">View Pricing</Link>
+                <Link to="/register" className="btn btn-primary btn-large">Start Free</Link>
+                <Link to="/demo" className="btn btn-outline btn-large">See Live Demo</Link>
               </div>
               <div className="hero-trust">
                 <div className="trust-badges">
