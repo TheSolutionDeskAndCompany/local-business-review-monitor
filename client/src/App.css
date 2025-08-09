@@ -111,6 +111,18 @@ body {
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
 }
 
+.platform-logo-large.google {
+  background: #4285f4;
+}
+
+.platform-logo-large.facebook {
+  background: #1877f2;
+}
+
+.platform-logo-large.yelp {
+  background: #d32323;
+}
+
 .btn {
   display: inline-flex;
   align-items: center;
