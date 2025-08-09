@@ -32,7 +32,7 @@ function resetTemplate({ appName, resetUrl }) {
           
           <!-- Reset button with ReviewReady styling -->
           <div style="text-align: center; margin: 32px 0;">
-            <a href="${resetUrl}" style="display: inline-block; padding: 16px 32px; background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%); color: #ffffff; text-decoration: none; border-radius: 12px; font-weight: 600; font-size: 16px; box-shadow: 0 4px 14px 0 rgba(37, 99, 235, 0.3); transition: all 0.2s ease;">
+            <a href="${resetUrl}" style="display: inline-block; padding: 16px 32px; background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: #ffffff; text-decoration: none; border-radius: 12px; font-weight: 600; font-size: 16px; box-shadow: 0 4px 14px 0 rgba(16, 185, 129, 0.3); transition: all 0.2s ease;">
               Reset Password
             </a>
           </div>
@@ -40,7 +40,7 @@ function resetTemplate({ appName, resetUrl }) {
           <p style="margin: 24px 0 0 0; font-size: 14px; line-height: 1.5; color: #6b7280;">
             If the button doesn't work, you can copy and paste this link into your browser:
           </p>
-          <p style="margin: 8px 0 0 0; font-size: 14px; word-break: break-all; color: #2563eb;">
+          <p style="margin: 8px 0 0 0; font-size: 14px; word-break: break-all; color: #10b981;">
             ${resetUrl}
           </p>
           
@@ -58,7 +58,7 @@ function resetTemplate({ appName, resetUrl }) {
         <div style="background-color: #f9fafb; padding: 24px 40px; border-top: 1px solid #e5e7eb;">
           <p style="margin: 0; font-size: 14px; color: #6b7280; text-align: center;">
             © 2025 ${appName} / The Solution Desk Inc. | 
-            <a href="https://reviewready.ca" style="color: #2563eb; text-decoration: none;">reviewready.ca</a>
+            <a href="https://reviewready.ca" style="color: #10b981; text-decoration: none;">reviewready.ca</a>
           </p>
         </div>
         
