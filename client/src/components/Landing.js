@@ -9,6 +9,11 @@ const Landing = () => {
 
   return (
     <div className="landing-page">
+      {/* Fixed Background Logo */}
+      <div className="fixed-background-logo">
+        <img src="/Review-Ready-logo.png" alt="ReviewReady" className="fixed-logo-image" />
+      </div>
+      
       {/* Header */}
       <header className="header">
         <div className="container">
@@ -29,9 +34,6 @@ const Landing = () => {
         <div className="hero-background"></div>
         <div className="container">
           <div className="hero-content">
-            <div className="hero-logo">
-              <img src="/Review-Ready-logo.png" alt="ReviewReady" className="hero-logo-image" />
-            </div>
             <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">Stop Juggling 5 Different Apps for Reviews</h1>
             <p className="hero-subtitle">
               Get {ALERT_FREQUENCY_COPY} from Google, Facebook, Yelp & more—all in one unified dashboard. Never miss a review across any platform. Setup in 2 minutes.

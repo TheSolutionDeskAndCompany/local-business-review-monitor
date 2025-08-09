@@ -209,17 +209,26 @@ body {
   border: 1px solid rgba(16, 185, 129, 0.2);
 }
 
-/* Hero Logo */
-.hero-logo {
-  text-align: center;
-  margin-bottom: 0;
+/* Fixed Background Logo */
+.fixed-background-logo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: -1;
+  pointer-events: none;
 }
 
-.hero-logo-image {
-  height: 320px;
-  width: auto;
-  max-width: 800px;
+.fixed-logo-image {
+  width: 80vw;
+  height: 80vh;
   object-fit: contain;
+  opacity: 0.08;
+  filter: grayscale(20%);
 }
 
 .hero h1 {
