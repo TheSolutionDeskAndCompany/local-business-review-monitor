@@ -24,23 +24,22 @@ const ForgotPassword = () => {
         body: JSON.stringify({ email }),
       });
 
-      const data = await response.json();
-
-      if (response.ok) {
-        setEmailSent(true);
-        setMessage(data.message);
-        
-        // In development or when email fails, show the reset link
-        if (data.resetLink) {
-          console.log('Password reset link:', data.resetLink);
-          setMessage(data.message + ' For development: ' + data.resetLink);
-        }
-      } else {
-        setError(data.message || 'Failed to send reset email. Please try again.');
+      const text = await response.text();
+      if (!response.ok) throw new Error(text || `HTTP ${response.status}`);
+      
+      // Try to parse as JSON, fallback to text
+      let data;
+      try {
+        data = JSON.parse(text);
+      } catch {
+        data = { message: text };
       }
+
+      setEmailSent(true);
+      setMessage(data.message || "If that email exists, reset instructions have been sent.");
     } catch (err) {
-      console.error('Forgot password error:', err);
-      setError('Network error. Please check your connection and try again.');
+      console.error('ForgotPassword error:', err);
+      setError(err?.message ?? "Could not reach the server.");
     }
     
     setLoading(false);
