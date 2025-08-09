@@ -213,7 +213,7 @@ body {
 /* Banner Logo */
 .banner-logo-section {
   width: 100%;
-  padding: 20px 0 0 0;
+  padding: 40px 0 40px 0;
   background: linear-gradient(135deg, rgba(16, 185, 129, 0.05) 0%, rgba(16, 185, 129, 0.02) 100%);
   border-top: 1px solid rgba(16, 185, 129, 0.1);
   border-bottom: 1px solid rgba(16, 185, 129, 0.1);
