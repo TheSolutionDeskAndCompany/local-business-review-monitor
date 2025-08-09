@@ -2,19 +2,25 @@
 
 This file is created to force a fresh Vercel deployment.
 
-**Issue:** Domain is serving old ReviewMonitor layout instead of current ReviewReady code.
+**Issue:** Custom domain still serving old ReviewMonitor layout despite initial fixes.
 
-**Timestamp:** 2025-01-09 04:56:42
+**Timestamp:** 2025-01-09 11:43:38
 
-**Fixes Applied:**
-- Added cache-control headers to vercel.json to prevent browser caching
-- Fixed password reset URL generation to use production domain (reviewready.ca)
-- Force cache invalidation for HTML/JS files while preserving static asset caching
+**Aggressive Fixes Applied:**
+- Enhanced cache-control headers with no-cache, no-store, must-revalidate
+- Added Pragma: no-cache and Expires: 0 headers
+- Updated HTML cache-bust meta tag to current timestamp
+- Force complete cache invalidation across all layers
+
+**Previous Attempts:**
+- Basic cache-control headers (insufficient)
+- Password reset URL fix (completed)
+- Standard deployment trigger (insufficient)
 
 **Expected Result:** 
-- ReviewReady branding should be live
-- /reset-password route should work (no 404)
+- ReviewReady branding should be live on custom domain
+- Complete elimination of old layout/theme
 - All recent UI improvements should be visible
-- Password reset emails will contain correct domain links
+- Aggressive cache busting should prevent future issues
 
-**Current Status:** Deployment fixes applied, ready for redeploy
+**Current Status:** Aggressive cache-busting deployment ready
