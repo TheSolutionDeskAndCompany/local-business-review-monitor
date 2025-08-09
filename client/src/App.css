@@ -209,6 +209,19 @@ body {
   border: 1px solid rgba(16, 185, 129, 0.2);
 }
 
+/* Hero Logo */
+.hero-logo {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.hero-logo-image {
+  height: 180px;
+  width: auto;
+  max-width: 450px;
+  object-fit: contain;
+}
+
 .hero h1 {
   font-size: 56px;
   font-weight: 800;
@@ -2756,6 +2769,139 @@ body {
 
 .checkmark {
   display: none;
+}
+
+/* Comparison Section */
+.comparison {
+  padding: 4rem 0;
+  background: var(--color-background);
+}
+
+.comparison-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin: 2rem 0;
+}
+
+.comparison-item {
+  background: var(--color-card);
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.comparison-item.highlight {
+  border: 2px solid var(--color-primary);
+  background: linear-gradient(135deg, var(--color-card) 0%, rgba(16, 185, 129, 0.02) 100%);
+}
+
+.comparison-item h3 {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.comparison-item ul {
+  list-style: none;
+  padding: 0;
+}
+
+.comparison-item li {
+  padding: 0.5rem 0;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.time-savings {
+  text-align: center;
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: rgba(16, 185, 129, 0.1);
+  border-radius: 8px;
+}
+
+.time-savings p {
+  font-size: 1.125rem;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+/* Credibility Section */
+.credibility {
+  padding: 4rem 0;
+  background: var(--color-card);
+}
+
+.credibility-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  margin: 2rem 0;
+  text-align: center;
+}
+
+.stat {
+  padding: 1.5rem;
+}
+
+.stat-number {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: 0.5rem;
+}
+
+.stat-label {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.testimonial-preview {
+  max-width: 600px;
+  margin: 3rem auto 0;
+  text-align: center;
+}
+
+.testimonial-preview blockquote {
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: var(--color-text-primary);
+  font-style: italic;
+  margin-bottom: 1rem;
+  padding: 0;
+  border: none;
+}
+
+.testimonial-preview cite {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  font-style: normal;
+  font-weight: 500;
+}
+
+/* Responsive Design for New Sections */
+@media (max-width: 768px) {
+  .comparison-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .credibility-stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  
+  .stat-number {
+    font-size: 2rem;
+  }
+  
+  .comparison-item {
+    padding: 1.5rem;
+  }
 }
 
 /* Platform Connections */

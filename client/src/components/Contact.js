@@ -91,8 +91,8 @@ Preferred contact: [email]`;
       <main className="max-w-3xl mx-auto px-4 py-12 space-y-10">
         <div className="text-center">
           <MessageCircle size={48} className="mx-auto mb-4 text-green-600" />
-          <h1 className="text-4xl font-bold mb-2">Contact us</h1>
-          <p className="text-gray-600">We typically respond within 1 business day.</p>
+          <h1 className="text-4xl font-bold mb-2">Need Help with Your Unified Review Dashboard?</h1>
+          <p className="text-gray-600">Get support for managing all your reviews in one place. We typically respond within 1 business day.</p>
         </div>
 
         {/* Contact Cards */}

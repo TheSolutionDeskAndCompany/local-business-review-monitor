@@ -23,7 +23,7 @@ const Privacy = () => {
         <div className="text-center">
           <Shield size={48} className="mx-auto mb-4 text-green-600" />
           <h1 className="text-4xl font-bold mb-2">Privacy Policy</h1>
-          <p className="text-gray-600">How ReviewReady collects, uses, and protects your data. GDPR + PIPEDA aligned.</p>
+          <p className="text-gray-600">How ReviewReady protects your data while unifying reviews from Google, Facebook, Yelp & more. GDPR + PIPEDA aligned.</p>
         </div>
 
         <div className="prose prose-lg max-w-none">

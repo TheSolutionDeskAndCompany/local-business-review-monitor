@@ -23,7 +23,7 @@ const Security = () => {
         <div className="text-center">
           <Shield size={48} className="mx-auto mb-4 text-green-600" />
           <h1 className="text-4xl font-bold mb-2">Security</h1>
-          <p className="text-gray-600">How ReviewReady protects your data.</p>
+          <p className="text-gray-600">How ReviewReady securely manages your unified review data across all platforms.</p>
         </div>
 
         <div className="prose prose-lg max-w-none">

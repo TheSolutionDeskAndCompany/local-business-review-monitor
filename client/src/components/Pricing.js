@@ -43,8 +43,8 @@ const Pricing = () => {
       <section className="pricing-hero">
         <div className="container">
           <div className="pricing-header">
-            <h1>Simple, Transparent Pricing</h1>
-            <p>Start with a {TRIAL_DAYS}-day free trial. No credit card required.</p>
+            <h1>Stop Juggling Apps. Start Saving Time.</h1>
+            <p>Unified review management for Google, Facebook, Yelp & more. Start with a {TRIAL_DAYS}-day free trial. No credit card required.</p>
           </div>
 
           {/* Billing Toggle */}

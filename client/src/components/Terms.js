@@ -23,7 +23,7 @@ const Terms = () => {
         <div className="text-center">
           <FileText size={48} className="mx-auto mb-4 text-green-600" />
           <h1 className="text-4xl font-bold mb-2">Terms of Service</h1>
-          <p className="text-gray-600">Terms that govern your use of ReviewReady.</p>
+          <p className="text-gray-600">Terms that govern your use of ReviewReady's unified review management platform.</p>
         </div>
 
         <div className="prose prose-lg max-w-none">
