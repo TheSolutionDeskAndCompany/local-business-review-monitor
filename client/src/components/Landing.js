@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Bell, Shield, CheckCircle, Mail, MessageSquare, CreditCard } from 'lucide-react';
 import { TRIAL_DAYS, SHOW_SOCIAL_PROOF, ALERT_FREQUENCY_COPY } from '../lib/marketing';
+import { CONTACT } from '../lib/contacts';
 import MarketingDashboardMock from './MarketingDashboardMock';
 
 const Landing = () => {
@@ -47,7 +48,7 @@ const Landing = () => {
             <div className="trust-badges">
               <div className="trust-badge">
                 <CreditCard size={16} />
-                <a href="/security" target="_blank" rel="noopener" aria-label="Learn about Stripe secure payments">Stripe secure payments</a>
+                <a href="/security" target="_blank" rel="noopener" aria-label="Learn about Stripe secure payments" title={`Billing questions? Email ${CONTACT.billing}`}>Stripe secure payments</a>
               </div>
               <div className="trust-badge">
                 <CheckCircle size={16} />
@@ -233,11 +234,14 @@ const Landing = () => {
             <div className="footer-links">
               <Link to="/pricing">Pricing</Link>
               <Link to="/login">Login</Link>
-              <a href="mailto:support@reviewready.ca">Support</a>
+              <Link to="/contact">Contact</Link>
+              <a href={`mailto:${CONTACT.support}`} aria-label={`Email Support (${CONTACT.support})`} rel="noopener">Support</a>
+              <a href={`mailto:${CONTACT.sales}`} aria-label={`Email Sales (${CONTACT.sales})`} rel="noopener">Sales</a>
+              <a href={`mailto:${CONTACT.billing}`} aria-label={`Email Billing (${CONTACT.billing})`} rel="noopener">Billing</a>
               <Link to="/privacy" id="privacy">Privacy</Link>
               <Link to="/terms">Terms</Link>
               <Link to="/security" id="security">Security</Link>
-              <Link to="/contact">Contact</Link>
+              <a href={`mailto:${CONTACT.abuse}`} aria-label={`Email Abuse Reports (${CONTACT.abuse})`} rel="noopener">Report abuse</a>
             </div>
           </div>
           <div className="footer-bottom">

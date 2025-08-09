@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { CheckCircle } from 'lucide-react';
+import { Check } from 'lucide-react';
 import { TRIAL_DAYS } from '../lib/marketing';
+import { CONTACT } from '../lib/contacts';
 
 const Pricing = () => {
   const [billingCycle, setBillingCycle] = useState('monthly');
@@ -93,11 +94,11 @@ const Pricing = () => {
               
               <div className="card-features">
                 <ul>
-                  <li><CheckCircle className="check" /> Google Business Profile monitoring</li>
-                  <li><CheckCircle className="check" /> Email notifications</li>
-                  <li><CheckCircle className="check" /> Review dashboard</li>
-                  <li><CheckCircle className="check" /> Export reports (CSV/JSON)</li>
-                  <li><CheckCircle className="check" /> 7-day free trial</li>
+                  <li><Check className="check" /> Google Business Profile monitoring</li>
+                  <li><Check className="check" /> Email notifications</li>
+                  <li><Check className="check" /> Review dashboard</li>
+                  <li><Check className="check" /> Export reports (CSV/JSON)</li>
+                  <li><Check className="check" /> 7-day free trial</li>
                 </ul>
               </div>
               
@@ -123,12 +124,12 @@ const Pricing = () => {
               
               <div className="card-features">
                 <ul>
-                  <li><CheckCircle className="check" /> Everything in Basic</li>
-                  <li><CheckCircle className="check" /> Yelp monitoring <span className="coming-soon">Coming soon*</span></li>
-                  <li><CheckCircle className="check" /> Facebook monitoring <span className="coming-soon">Coming soon*</span></li>
-                  <li><CheckCircle className="check" /> SMS notifications</li>
-                  <li><CheckCircle className="check" /> Priority support</li>
-                  <li><CheckCircle className="check" /> Sentiment trends & volume by source</li>
+                  <li><Check className="check" /> Everything in Basic</li>
+                  <li><Check className="check" /> Yelp monitoring <span className="coming-soon">Coming soon*</span></li>
+                  <li><Check className="check" /> Facebook monitoring <span className="coming-soon">Coming soon*</span></li>
+                  <li><Check className="check" /> SMS notifications</li>
+                  <li><Check className="check" /> Priority support</li>
+                  <li><Check className="check" /> Sentiment trends & volume by source</li>
                 </ul>
               </div>
               
@@ -184,7 +185,7 @@ const Pricing = () => {
             </div>
             <div className="faq-item">
               <h3>Do you offer support?</h3>
-              <p>Yes! Basic plan includes email support, Pro plan includes priority support with faster response times.</p>
+              <p>Yes! Basic plan includes email support, Pro plan includes priority support with faster response times. Contact <a href={`mailto:${CONTACT.support}`} className="text-brand-600 hover:text-brand-700" aria-label={`Email Support (${CONTACT.support})`} rel="noopener">{CONTACT.support}</a> for assistance.</p>
             </div>
           </div>
         </div>

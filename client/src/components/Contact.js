@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Mail, MessageCircle, Phone, Shield } from 'lucide-react';
+import { Mail, MessageCircle, Shield, CreditCard, Users } from 'lucide-react';
+import { CONTACT } from '../lib/contacts';
 
 function CopyButton({ text }) {
   return (
@@ -97,54 +98,140 @@ Preferred contact: [email]`;
 
         {/* Contact Cards */}
         <div className="grid gap-6 lg:grid-cols-3">
+          {/* Support */}
           <div className="bg-white p-6 rounded-lg border shadow-sm">
-            <Mail className="w-8 h-8 text-green-600 mb-4" />
-            <h3 className="text-lg font-semibold mb-2">Support</h3>
-            <p className="text-gray-600 mb-4">Technical issues, billing questions, or help getting set up.</p>
-            <a 
-              href="mailto:support@reviewready.ca?subject=Support%20request%20—%20ReviewReady"
-              className="text-green-600 hover:text-green-700 font-medium"
-              aria-label="Email support team"
-            >
-              support@reviewready.ca
-            </a>
-            <p className="text-sm text-gray-500 mt-2">Hours: Mon–Fri, 9–5 PT</p>
-          </div>
-
-          <div className="bg-white p-6 rounded-lg border shadow-sm">
-            <Phone className="w-8 h-8 text-green-600 mb-4" />
-            <h3 className="text-lg font-semibold mb-2">Sales</h3>
-            <p className="text-gray-600 mb-4">Pricing, multi-location, and procurement.</p>
-            <a 
-              href="mailto:sales@reviewready.ca?subject=Sales%20inquiry%20—%20ReviewReady"
-              className="text-green-600 hover:text-green-700 font-medium"
-              aria-label="Email sales team"
-            >
-              sales@reviewready.ca
-            </a>
-          </div>
-
-          <div className="bg-white p-6 rounded-lg border shadow-sm">
-            <Shield className="w-8 h-8 text-green-600 mb-4" />
-            <h3 className="text-lg font-semibold mb-2">Security</h3>
-            <p className="text-gray-600 mb-4">Report a vulnerability (see our disclosure policy).</p>
-            <div className="space-y-2">
-              <a 
-                href="mailto:security@reviewready.ca?subject=Security%20report%20—%20ReviewReady"
-                className="block text-green-600 hover:text-green-700 font-medium"
-                aria-label="Email security team"
-              >
-                security@reviewready.ca
-              </a>
-              <Link 
-                to="/security" 
-                className="block text-sm text-brand-600 hover:text-brand-700"
-                target="_blank" 
-                rel="noopener"
-              >
-                View disclosure policy →
-              </Link>
+            <div className="flex items-center space-y-2">
+              <Mail className="w-8 h-8 text-green-600 mb-2" />
+              <div>
+                <h2 className="text-xl font-semibold mb-2">Support</h2>
+                <p className="text-gray-600 mb-3">Technical help and account questions</p>
+                <a 
+                  href={`mailto:${CONTACT.support}`}
+                  className="text-green-600 font-medium hover:text-green-700"
+                  aria-label={`Email Support (${CONTACT.support})`}
+                  rel="noopener"
+                >
+                  {CONTACT.support}
+                </a>
+                <p className="text-sm text-gray-500 mt-2">Mon-Fri 9 AM - 5 PM PST</p>
+              </div>
             </div>
+          </div>
+
+          {/* Sales */}
+          <div className="bg-white p-6 rounded-lg border shadow-sm">
+            <div className="flex items-center space-y-2">
+              <Users className="w-8 h-8 text-green-600 mb-2" />
+              <div>
+                <h2 className="text-xl font-semibold mb-2">Sales</h2>
+                <p className="text-gray-600 mb-3">Questions about plans and pricing</p>
+                <a 
+                  href={`mailto:${CONTACT.sales}`}
+                  className="text-green-600 font-medium hover:text-green-700"
+                  aria-label={`Email Sales (${CONTACT.sales})`}
+                  rel="noopener"
+                >
+                  {CONTACT.sales}
+                </a>
+                <p className="text-sm text-gray-500 mt-2">Mon-Fri 8 AM - 6 PM PST</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Billing */}
+          <div className="bg-white p-6 rounded-lg border shadow-sm">
+            <div className="flex items-center space-y-2">
+              <CreditCard className="w-8 h-8 text-green-600 mb-2" />
+              <div>
+                <h2 className="text-xl font-semibold mb-2">Billing</h2>
+                <p className="text-gray-600 mb-3">Invoices, payments, and subscription questions</p>
+                <a 
+                  href={`mailto:${CONTACT.billing}`}
+                  className="text-green-600 font-medium hover:text-green-700"
+                  aria-label={`Email Billing (${CONTACT.billing})`}
+                  rel="noopener"
+                >
+                  {CONTACT.billing}
+                </a>
+                <p className="text-sm text-gray-500 mt-2">Mon-Fri 9 AM - 5 PM PST</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Privacy */}
+          <div className="bg-white p-6 rounded-lg border shadow-sm">
+            <div className="flex items-center space-y-2">
+              <Shield className="w-8 h-8 text-green-600 mb-2" />
+              <div>
+                <h2 className="text-xl font-semibold mb-2">Privacy (PIPEDA/GDPR)</h2>
+                <p className="text-gray-600 mb-3">Data access, export, and deletion requests</p>
+                <a 
+                  href={`mailto:${CONTACT.privacy}`}
+                  className="text-green-600 font-medium hover:text-green-700"
+                  aria-label={`Email Privacy (${CONTACT.privacy})`}
+                  rel="noopener"
+                >
+                  {CONTACT.privacy}
+                </a>
+                <p className="text-sm text-gray-500 mt-2">Response within 30 days</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Security */}
+          <div className="bg-white p-6 rounded-lg border shadow-sm">
+            <div className="flex items-center space-y-2">
+              <Shield className="w-8 h-8 text-green-600 mb-2" />
+              <div>
+                <h2 className="text-xl font-semibold mb-2">Security</h2>
+                <p className="text-gray-600 mb-3">Vulnerability reports and security concerns</p>
+                <a 
+                  href={`mailto:${CONTACT.security}`}
+                  className="text-green-600 font-medium hover:text-green-700"
+                  aria-label={`Email Security (${CONTACT.security})`}
+                  rel="noopener"
+                >
+                  {CONTACT.security}
+                </a>
+                <Link 
+                  to="/security" 
+                  className="block text-sm text-brand-600 hover:text-brand-700 mt-2"
+                  target="_blank" 
+                  rel="noopener"
+                >
+                  View Security Policy →
+                </Link>
+              </div>
+            </div>
+          </div>
+
+          {/* Media/Press */}
+          <div className="bg-white p-6 rounded-lg border shadow-sm">
+            <div className="flex items-center space-y-2">
+              <Mail className="w-8 h-8 text-green-600 mb-2" />
+              <div>
+                <h2 className="text-xl font-semibold mb-2">Media/Press</h2>
+                <p className="text-gray-600 mb-3">Press inquiries and general contact</p>
+                <a 
+                  href={`mailto:${CONTACT.contact}`}
+                  className="text-green-600 font-medium hover:text-green-700"
+                  aria-label={`Email General Contact (${CONTACT.contact})`}
+                  rel="noopener"
+                >
+                  {CONTACT.contact}
+                </a>
+                <p className="text-sm text-gray-500 mt-2">Mon-Fri 9 AM - 5 PM PST</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Additional Contact Methods */}
+        <div className="mt-8 text-center">
+          <h2 className="text-xl font-semibold mb-4">Additional Contact Methods</h2>
+          <div className="space-y-2 text-sm text-gray-600">
+            <p><strong>Abuse reports:</strong> <a href={`mailto:${CONTACT.abuse}`} className="text-brand-600 hover:text-brand-700" aria-label={`Email Abuse Reports (${CONTACT.abuse})`} rel="noopener">{CONTACT.abuse}</a></p>
+            <p><strong>DMARC reports:</strong> <a href={`mailto:${CONTACT.dmarc}`} className="text-brand-600 hover:text-brand-700" aria-label={`Email DMARC Reports (${CONTACT.dmarc})`} rel="noopener">{CONTACT.dmarc}</a> (automated reports only)</p>
           </div>
         </div>
 
@@ -153,7 +240,7 @@ Preferred contact: [email]`;
           <h2 className="text-xl font-semibold mb-3">Privacy & data requests</h2>
           <p className="text-gray-700 mb-4">
             For access/export/deletion or other privacy requests (PIPEDA/GDPR), email{' '}
-            <strong><a href="mailto:privacy@reviewready.ca" className="text-brand-600 hover:text-brand-700">privacy@reviewready.ca</a></strong>{' '}
+            <strong><a href={`mailto:${CONTACT.privacy}`} className="text-brand-600 hover:text-brand-700" aria-label={`Email Privacy (${CONTACT.privacy})`} rel="noopener">{CONTACT.privacy}</a></strong>{' '}
             from your account email. We may verify identity before acting. Normal response time: 30 days.
           </p>
           <Link to="/privacy" className="text-brand-600 hover:text-brand-700 font-medium">

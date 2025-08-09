@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { CONTACT } from '../lib/contacts';
 import { ArrowLeft, Mail } from 'lucide-react';
 
 const ForgotPassword = () => {
@@ -42,7 +43,7 @@ const ForgotPassword = () => {
       console.error('Forgot password error:', err);
       // If backend is not available, show a helpful message
       setEmailSent(true);
-      setMessage('Password reset functionality is currently being configured. Please contact support for assistance.');
+      setMessage(`Password reset functionality is currently being configured. Please contact support at ${CONTACT.support} for assistance.`);
     }
     
     setLoading(false);

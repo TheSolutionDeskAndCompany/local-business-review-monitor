@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { CONTACT } from '../lib/contacts';
 import { FileText } from 'lucide-react';
 
 const Terms = () => {
@@ -52,7 +53,7 @@ const Terms = () => {
           <p>You retain rights to your content. You grant us a limited license to process it to operate the service. Our software, trademarks, and site content are our IP.</p>
 
           <h2>7) Availability & changes</h2>
-          <p>The service is provided <strong>"as is"</strong> and may change over time. We may suspend access for maintenance, security, or legal reasons.</p>
+          <p>For questions about these Terms, contact <strong><a href={`mailto:${CONTACT.contact}`} className="text-brand-600 hover:text-brand-700" aria-label={`Email General Contact (${CONTACT.contact})`} rel="noopener">{CONTACT.contact}</a></strong>. For billing disputes, contact <strong><a href={`mailto:${CONTACT.billing}`} className="text-brand-600 hover:text-brand-700" aria-label={`Email Billing (${CONTACT.billing})`} rel="noopener">{CONTACT.billing}</a></strong>. The service is provided <strong>"as is"</strong> and may change over time. We may suspend access for maintenance, security, or legal reasons.</p>
 
           <h2>8) Warranties & liability</h2>
           <p>We disclaim all implied warranties to the extent permitted by law. Our total liability for any claim is limited to the fees you paid in the <strong>12 months</strong> before the event giving rise to the claim. We're not liable for indirect or consequential damages.</p>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { CONTACT } from '../lib/contacts';
 import { Shield } from 'lucide-react';
 
 const Privacy = () => {
@@ -70,7 +71,7 @@ const Privacy = () => {
             <li><strong>Canada (PIPEDA):</strong> access, correction, and complaint rights.</li>
             <li><strong>EU/UK (GDPR):</strong> access, rectification, erasure, restriction, portability, objection, and withdrawal of consent.</li>
           </ul>
-          <p>Request by emailing <strong><a href="mailto:privacy@reviewready.ca">privacy@reviewready.ca</a></strong>.</p>
+          <p>For questions about this Privacy Policy or to exercise your rights, contact us at <strong><a href={`mailto:${CONTACT.privacy}`} className="text-brand-600 hover:text-brand-700" aria-label={`Email Privacy (${CONTACT.privacy})`} rel="noopener">{CONTACT.privacy}</a></strong> or <strong><a href={`mailto:${CONTACT.support}`} className="text-brand-600 hover:text-brand-700" aria-label={`Email Support (${CONTACT.support})`} rel="noopener">{CONTACT.support}</a></strong>.</p>
 
           <h2>Cookies</h2>
           <p>We use essential cookies for auth and preferences, plus analytics/performance cookies. You can control cookies in your browser settings.</p>

@@ -66,10 +66,37 @@ Canadian-owned, made for local business.
 
 ---
 
+## Contact & Support
+
+- **Support:** support@reviewready.ca  
+- **Sales:** sales@reviewready.ca  
+- **Billing:** billing@reviewready.ca  
+- **Privacy (PIPEDA/GDPR):** privacy@reviewready.ca  
+- **Security (vuln reports):** security@reviewready.ca  
+- **General/Media:** contact@reviewready.ca  
+- **Abuse reports:** abuse@reviewready.ca  
+- **DMARC aggregate reports:** dmarc@reviewready.ca (reports only)
+
+We typically reply within **1 business day** (faster for security reports).
+
+### Security Disclosure
+If you believe you've found a vulnerability, email **security@reviewready.ca** with details and steps to reproduce. Please avoid accessing other users' data and allow us reasonable time to remediate.
+
+### Data Requests
+To request access, export, or deletion of your personal data, email **privacy@reviewready.ca** from your account email. We aim to complete requests within **30 days**.
+
+### Billing
+Questions about charges or invoices? Email **billing@reviewready.ca**.
+
+---
+
 ## License
 
-This repository is proprietary and not open source.  
- 2025 ReviewReady / The Solution Desk Inc. All rights reserved.
+MIT License - see LICENSE file for details.
+
+---
+
+**2025 ReviewReady / The Solution Desk Inc.** All rights reserved.
 
 ---
 

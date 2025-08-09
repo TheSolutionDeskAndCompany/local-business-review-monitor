@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { CONTACT } from '../lib/contacts';
 import { Shield } from 'lucide-react';
 
 const Security = () => {
@@ -38,6 +39,7 @@ const Security = () => {
           </ul>
 
           <h2>Data protection</h2>
+          <p>We typically respond to security reports within <strong>24 hours</strong> and provide updates every <strong>72 hours</strong> until resolution.</p>
           <ul>
             <li>Encryption <strong>in transit</strong> (TLS) and <strong>at rest</strong> (cloud-provider encryption).</li>
             <li>Secrets stored in managed secrets/ENV, rotated when necessary.</li>
@@ -58,7 +60,10 @@ const Security = () => {
           </ul>
 
           <h2>Responsible disclosure</h2>
-          <p>Found a security issue? Email <strong><a href="mailto:security@reviewready.ca">security@reviewready.ca</a></strong>. We'll acknowledge receipt and work to resolve promptly. Please avoid accessing other users' data and allow us time to fix the issue.</p>
+          <p>If you believe you've found a vulnerability, email <strong><a href={`mailto:${CONTACT.security}`} className="text-brand-600 hover:text-brand-700" aria-label={`Email Security (${CONTACT.security})`} rel="noopener">{CONTACT.security}</a></strong> with:</p>
+          <p>Found a security issue? Email <strong><a href={`mailto:${CONTACT.security}`} className="text-brand-600 hover:text-brand-700" aria-label={`Email Security (${CONTACT.security})`} rel="noopener">{CONTACT.security}</a></strong>. We'll acknowledge receipt and work to resolve promptly. Please avoid accessing other users' data and allow us time to fix the issue.</p>
+
+          <p><strong>Report abuse (spam/impersonation):</strong> <a href={`mailto:${CONTACT.abuse}`} className="text-brand-600 hover:text-brand-700" aria-label={`Email Abuse Reports (${CONTACT.abuse})`} rel="noopener">{CONTACT.abuse}</a></p>
 
           <h2>Subprocessors</h2>
           <p>Payments: <strong>Stripe</strong><br />

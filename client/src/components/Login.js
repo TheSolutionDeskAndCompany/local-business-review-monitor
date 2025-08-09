@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { CONTACT } from '../lib/contacts';
 import { useAuth } from '../contexts/AuthContext';
 
 const Login = () => {
