@@ -2,11 +2,13 @@ const cron = require('node-cron');
 const axios = require('axios');
 const User = require('../models/User');
 const Review = require('../models/Review');
+const { sendReviewNotification } = require('./emailService');
+const logger = require('../utils/logger');
 const emailService = require('./emailService');
 
 // Monitor reviews every 15 minutes
 cron.schedule('*/15 * * * *', async () => {
-  console.log('Starting review monitoring check...');
+  logger.info('Starting review monitoring check');
   
   try {
     // Get all users with active subscriptions and connected platforms
@@ -19,7 +21,7 @@ cron.schedule('*/15 * * * *', async () => {
       await checkUserReviews(user);
     }
     
-    console.log(`Review monitoring completed for ${users.length} users`);
+    logger.info('Review monitoring completed', { userCount: users.length });
   } catch (error) {
     console.error('Review monitoring error:', error);
   }
@@ -98,7 +100,7 @@ async function checkGoogleReviews(user, googlePlatform) {
     }
     
     if (newReviewsCount > 0) {
-      console.log(`Found ${newReviewsCount} new Google reviews for user ${user._id}`);
+      logger.info('New Google reviews found', { userId: user._id, count: newReviewsCount });
     }
     
   } catch (error) {
@@ -106,7 +108,7 @@ async function checkGoogleReviews(user, googlePlatform) {
     
     // If token expired, mark platform as needing reconnection
     if (error.response?.status === 401) {
-      console.log(`Google token expired for user ${user._id}, marking for reconnection`);
+      logger.warn('Google token expired', { userId: user._id });
       // Could implement token refresh logic here
     }
   }

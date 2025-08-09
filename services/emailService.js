@@ -1,4 +1,5 @@
 const nodemailer = require('nodemailer');
+const logger = require('../utils/logger');
 
 // Create transporter using Gmail SMTP
 const transporter = nodemailer.createTransport({
@@ -58,7 +59,7 @@ async function sendNewReviewNotification(user, review) {
     };
     
     await transporter.sendMail(mailOptions);
-    console.log(`Review notification sent to ${user.email}`);
+    logger.info('Review notification sent', { email: user.email });
     
   } catch (error) {
     console.error('Email sending error:', error);
@@ -108,7 +109,7 @@ async function sendWelcomeEmail(user) {
     };
     
     await transporter.sendMail(mailOptions);
-    console.log(`Welcome email sent to ${user.email}`);
+    logger.info('Welcome email sent', { email: user.email });
     
   } catch (error) {
     console.error('Welcome email sending error:', error);
@@ -159,7 +160,7 @@ async function sendTrialEndingEmail(user, daysLeft) {
     };
     
     await transporter.sendMail(mailOptions);
-    console.log(`Trial ending email sent to ${user.email}`);
+    logger.info('Trial ending email sent', { email: user.email });
     
   } catch (error) {
     console.error('Trial ending email sending error:', error);

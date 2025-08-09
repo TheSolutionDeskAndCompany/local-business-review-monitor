@@ -2,6 +2,7 @@ const express = require('express');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const User = require('../models/User');
 const auth = require('../middleware/auth');
+const logger = require('../utils/logger');
 
 const router = express.Router();
 
@@ -82,7 +83,7 @@ router.post('/webhook', express.raw({type: 'application/json'}), async (req, res
           'subscription.currentPeriodEnd': new Date(subscription.current_period_end * 1000)
         });
         
-        console.log(`Subscription activated for user ${userId}`);
+        logger.info('Subscription activated', { userId });
         break;
         
       case 'invoice.payment_succeeded':

@@ -2,14 +2,15 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const auth = require('../middleware/auth');
+const logger = require('../utils/logger');
 
 const router = express.Router();
 
 // Register
 router.post('/register', async (req, res) => {
   try {
-    console.log('Registration attempt:', { email: req.body.email, hasPassword: !!req.body.password });
-    console.log('Environment check:', { 
+    logger.debug('Registration attempt', { email: req.body.email, hasPassword: !!req.body.password });
+    logger.debug('Environment check', { 
       hasMongoUri: !!process.env.MONGODB_URI, 
       hasJwtSecret: !!process.env.JWT_SECRET,
       nodeEnv: process.env.NODE_ENV 
@@ -19,19 +20,19 @@ router.post('/register', async (req, res) => {
 
     // Validate required fields
     if (!email || !password || !businessName || !ownerName) {
-      console.log('Missing required fields:', { email: !!email, password: !!password, businessName: !!businessName, ownerName: !!ownerName });
+      logger.warn('Missing required fields', { email: !!email, password: !!password, businessName: !!businessName, ownerName: !!ownerName });
       return res.status(400).json({ message: 'Missing required fields' });
     }
 
-    console.log('Checking for existing user...');
+    logger.debug('Checking for existing user');
     // Check if user already exists
     let user = await User.findOne({ email });
     if (user) {
-      console.log('User already exists:', email);
+      logger.warn('User already exists', { email });
       return res.status(400).json({ message: 'User already exists' });
     }
 
-    console.log('Creating new user...');
+    logger.debug('Creating new user');
     // Create new user
     user = new User({
       email,
@@ -41,9 +42,9 @@ router.post('/register', async (req, res) => {
       phone
     });
 
-    console.log('Saving user to database...');
+    logger.debug('Saving user to database');
     await user.save();
-    console.log('User saved successfully:', user.id);
+    logger.info('User registered successfully', { userId: user.id, email: user.email });
 
     // Create JWT token
     const payload = {
@@ -52,17 +53,17 @@ router.post('/register', async (req, res) => {
       }
     };
 
-    console.log('Creating JWT token...');
+    logger.debug('Creating JWT token');
     jwt.sign(
       payload,
       process.env.JWT_SECRET || 'fallback-secret',
       { expiresIn: '7d' },
       (err, token) => {
         if (err) {
-          console.error('JWT signing error:', err);
+          logger.error('JWT signing error', err);
           return res.status(500).json({ message: 'Token generation failed' });
         }
-        console.log('Registration successful for:', email);
+        logger.info('Registration completed', { email });
         res.json({
           token,
           user: {
@@ -173,7 +174,7 @@ router.post('/forgot-password', async (req, res) => {
     // In a real app, you would send an email here
     // For now, we'll log the reset link to console
     const resetLink = `${process.env.CLIENT_URL || 'http://localhost:3000'}/reset-password?token=${resetToken}`;
-    console.log('Password reset link:', resetLink);
+    logger.info('Password reset link generated', { email: user.email, resetLink });
 
     // TODO: Send email with reset link
     // await sendPasswordResetEmail(user.email, resetLink);
