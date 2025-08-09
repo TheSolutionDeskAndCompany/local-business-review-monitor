@@ -94,10 +94,10 @@ const Landing = () => {
         <div className="mx-auto max-w-6xl px-4">
           <h2 className="text-center text-3xl font-bold tracking-tight sm:text-4xl">How it works</h2>
 
-          {/* desktop row with connectors */}
-          <div className="relative mt-10 hidden md:grid md:grid-cols-3 md:gap-8">
-            {/* dashed connector line */}
-            <div className="pointer-events-none absolute left-0 right-0 top-8 mx-8">
+          {/* responsive cards layout */}
+          <div className="relative mt-10 grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* dashed connector line - desktop only */}
+            <div className="pointer-events-none absolute left-0 right-0 top-8 mx-8 hidden md:block">
               <div className="h-0.5 w-full border-t-2 border-dashed border-gray-200"></div>
             </div>
 
@@ -125,25 +125,6 @@ const Landing = () => {
               <p className="mx-auto mt-2 max-w-xs text-sm text-gray-600">Jump straight to the review from your inbox or dashboard.</p>
             </div>
           </div>
-
-          {/* mobile vertical stepper - only show on small screens */}
-          <ol className="mt-8 space-y-6 md:hidden">
-            <li className="relative border-l-2 border-gray-200 pl-6">
-              <span className="absolute -left-2 top-1.5 inline-flex h-4 w-4 items-center justify-center rounded-full bg-brand-600 ring-2 ring-white"></span>
-              <h3 className="text-base font-semibold">Connect your locations</h3>
-              <p className="mt-1 text-sm text-gray-600">Sign in with Google. Import from Google, CSV, or add manually.</p>
-            </li>
-            <li className="relative border-l-2 border-gray-200 pl-6">
-              <span className="absolute -left-2 top-1.5 inline-flex h-4 w-4 items-center justify-center rounded-full bg-brand-600 ring-2 ring-white"></span>
-              <h3 className="text-base font-semibold">Get near-real-time alerts</h3>
-              <p className="mt-1 text-sm text-gray-600">Email and SMS alerts for new reviews.</p>
-            </li>
-            <li className="relative border-l-2 border-gray-200 pl-6">
-              <span className="absolute -left-2 top-1.5 inline-flex h-4 w-4 items-center justify-center rounded-full bg-brand-600 ring-2 ring-white"></span>
-              <h3 className="text-base font-semibold">Reply fast</h3>
-              <p className="mt-1 text-sm text-gray-600">Jump straight to the review from your inbox or dashboard.</p>
-            </li>
-          </ol>
         </div>
       </section>
 
