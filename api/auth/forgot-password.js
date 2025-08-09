@@ -105,7 +105,8 @@ module.exports = async (req, res) => {
     }
 
     const appName = process.env.APP_NAME || "ReviewReady";
-    const base = (process.env.APP_URL || `${req.headers["x-forwarded-proto"] || "https"}://${req.headers.host}`).replace(/\/+$/,"");
+    // Use production domain for reset links
+    const base = process.env.APP_URL || "https://reviewready.ca";
     const token = jwt.sign({ email }, process.env.RESET_TOKEN_SECRET, { expiresIn: "30m" });
     const resetUrl = `${base}/reset-password?token=${encodeURIComponent(token)}`;
 
