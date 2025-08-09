@@ -69,7 +69,7 @@ const Landing = () => {
       {/* Platform Chips Row */}
       <section className="py-6">
         <div className="mx-auto max-w-6xl px-4">
-          <div className="flex flex-wrap items-center justify-center gap-4 text-sm">
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-3 text-sm">
             <span className="text-gray-500">Integrates with the platforms you use</span>
             <span className="inline-flex items-center gap-2 rounded-md bg-white px-3 py-1.5 shadow-sm ring-1 ring-gray-200">
               <span className="inline-flex h-6 w-6 items-center justify-center rounded-md bg-[#1a73e8] text-white font-semibold">G</span>
@@ -77,13 +77,11 @@ const Landing = () => {
             </span>
             <span className="inline-flex items-center gap-2 rounded-md bg-white px-3 py-1.5 shadow-sm ring-1 ring-gray-200">
               <span className="inline-flex h-6 w-6 items-center justify-center rounded-md bg-[#1877f2] text-white font-semibold">F</span>
-              Facebook
-              <span className="ml-2 rounded-full bg-gray-100 px-2 py-0.5 text-[11px] font-medium text-gray-600 ring-1 ring-gray-200">Coming soon</span>
+              Facebook <span className="ml-1 rounded-full bg-gray-100 px-2 py-0.5 text-[11px] font-medium text-gray-600 ring-1 ring-gray-200">Coming soon</span>
             </span>
             <span className="inline-flex items-center gap-2 rounded-md bg-white px-3 py-1.5 shadow-sm ring-1 ring-gray-200">
               <span className="inline-flex h-6 w-6 items-center justify-center rounded-md bg-[#d32323] text-white font-semibold">Y</span>
-              Yelp
-              <span className="ml-2 rounded-full bg-gray-100 px-2 py-0.5 text-[11px] font-medium text-gray-600 ring-1 ring-gray-200">Coming soon</span>
+              Yelp <span className="ml-1 rounded-full bg-gray-100 px-2 py-0.5 text-[11px] font-medium text-gray-600 ring-1 ring-gray-200">Coming soon</span>
             </span>
           </div>
         </div>
@@ -95,9 +93,9 @@ const Landing = () => {
           <h2 className="text-center text-3xl font-bold tracking-tight sm:text-4xl">How it works</h2>
 
           {/* desktop */}
-          <div className="relative mt-10 hidden md:grid md:grid-cols-3 md:gap-8">
+          <div className="relative mt-8 hidden md:grid md:grid-cols-3 md:gap-8">
             {/* dashed connector */}
-            <div className="pointer-events-none absolute left-0 right-0 top-6 mx-8">
+            <div className="pointer-events-none absolute inset-x-16 top-7">
               <div className="h-0.5 w-full border-t-2 border-dashed border-gray-200"></div>
             </div>
 
@@ -106,12 +104,13 @@ const Landing = () => {
               { n: 2, title: "Get near-real-time alerts", desc: "Email and SMS alerts for new reviews." },
               { n: 3, title: "Reply fast", desc: "Jump straight to the review from your inbox or dashboard." }
             ].map(s => (
-              <div key={s.n} className="relative z-10 rounded-2xl border bg-white p-6 text-center shadow-sm">
-                <div className="mx-auto -mt-8 mb-2 flex h-12 w-12 items-center justify-center rounded-full bg-brand-600 text-white text-base font-semibold shadow ring-1 ring-black/5">
+              <div key={s.n} className="relative z-10 flex h-full flex-col items-center rounded-2xl border bg-white p-6 text-center shadow-sm">
+                <div className="mx-auto -mt-8 mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-brand-600 text-white font-semibold shadow ring-1 ring-black/5">
                   {s.n}
                 </div>
                 <h3 className="text-lg font-semibold">{s.title}</h3>
-                <p className="mx-auto mt-2 max-w-xs text-sm text-gray-600">{s.desc}</p>
+                <p className="mt-2 max-w-xs text-sm text-gray-600">{s.desc}</p>
+                <div className="mt-auto h-2" />
               </div>
             ))}
           </div>
