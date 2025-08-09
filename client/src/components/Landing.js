@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Bell, Shield, CheckCircle, Mail, MessageSquare, CreditCard } from 'lucide-react';
 import { TRIAL_DAYS, SHOW_SOCIAL_PROOF, ALERT_FREQUENCY_COPY } from '../lib/marketing';
+import MarketingDashboardMock from './MarketingDashboardMock';
 
 const Landing = () => {
   const [billingCycle, setBillingCycle] = useState('monthly');
@@ -59,15 +60,7 @@ const Landing = () => {
             </div>
           </div>
           <div className="hero-image">
-            <img 
-              src="/images/hero-dashboard.png" 
-              alt="ReviewReady dashboard showing review monitoring across Google, Facebook, and Yelp" 
-              width={1280}
-              height={720}
-              loading="eager"
-              sizes="(min-width:1024px) 50vw, 100vw"
-              className="dashboard-screenshot rounded-xl shadow-lg ring-1 ring-black/5"
-            />
+            <MarketingDashboardMock />
           </div>
         </div>
       </section>

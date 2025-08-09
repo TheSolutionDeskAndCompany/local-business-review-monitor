@@ -138,7 +138,7 @@ Preferred contact: [email]`;
               </a>
               <Link 
                 to="/security" 
-                className="block text-sm text-blue-600 hover:text-blue-700"
+                className="block text-sm text-brand-600 hover:text-brand-700"
                 target="_blank" 
                 rel="noopener"
               >
@@ -149,14 +149,14 @@ Preferred contact: [email]`;
         </div>
 
         {/* Privacy & Data Requests */}
-        <div className="bg-blue-50 p-6 rounded-lg border border-blue-200">
+        <div className="bg-brand-50 p-6 rounded-lg border border-brand-200">
           <h2 className="text-xl font-semibold mb-3">Privacy & data requests</h2>
           <p className="text-gray-700 mb-4">
             For access/export/deletion or other privacy requests (PIPEDA/GDPR), email{' '}
-            <strong><a href="mailto:privacy@reviewready.ca" className="text-blue-600 hover:text-blue-700">privacy@reviewready.ca</a></strong>{' '}
+            <strong><a href="mailto:privacy@reviewready.ca" className="text-brand-600 hover:text-brand-700">privacy@reviewready.ca</a></strong>{' '}
             from your account email. We may verify identity before acting. Normal response time: 30 days.
           </p>
-          <Link to="/privacy" className="text-blue-600 hover:text-blue-700 font-medium">
+          <Link to="/privacy" className="text-brand-600 hover:text-brand-700 font-medium">
             View Privacy Policy →
           </Link>
         </div>

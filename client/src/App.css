@@ -1,23 +1,39 @@
 /* Updated SaaS Color Palette Variables */
 :root {
-  --color-primary: #10b981; /* Emerald green for primary buttons */
-  --color-accent-blue: #2563eb; /* Blue only for subtle accents */
-  --color-accent-light: #60a5fa; /* Light blue for hover states */
-  --color-success: #10b981; /* Green for success states */
-  --color-danger: #ef4444; /* Red for errors */
-  --color-warning: #eab308; /* Gold for info/warnings */
-  --color-highlight: #efb41d; /* Gold for highlights/CTAs */
-  --color-cyan: #06b6d4; /* Cyan for secondary accents */
-  --color-neutral-dark: #1e293b; /* Dark neutral for navbar/text */
-  --color-neutral-darker: #2d3748; /* Alternative dark neutral */
-  --color-background: #f8fafc; /* Off-white page backgrounds */
-  --color-background-alt: #f9fafb; /* Alternative off-white */
-  --color-card: #ffffff; /* White for cards/panels */
-  --color-text-primary: #1e293b; /* Dark neutral text */
-  --color-text-secondary: #64748b; /* Secondary text */
-  --color-border: #e2e8f0; /* Border color */
-  --color-border-light: #f1f5f9; /* Light border */
-  --color-navbar: #1e293b; /* Dark neutral navbar background */
+  --color-primary: #10b981;
+  --color-primary-hover: #059669;
+  --color-secondary: #6b7280;
+  --color-accent-blue: #059669; /* Changed from blue to green */
+  --color-accent-blue-hover: #047857; /* Changed from blue to green */
+  --color-success: #10b981;
+  --color-danger: #ef4444;
+  --color-warning: #f59e0b;
+  --color-info: #059669; /* Changed from blue to green */
+  --color-text-primary: #1f2937;
+  --color-text-secondary: #6b7280;
+  --color-text-muted: #9ca3af;
+  --color-background: #ffffff;
+  --color-background-alt: #f9fafb;
+  --color-border: #e5e7eb;
+  --color-card: #ffffff;
+  --color-header: #1e293b;
+  
+  /* Brand Green Palette */
+  --brand-50: #ecfdf5;
+  --brand-100: #d1fae5;
+  --brand-200: #a7f3d0;
+  --brand-300: #6ee7b7;
+  --brand-400: #34d399;
+  --brand-500: #10b981;
+  --brand-600: #059669;
+  --brand-700: #047857;
+  --brand-800: #065f46;
+  --brand-900: #064e3b;
+  
+  /* Brand Utilities */
+  --brand-bg: #059669;
+  --brand-bg-hover: #047857;
+  --brand-ring: #10b981;
 }
 
 /* Reset and base styles */
@@ -2491,20 +2507,20 @@ body {
   color: #6b7280;
 }
 
-.text-blue-600 {
-  color: var(--color-accent-blue);
+.text-brand-600 {
+  color: var(--brand-600);
 }
 
-.text-blue-700 {
-  color: #1d4ed8;
+.text-brand-700 {
+  color: var(--brand-700);
 }
 
 .hover\:text-green-700:hover {
   color: #059669;
 }
 
-.hover\:text-blue-700:hover {
-  color: #1d4ed8;
+.hover\:text-brand-700:hover {
+  color: var(--brand-700);
 }
 
 .hover\:bg-black\/5:hover {
@@ -2519,8 +2535,8 @@ body {
   background-color: #f9fafb;
 }
 
-.bg-blue-50 {
-  background-color: #eff6ff;
+.bg-brand-50 {
+  background-color: var(--brand-50);
 }
 
 .p-6 {
@@ -2544,8 +2560,8 @@ body {
   border-color: var(--color-border);
 }
 
-.border-blue-200 {
-  border-color: #bfdbfe;
+.border-brand-200 {
+  border-color: var(--brand-200);
 }
 
 .shadow-sm {
@@ -2752,6 +2768,326 @@ body {
   font-size: 0.75rem;
   font-weight: 500;
   margin-left: 0.25rem;
+}
+
+/* Marketing Dashboard Mock */
+.marketing-dashboard-mock {
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+  background: white;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+.dashboard-header {
+  background: var(--color-header);
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.dashboard-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dashboard-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: white;
+  font-weight: 600;
+}
+
+.logo-mini {
+  width: 24px;
+  height: 24px;
+}
+
+.dashboard-search input {
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.375rem;
+  background: white;
+  width: 300px;
+  font-size: 0.875rem;
+}
+
+.user-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--brand-600);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.dashboard-content {
+  display: flex;
+  min-height: 500px;
+}
+
+.dashboard-sidebar {
+  width: 240px;
+  background: var(--color-background-alt);
+  padding: 1.5rem;
+  border-right: 1px solid var(--color-border);
+}
+
+.dashboard-sidebar h3 {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 1rem;
+}
+
+.source-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.source-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  transition: background-color 0.2s;
+}
+
+.source-item.active {
+  background: var(--brand-50);
+  border: 1px solid var(--brand-200);
+}
+
+.source-item:hover {
+  background: var(--color-background);
+}
+
+.source-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: white;
+}
+
+.source-icon.google {
+  background: #4285f4;
+}
+
+.source-icon.facebook {
+  background: #1877f2;
+}
+
+.source-icon.yelp {
+  background: #ff1a1a;
+}
+
+.source-name {
+  flex: 1;
+  font-size: 0.875rem;
+  color: var(--color-text-primary);
+}
+
+.source-count {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--brand-600);
+  background: var(--brand-100);
+  padding: 0.125rem 0.5rem;
+  border-radius: 1rem;
+}
+
+.source-count.coming-soon {
+  color: var(--color-text-secondary);
+  background: var(--color-background);
+}
+
+.dashboard-main {
+  flex: 1;
+  padding: 1.5rem;
+}
+
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  background: white;
+  border: 1px solid var(--color-border);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.stat-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 0.5rem;
+  background: var(--brand-50);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--brand-600);
+}
+
+.stat-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.reviews-section h4 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: 1rem;
+}
+
+.review-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.review-item {
+  background: white;
+  border: 1px solid var(--color-border);
+  border-radius: 0.5rem;
+  padding: 1rem;
+}
+
+.review-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.review-stars {
+  display: flex;
+  gap: 0.125rem;
+}
+
+.star.filled {
+  color: #fbbf24;
+}
+
+.star.empty {
+  color: var(--color-border);
+}
+
+.review-source {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.125rem 0.5rem;
+  border-radius: 1rem;
+  color: white;
+}
+
+.review-source.google {
+  background: #4285f4;
+}
+
+.review-time {
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+  margin-left: auto;
+}
+
+.review-text {
+  font-size: 0.875rem;
+  color: var(--color-text-primary);
+  margin-bottom: 0.75rem;
+  line-height: 1.5;
+}
+
+.reply-btn {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.375rem 0.75rem;
+  border-radius: 0.375rem;
+  border: 1px solid var(--brand-600);
+  background: white;
+  color: var(--brand-600);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.reply-btn:hover {
+  background: var(--brand-50);
+}
+
+.reply-btn.replied {
+  background: var(--brand-600);
+  color: white;
+  border-color: var(--brand-600);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .marketing-dashboard-mock {
+    margin: 0 1rem;
+  }
+  
+  .dashboard-content {
+    flex-direction: column;
+  }
+  
+  .dashboard-sidebar {
+    width: 100%;
+  }
+  
+  .stats-row {
+    grid-template-columns: 1fr;
+  }
+  
+  .dashboard-search input {
+    width: 200px;
+  }
+}
+
+@media (max-width: 640px) {
+  .dashboard-nav {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: stretch;
+  }
+  
+  .dashboard-search input {
+    width: 100%;
+  }
+  
+  .review-header {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
 }
 
 .checkmark {
