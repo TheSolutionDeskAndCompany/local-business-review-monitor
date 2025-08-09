@@ -7,6 +7,7 @@ const Register = () => {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
+    confirmPassword: '',
     businessName: '',
     ownerName: '',
     phone: ''
@@ -28,6 +29,26 @@ const Register = () => {
     e.preventDefault();
     setError('');
     setLoading(true);
+
+    // Validate password match
+    if (formData.password !== formData.confirmPassword) {
+      setError('Passwords do not match');
+      setLoading(false);
+      return;
+    }
+
+    // Validate password strength
+    if (formData.password.length < 8) {
+      setError('Password must be at least 8 characters long');
+      setLoading(false);
+      return;
+    }
+
+    if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/.test(formData.password)) {
+      setError('Password must contain at least one uppercase letter, one lowercase letter, and one number');
+      setLoading(false);
+      return;
+    }
 
     const result = await register(formData);
     
@@ -116,8 +137,22 @@ const Register = () => {
               value={formData.password}
               onChange={handleChange}
               required
-              placeholder="Create a secure password"
-              minLength="6"
+              placeholder="Must be 8+ chars with uppercase, lowercase, and number"
+              minLength="8"
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="confirmPassword">Confirm Password</label>
+            <input
+              type="password"
+              id="confirmPassword"
+              name="confirmPassword"
+              value={formData.confirmPassword}
+              onChange={handleChange}
+              required
+              placeholder="Re-enter your password"
+              minLength="8"
             />
           </div>
 
