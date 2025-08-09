@@ -60,31 +60,31 @@ const Landing = () => {
               </div>
             </div>
           </div>
-          <div className="hero-image">
+          <div className="hero-image mt-6">
             <MarketingDashboardMock />
           </div>
         </div>
       </section>
 
-      {/* Platform Logos Section */}
-      <section className="py-8 bg-gray-50/50">
+      {/* Platform Chips Row */}
+      <section className="py-6">
         <div className="mx-auto max-w-6xl px-4">
-          <p className="text-center text-sm font-medium text-gray-600 mb-6">Integrates with the platforms you use</p>
-          <div className="flex justify-center items-center gap-12 flex-wrap">
-            <div className="flex items-center gap-3">
-              <div className="platform-logo-large google" aria-label="Google Business Profile" role="img">G</div>
-              <span className="text-lg font-semibold text-gray-700">Google Business</span>
-            </div>
-            <div className="flex items-center gap-3 opacity-60">
-              <div className="platform-logo-large facebook" aria-label="Facebook" role="img">f</div>
-              <span className="text-lg font-semibold text-gray-700">Facebook</span>
-              <span className="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full">Coming Soon</span>
-            </div>
-            <div className="flex items-center gap-3 opacity-60">
-              <div className="platform-logo-large yelp" aria-label="Yelp" role="img">Y</div>
-              <span className="text-lg font-semibold text-gray-700">Yelp</span>
-              <span className="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full">Coming Soon</span>
-            </div>
+          <div className="flex flex-wrap items-center justify-center gap-4 text-sm">
+            <span className="text-gray-500">Integrates with the platforms you use</span>
+            <span className="inline-flex items-center gap-2 rounded-md bg-white px-3 py-1.5 shadow-sm ring-1 ring-gray-200">
+              <span className="inline-flex h-6 w-6 items-center justify-center rounded-md bg-[#1a73e8] text-white font-semibold">G</span>
+              Google Business
+            </span>
+            <span className="inline-flex items-center gap-2 rounded-md bg-white px-3 py-1.5 shadow-sm ring-1 ring-gray-200">
+              <span className="inline-flex h-6 w-6 items-center justify-center rounded-md bg-[#1877f2] text-white font-semibold">F</span>
+              Facebook
+              <span className="ml-2 rounded-full bg-gray-100 px-2 py-0.5 text-[11px] font-medium text-gray-600 ring-1 ring-gray-200">Coming soon</span>
+            </span>
+            <span className="inline-flex items-center gap-2 rounded-md bg-white px-3 py-1.5 shadow-sm ring-1 ring-gray-200">
+              <span className="inline-flex h-6 w-6 items-center justify-center rounded-md bg-[#d32323] text-white font-semibold">Y</span>
+              Yelp
+              <span className="ml-2 rounded-full bg-gray-100 px-2 py-0.5 text-[11px] font-medium text-gray-600 ring-1 ring-gray-200">Coming soon</span>
+            </span>
           </div>
         </div>
       </section>
@@ -94,37 +94,42 @@ const Landing = () => {
         <div className="mx-auto max-w-6xl px-4">
           <h2 className="text-center text-3xl font-bold tracking-tight sm:text-4xl">How it works</h2>
 
-          {/* responsive cards layout */}
-          <div className="relative mt-10 grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* dashed connector line - desktop only */}
-            <div className="pointer-events-none absolute left-0 right-0 top-8 mx-8 hidden md:block">
+          {/* desktop */}
+          <div className="relative mt-10 hidden md:grid md:grid-cols-3 md:gap-8">
+            {/* dashed connector */}
+            <div className="pointer-events-none absolute left-0 right-0 top-6 mx-8">
               <div className="h-0.5 w-full border-t-2 border-dashed border-gray-200"></div>
             </div>
 
-            <div className="relative z-10 h-full rounded-2xl border bg-white/70 p-6 text-center shadow-sm">
-              <div className="mx-auto -mt-6 mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-brand-600 text-white text-base font-semibold shadow ring-1 ring-black/5">
-                1
+            {[
+              { n: 1, title: "Connect your locations", desc: "Sign in with Google. Import from Google, CSV, or add manually." },
+              { n: 2, title: "Get near-real-time alerts", desc: "Email and SMS alerts for new reviews." },
+              { n: 3, title: "Reply fast", desc: "Jump straight to the review from your inbox or dashboard." }
+            ].map(s => (
+              <div key={s.n} className="relative z-10 rounded-2xl border bg-white p-6 text-center shadow-sm">
+                <div className="mx-auto -mt-8 mb-2 flex h-12 w-12 items-center justify-center rounded-full bg-brand-600 text-white text-base font-semibold shadow ring-1 ring-black/5">
+                  {s.n}
+                </div>
+                <h3 className="text-lg font-semibold">{s.title}</h3>
+                <p className="mx-auto mt-2 max-w-xs text-sm text-gray-600">{s.desc}</p>
               </div>
-              <h3 className="text-lg font-semibold">Connect your locations</h3>
-              <p className="mx-auto mt-2 max-w-xs text-sm text-gray-600">Sign in with Google. Import from Google, CSV, or add manually.</p>
-            </div>
-
-            <div className="relative z-10 h-full rounded-2xl border bg-white/70 p-6 text-center shadow-sm">
-              <div className="mx-auto -mt-6 mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-brand-600 text-white text-base font-semibold shadow ring-1 ring-black/5">
-                2
-              </div>
-              <h3 className="text-lg font-semibold">Get near-real-time alerts</h3>
-              <p className="mx-auto mt-2 max-w-xs text-sm text-gray-600">Email and SMS alerts for new reviews.</p>
-            </div>
-
-            <div className="relative z-10 h-full rounded-2xl border bg-white/70 p-6 text-center shadow-sm">
-              <div className="mx-auto -mt-6 mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-brand-600 text-white text-base font-semibold shadow ring-1 ring-black/5">
-                3
-              </div>
-              <h3 className="text-lg font-semibold">Reply fast</h3>
-              <p className="mx-auto mt-2 max-w-xs text-sm text-gray-600">Jump straight to the review from your inbox or dashboard.</p>
-            </div>
+            ))}
           </div>
+
+          {/* mobile vertical stepper */}
+          <ol className="mt-8 space-y-6 md:hidden">
+            {[
+              { n: 1, title: "Connect your locations", desc: "Sign in with Google. Import from Google, CSV, or add manually." },
+              { n: 2, title: "Get near-real-time alerts", desc: "Email and SMS alerts for new reviews." },
+              { n: 3, title: "Reply fast", desc: "Jump straight to the review from your inbox or dashboard." }
+            ].map(s => (
+              <li key={s.n} className="relative border-l-2 border-gray-200 pl-6">
+                <span className="absolute -left-2 top-1.5 inline-flex h-4 w-4 items-center justify-center rounded-full bg-brand-600 ring-2 ring-white"></span>
+                <h3 className="text-base font-semibold">{s.title}</h3>
+                <p className="mt-1 text-sm text-gray-600">{s.desc}</p>
+              </li>
+            ))}
+          </ol>
         </div>
       </section>
 
