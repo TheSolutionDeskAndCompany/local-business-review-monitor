@@ -72,9 +72,9 @@ const Landing = () => {
           <h2 className="text-center text-3xl font-bold tracking-tight sm:text-4xl">How it works</h2>
 
           {/* desktop row with connectors */}
-          <div className="relative mt-10 hidden md:grid md:grid-cols-3 md:gap-8">
+          <div className="relative mt-10 hidden lg:grid lg:grid-cols-3 lg:gap-8">
             {/* dashed connector line */}
-            <div className="pointer-events-none absolute left-0 right-0 top-8 mx-8 hidden md:block">
+            <div className="pointer-events-none absolute left-0 right-0 top-8 mx-8 hidden lg:block">
               <div className="h-0.5 w-full border-t-2 border-dashed border-gray-200"></div>
             </div>
 
@@ -104,7 +104,7 @@ const Landing = () => {
           </div>
 
           {/* mobile vertical stepper */}
-          <ol className="mt-8 space-y-6 md:hidden">
+          <ol className="mt-8 space-y-6 lg:hidden">
             <li className="relative border-l-2 border-gray-200 pl-6">
               <span className="absolute -left-2 top-1.5 inline-flex h-4 w-4 items-center justify-center rounded-full bg-brand-600 ring-2 ring-white"></span>
               <h3 className="text-base font-semibold">Connect your locations</h3>
