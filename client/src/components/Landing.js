@@ -9,10 +9,7 @@ const Landing = () => {
 
   return (
     <div className="landing-page">
-      {/* Fixed Background Logo */}
-      <div className="fixed-background-logo">
-        <img src="/Review-Ready-logo.png" alt="ReviewReady" className="fixed-logo-image" />
-      </div>
+
       
       {/* Header */}
       <header className="header">
@@ -66,6 +63,13 @@ const Landing = () => {
           </div>
           <div className="hero-image">
             <MarketingDashboardMock />
+          </div>
+        </div>
+        
+        {/* Banner Logo */}
+        <div className="banner-logo-section">
+          <div className="container">
+            <img src="/Review-Ready-logo.png" alt="ReviewReady" className="banner-logo" />
           </div>
         </div>
       </section>

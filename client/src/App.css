@@ -209,26 +209,23 @@ body {
   border: 1px solid rgba(16, 185, 129, 0.2);
 }
 
-/* Fixed Background Logo */
-.fixed-background-logo {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: -1;
-  pointer-events: none;
+/* Banner Logo */
+.banner-logo-section {
+  width: 100%;
+  padding: 40px 0;
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.05) 0%, rgba(16, 185, 129, 0.02) 100%);
+  border-top: 1px solid rgba(16, 185, 129, 0.1);
+  border-bottom: 1px solid rgba(16, 185, 129, 0.1);
 }
 
-.fixed-logo-image {
-  width: 80vw;
-  height: 80vh;
-  object-fit: contain;
-  opacity: 0.08;
-  filter: grayscale(20%);
+.banner-logo {
+  width: 100%;
+  max-width: 800px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  opacity: 0.9;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
 }
 
 .hero h1 {
