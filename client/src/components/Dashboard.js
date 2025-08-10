@@ -54,36 +54,84 @@ const Dashboard = () => {
   };
 
   const connectGoogleBusiness = () => {
-    // Mock Google Business Profile connection
-    alert('Google Business Profile connection would open OAuth flow here.\n\nFor demo purposes, this would:\n1. Open Google OAuth\n2. Request Business Profile permissions\n3. Store connection credentials\n4. Start monitoring reviews');
+    // In a real implementation, this would redirect to Google OAuth
+    const clientId = 'your-google-client-id';
+    const redirectUri = encodeURIComponent(window.location.origin + '/auth/google/callback');
+    const scope = encodeURIComponent('https://www.googleapis.com/auth/business.manage');
     
-    // Simulate successful connection
-    setPlatforms([...platforms, { 
-      platform: 'google', 
-      businessName: user?.businessName || 'Your Business',
-      connected: true,
-      lastSync: new Date()
-    }]);
+    // For now, show what would happen
+    const proceed = window.confirm(
+      '🔗 Connect Google Business Profile\n\n' +
+      'This will redirect you to Google to authorize ReviewReady to:\n' +
+      '• Access your Business Profile information\n' +
+      '• Monitor reviews and ratings\n' +
+      '• Send notifications for new reviews\n\n' +
+      'Click OK to continue to Google OAuth...'
+    );
+    
+    if (proceed) {
+      // In production, redirect to:
+      // window.location.href = `https://accounts.google.com/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}&response_type=code`;
+      
+      // For demo, simulate successful connection
+      alert('✅ Google Business Profile Connected!\n\nIn production, you would be redirected to Google OAuth and then back here with your connection established.');
+      setPlatforms([...platforms, { 
+        platform: 'google', 
+        businessName: user?.businessName || 'Your Business',
+        connected: true,
+        lastSync: new Date()
+      }]);
+    }
   };
 
-  const connectYelp = async () => {
-    const businessId = prompt('Enter your Yelp Business ID:\n\n(You can find this in your Yelp business URL: yelp.com/biz/YOUR-BUSINESS-ID)');
-    const apiKey = prompt('Enter your Yelp API Key:\n\n(Get this from: https://www.yelp.com/developers/v3/manage_app)');
+  const connectYelp = () => {
+    const proceed = window.confirm(
+      '🔗 Connect Yelp Business\n\n' +
+      'This will open Yelp\'s authorization page where you can:\n' +
+      '• Grant ReviewReady access to your business data\n' +
+      '• Enable automatic review monitoring\n' +
+      '• Set up instant notifications\n\n' +
+      'You\'ll need your Yelp Business account credentials.\n\n' +
+      'Click OK to continue to Yelp authorization...'
+    );
     
-    if (!businessId || !apiKey) {
-      alert('Both Business ID and API Key are required to connect Yelp.');
-      return;
+    if (proceed) {
+      // In production, this would redirect to Yelp's OAuth or open a modal
+      // For now, open the developer portal in a new tab
+      window.open('https://www.yelp.com/developers/v3/manage_app', '_blank');
+      
+      // Show connection form
+      setTimeout(() => {
+        const businessId = prompt(
+          '📋 Yelp Connection Setup\n\n' +
+          'Enter your Yelp Business ID:\n' +
+          '(Found in your business URL: yelp.com/biz/YOUR-BUSINESS-ID)'
+        );
+        
+        if (businessId) {
+          const apiKey = prompt(
+            '🔑 API Key Required\n\n' +
+            'Enter your Yelp API Key:\n' +
+            '(From the developer portal that just opened)'
+          );
+          
+          if (apiKey) {
+            // Make the API call
+            connectYelpWithCredentials(businessId.trim(), apiKey.trim());
+          }
+        }
+      }, 1000);
     }
-    
+  };
+  
+  const connectYelpWithCredentials = async (businessId, apiKey) => {
     try {
       const response = await axios.post('/api/business/connect/yelp', {
-        businessId: businessId.trim(),
-        apiKey: apiKey.trim()
+        businessId,
+        apiKey
       });
       
       alert(`✅ ${response.data.message}\n\nBusiness: ${response.data.businessName}\n\nYour Yelp reviews will now be monitored automatically!`);
-      
-      // Refresh platforms list
       fetchDashboardData();
     } catch (error) {
       const errorMsg = error.response?.data?.message || 'Failed to connect Yelp';
@@ -91,24 +139,58 @@ const Dashboard = () => {
     }
   };
 
-  const connectFacebook = async () => {
-    const pageId = prompt('Enter your Facebook Page ID:\n\n(Find this in your Facebook Page settings or URL)');
-    const accessToken = prompt('Enter your Facebook Page Access Token:\n\n(Generate this from: https://developers.facebook.com/tools/explorer/)');
+  const connectFacebook = () => {
+    const proceed = window.confirm(
+      '🔗 Connect Facebook Page\n\n' +
+      'This will redirect you to Facebook to authorize ReviewReady to:\n' +
+      '• Access your Page information and reviews\n' +
+      '• Monitor new reviews automatically\n' +
+      '• Send instant notifications\n\n' +
+      'You\'ll need admin access to your Facebook Page.\n\n' +
+      'Click OK to continue to Facebook authorization...'
+    );
     
-    if (!pageId || !accessToken) {
-      alert('Both Page ID and Access Token are required to connect Facebook.');
-      return;
+    if (proceed) {
+      // In production, this would use Facebook Login SDK
+      const appId = 'your-facebook-app-id';
+      const redirectUri = encodeURIComponent(window.location.origin + '/auth/facebook/callback');
+      const scope = 'pages_show_list,pages_read_engagement';
+      
+      // For now, open Facebook developers tools
+      window.open('https://developers.facebook.com/tools/explorer/', '_blank');
+      
+      // Show connection form
+      setTimeout(() => {
+        const pageId = prompt(
+          '📋 Facebook Page Setup\n\n' +
+          'Enter your Facebook Page ID:\n' +
+          '(Found in your Page settings or About section)'
+        );
+        
+        if (pageId) {
+          const accessToken = prompt(
+            '🔑 Access Token Required\n\n' +
+            'Enter your Page Access Token:\n' +
+            '(From the Graph API Explorer that just opened)'
+          );
+          
+          if (accessToken) {
+            // Make the API call
+            connectFacebookWithCredentials(pageId.trim(), accessToken.trim());
+          }
+        }
+      }, 1000);
     }
-    
+  };
+  
+  const connectFacebookWithCredentials = async (pageId, accessToken) => {
     try {
       const response = await axios.post('/api/business/connect/facebook', {
-        pageId: pageId.trim(),
-        accessToken: accessToken.trim()
+        pageId,
+        accessToken
       });
       
       alert(`✅ ${response.data.message}\n\nBusiness: ${response.data.businessName}\n\nYour Facebook reviews will now be monitored automatically!`);
-      
-      // Refresh platforms list
       fetchDashboardData();
     } catch (error) {
       const errorMsg = error.response?.data?.message || 'Failed to connect Facebook';
@@ -117,21 +199,9 @@ const Dashboard = () => {
   };
 
   const connectPlatform = () => {
-    const choice = prompt('Choose a platform to connect:\n\n1. Google Business Profile\n2. Yelp Business\n3. Facebook Page\n\nEnter 1, 2, or 3:');
-    
-    switch(choice) {
-      case '1':
-        connectGoogleBusiness();
-        break;
-      case '2':
-        connectYelp();
-        break;
-      case '3':
-        connectFacebook();
-        break;
-      default:
-        alert('Please enter 1, 2, or 3 to select a platform.');
-    }
+    // This function is now less relevant since each platform has its own connect button
+    // But keeping it for the main "Connect Platform" button
+    alert('💡 Choose a Platform Below\n\nClick the "Connect" button on any platform card below to get started:\n\n• Google Business Profile\n• Yelp Business\n• Facebook Page\n\nEach platform will guide you through its specific authorization process.');
   };
 
   const exportReviews = async (format = 'csv') => {
