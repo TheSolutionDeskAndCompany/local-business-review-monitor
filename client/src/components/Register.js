@@ -65,7 +65,7 @@ const Register = () => {
       <div className="auth-container">
         <div className="auth-header">
           <Link to="/" className="logo">
-            <img src="/Review-Ready-logo.png" alt="ReviewReady" className="logo-img" />
+            <img src="/Review-Ready-logo.png" alt="ReviewReady" className="logo-image" />
           </Link>
           <h1>Start Your Free Trial</h1>
           <p>7 days free, no credit card required</p>
