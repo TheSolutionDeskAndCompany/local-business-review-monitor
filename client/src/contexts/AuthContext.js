@@ -61,12 +61,12 @@ export const AuthProvider = ({ children }) => {
         }
       }
       
-      const mockUser = {
-        id: userData?.id || 'temp-user-' + Date.now(),
+      const mockUser = userData || {
+        id: 'temp-user-' + Date.now(),
         email: email,
-        businessName: userData?.businessName || 'Your Business',
-        ownerName: userData?.ownerName || 'Business Owner',
-        phone: userData?.phone || '',
+        businessName: 'Your Business',
+        ownerName: 'Business Owner',
+        phone: '',
         subscription: {
           status: 'trial',
           plan: 'basic',
