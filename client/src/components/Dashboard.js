@@ -53,6 +53,23 @@ const Dashboard = () => {
     }
   };
 
+  const connectGoogleBusiness = () => {
+    // Mock Google Business Profile connection
+    alert('Google Business Profile connection would open OAuth flow here.\n\nFor demo purposes, this would:\n1. Open Google OAuth\n2. Request Business Profile permissions\n3. Store connection credentials\n4. Start monitoring reviews');
+    
+    // Simulate successful connection
+    setPlatforms([...platforms, { 
+      platform: 'google', 
+      businessName: user?.businessName || 'Your Business',
+      connected: true,
+      lastSync: new Date()
+    }]);
+  };
+
+  const connectPlatform = () => {
+    alert('Platform connection wizard would open here.\n\nAvailable platforms:\n• Google Business Profile (Ready)\n• Yelp (Coming Soon)\n• Facebook (Coming Soon)');
+  };
+
   const exportReviews = async (format = 'csv') => {
     try {
       const response = await axios.get(`/api/reviews/export?format=${format}`, {
@@ -239,7 +256,7 @@ const Dashboard = () => {
           <div className="platforms-section">
             <div className="section-header">
               <h2>Connected Platforms</h2>
-              <button className="btn btn-primary">
+              <button className="btn btn-primary" onClick={connectPlatform}>
                 <Plus className="icon" />
                 Connect Platform
               </button>
@@ -258,7 +275,7 @@ const Dashboard = () => {
                   {platforms.find(p => p.platform === 'google') ? (
                     <span className="status connected">Connected</span>
                   ) : (
-                    <button className="btn btn-outline">Connect</button>
+                    <button className="btn btn-outline" onClick={connectGoogleBusiness}>Connect</button>
                   )}
                 </div>
               </div>
