@@ -1,20 +1,107 @@
 // api/auth/login.js
-const jwt = require("jsonwebtoken");
-const bcrypt = require("bcryptjs");
-const { getDB } = require("../../lib/mongo");
+const mongoose = require('mongoose');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
 
-async function readJSON(req) {
-  if (req.body) return req.body;
-  const chunks = [];
-  for await (const ch of req) chunks.push(ch);
-  try { return JSON.parse(Buffer.concat(chunks).toString() || "{}"); } catch { return {}; }
+// User Schema (inline for serverless)
+const UserSchema = new mongoose.Schema({
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+    lowercase: true
+  },
+  password: {
+    type: String,
+    required: true
+  },
+  businessName: {
+    type: String,
+    required: true
+  },
+  ownerName: {
+    type: String,
+    required: true
+  },
+  phone: {
+    type: String
+  },
+  subscription: {
+    status: {
+      type: String,
+      enum: ['trial', 'active', 'cancelled', 'expired'],
+      default: 'trial'
+    },
+    plan: {
+      type: String,
+      enum: ['basic', 'pro'],
+      default: 'basic'
+    },
+    stripeCustomerId: String,
+    stripeSubscriptionId: String,
+    trialEndsAt: {
+      type: Date,
+      default: () => new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
+    },
+    currentPeriodEnd: Date
+  },
+  notifications: {
+    email: {
+      type: Boolean,
+      default: true
+    },
+    sms: {
+      type: Boolean,
+      default: false
+    }
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now
+  }
+});
+
+// Password comparison method
+UserSchema.methods.comparePassword = async function(candidatePassword) {
+  return bcrypt.compare(candidatePassword, this.password);
+};
+
+let User;
+try {
+  User = mongoose.model('User');
+} catch {
+  User = mongoose.model('User', UserSchema);
 }
 
-function bad(res, code, msg) { return res.status(code).json({ ok: false, error: msg }); }
+let isConnected = false;
+
+const connectDB = async () => {
+  if (isConnected) return;
+  
+  try {
+    const conn = await mongoose.connect(process.env.MONGODB_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    isConnected = conn.connections[0].readyState === 1;
+    console.log('MongoDB connected');
+  } catch (error) {
+    console.error('MongoDB connection error:', error);
+    throw error;
+  }
+};
 
 module.exports = async (req, res) => {
-  if (req.method === "OPTIONS") return res.status(204).end();
-  if (req.method !== "POST") return bad(res, 405, "Method Not Allowed");
+  if (req.method === "OPTIONS") {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    return res.status(204).end();
+  }
+  
+  if (req.method !== "POST") {
+    return res.status(405).json({ message: "Method Not Allowed" });
+  }
 
   // Add CORS headers
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -22,40 +109,31 @@ module.exports = async (req, res) => {
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
   try {
-    const { email, password } = await readJSON(req);
+    await connectDB();
+    
+    const { email, password } = req.body;
 
     // Validate required fields
     if (!email || !password) {
-      return bad(res, 400, "Email and password are required");
+      return res.status(400).json({ message: 'Email and password are required' });
     }
 
-    const emailLower = email.toLowerCase();
-    const db = await getDB();
-    const users = db.collection("users");
-
-    // Find user by email (case-insensitive)
-    const user = await users.findOne({ 
-      $or: [{ emailLower }, { email }] 
-    });
-
+    // Find user by email
+    const user = await User.findOne({ email });
     if (!user) {
-      console.warn('Login attempt with non-existent email', { email: emailLower });
-      return bad(res, 400, "Invalid credentials");
+      return res.status(400).json({ message: 'Invalid credentials' });
     }
 
     // Check password
-    const isMatch = await bcrypt.compare(password, user.passwordHash);
+    const isMatch = await user.comparePassword(password);
     if (!isMatch) {
-      console.warn('Login attempt with wrong password', { email: emailLower });
-      return bad(res, 400, "Invalid credentials");
+      return res.status(400).json({ message: 'Invalid credentials' });
     }
-
-    console.log('User logged in successfully', { userId: user._id, email: emailLower });
 
     // Create JWT token
     const payload = {
       user: {
-        id: user._id.toString()
+        id: user.id
       }
     };
 
@@ -65,34 +143,21 @@ module.exports = async (req, res) => {
       { expiresIn: '24h' }
     );
 
-    // Return success response with token and user data
-    const userResponse = {
-      id: user._id.toString(),
-      email: user.email,
-      businessName: user.businessName,
-      ownerName: user.ownerName,
-      phone: user.phone || "",
-      subscription: user.subscription || {
-        plan: "trial",
-        status: "active",
-        trialEndsAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
-      },
-      settings: user.settings || {
-        emailNotifications: true,
-        smsNotifications: false,
-        reviewAlerts: true
-      }
-    };
-
-    return res.status(200).json({
-      ok: true,
-      message: "Login successful",
+    res.status(200).json({
+      message: 'Login successful',
       token,
-      user: userResponse
+      user: {
+        id: user.id,
+        email: user.email,
+        businessName: user.businessName,
+        ownerName: user.ownerName,
+        phone: user.phone,
+        subscription: user.subscription
+      }
     });
 
   } catch (error) {
-    console.error("Login error:", error);
-    return bad(res, 500, "Server error");
+    console.error('Login error:', error);
+    res.status(500).json({ message: 'Server error' });
   }
 };

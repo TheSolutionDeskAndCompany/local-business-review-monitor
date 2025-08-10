@@ -1,20 +1,109 @@
 // api/auth/register.js
-const jwt = require("jsonwebtoken");
-const bcrypt = require("bcryptjs");
-const { getDB } = require("../../lib/mongo");
+const mongoose = require('mongoose');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
 
-async function readJSON(req) {
-  if (req.body) return req.body;
-  const chunks = [];
-  for await (const ch of req) chunks.push(ch);
-  try { return JSON.parse(Buffer.concat(chunks).toString() || "{}"); } catch { return {}; }
+// User Schema (inline for serverless)
+const UserSchema = new mongoose.Schema({
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+    lowercase: true
+  },
+  password: {
+    type: String,
+    required: true
+  },
+  businessName: {
+    type: String,
+    required: true
+  },
+  ownerName: {
+    type: String,
+    required: true
+  },
+  phone: {
+    type: String
+  },
+  subscription: {
+    status: {
+      type: String,
+      enum: ['trial', 'active', 'cancelled', 'expired'],
+      default: 'trial'
+    },
+    plan: {
+      type: String,
+      enum: ['basic', 'pro'],
+      default: 'basic'
+    },
+    stripeCustomerId: String,
+    stripeSubscriptionId: String,
+    trialEndsAt: {
+      type: Date,
+      default: () => new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
+    },
+    currentPeriodEnd: Date
+  },
+  notifications: {
+    email: {
+      type: Boolean,
+      default: true
+    },
+    sms: {
+      type: Boolean,
+      default: false
+    }
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now
+  }
+});
+
+// Password hashing middleware
+UserSchema.pre('save', async function(next) {
+  if (!this.isModified('password')) return next();
+  this.password = await bcrypt.hash(this.password, 12);
+  next();
+});
+
+let User;
+try {
+  User = mongoose.model('User');
+} catch {
+  User = mongoose.model('User', UserSchema);
 }
 
-function bad(res, code, msg) { return res.status(code).json({ ok: false, error: msg }); }
+let isConnected = false;
+
+const connectDB = async () => {
+  if (isConnected) return;
+  
+  try {
+    const conn = await mongoose.connect(process.env.MONGODB_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    isConnected = conn.connections[0].readyState === 1;
+    console.log('MongoDB connected');
+  } catch (error) {
+    console.error('MongoDB connection error:', error);
+    throw error;
+  }
+};
 
 module.exports = async (req, res) => {
-  if (req.method === "OPTIONS") return res.status(204).end();
-  if (req.method !== "POST") return bad(res, 405, "Method Not Allowed");
+  if (req.method === "OPTIONS") {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    return res.status(204).end();
+  }
+  
+  if (req.method !== "POST") {
+    return res.status(405).json({ message: "Method Not Allowed" });
+  }
 
   // Add CORS headers
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -22,85 +111,36 @@ module.exports = async (req, res) => {
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
   try {
-    const { email, password, businessName, ownerName, phone } = await readJSON(req);
+    await connectDB();
+    
+    const { email, password, businessName, ownerName, phone } = req.body;
 
     // Validate required fields
     if (!email || !password || !businessName || !ownerName) {
-      console.warn('Missing required fields', { email: !!email, password: !!password, businessName: !!businessName, ownerName: !!ownerName });
-      return bad(res, 400, "Missing required fields");
+      return res.status(400).json({ message: 'Missing required fields' });
     }
-
-    // Validate email format
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      return bad(res, 400, "Invalid email format");
-    }
-
-    // Validate password strength
-    if (password.length < 8) {
-      return bad(res, 400, "Password must be at least 8 characters long");
-    }
-
-    if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/.test(password)) {
-      return bad(res, 400, "Password must contain at least one uppercase letter, one lowercase letter, and one number");
-    }
-
-    const emailLower = email.toLowerCase();
-    const db = await getDB();
-    const users = db.collection("users");
 
     // Check if user already exists
-    const existingUser = await users.findOne({ 
-      $or: [{ emailLower }, { email }] 
-    });
-
-    if (existingUser) {
-      console.warn('User already exists', { email: emailLower });
-      return bad(res, 400, "User already exists");
+    let user = await User.findOne({ email });
+    if (user) {
+      return res.status(400).json({ message: 'User already exists' });
     }
-
-    // Hash password
-    const passwordHash = await bcrypt.hash(password, 12);
 
     // Create new user
-    const newUser = {
+    user = new User({
       email,
-      emailLower,
-      passwordHash,
+      password,
       businessName,
       ownerName,
-      phone: phone || "",
-      createdAt: new Date(),
-      updatedAt: new Date(),
-      isEmailVerified: false,
-      subscription: {
-        plan: "trial",
-        status: "active",
-        trialEndsAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // 7 days from now
-        stripeCustomerId: null,
-        stripeSubscriptionId: null
-      },
-      settings: {
-        emailNotifications: true,
-        smsNotifications: false,
-        reviewAlerts: true
-      }
-    };
+      phone
+    });
 
-    console.log('Creating new user', { email: emailLower, businessName });
-    const result = await users.insertOne(newUser);
-    
-    if (!result.insertedId) {
-      console.error('Failed to create user');
-      return bad(res, 500, "Failed to create user");
-    }
-
-    console.log('User registered successfully', { userId: result.insertedId, email: emailLower });
+    await user.save();
 
     // Create JWT token
     const payload = {
       user: {
-        id: result.insertedId.toString()
+        id: user.id
       }
     };
 
@@ -110,26 +150,21 @@ module.exports = async (req, res) => {
       { expiresIn: '24h' }
     );
 
-    // Return success response with token and user data
-    const userResponse = {
-      id: result.insertedId.toString(),
-      email,
-      businessName,
-      ownerName,
-      phone: phone || "",
-      subscription: newUser.subscription,
-      settings: newUser.settings
-    };
-
-    return res.status(201).json({
-      ok: true,
-      message: "User registered successfully",
+    res.status(201).json({
+      message: 'User registered successfully',
       token,
-      user: userResponse
+      user: {
+        id: user.id,
+        email: user.email,
+        businessName: user.businessName,
+        ownerName: user.ownerName,
+        phone: user.phone,
+        subscription: user.subscription
+      }
     });
 
   } catch (error) {
-    console.error("Registration error:", error);
-    return bad(res, 500, "Server error");
+    console.error('Registration error:', error);
+    res.status(500).json({ message: 'Server error' });
   }
 };
