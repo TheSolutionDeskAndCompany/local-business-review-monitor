@@ -49,12 +49,24 @@ export const AuthProvider = ({ children }) => {
       
       // Create mock token and user data
       const mockToken = 'mock-jwt-token-' + Date.now();
+      
+      // Try to get user data from localStorage (from registration) or use defaults
+      const storedUser = localStorage.getItem('user');
+      let userData = null;
+      if (storedUser) {
+        try {
+          userData = JSON.parse(storedUser);
+        } catch (e) {
+          console.log('Could not parse stored user data');
+        }
+      }
+      
       const mockUser = {
-        id: 'temp-user-' + Date.now(),
+        id: userData?.id || 'temp-user-' + Date.now(),
         email: email,
-        businessName: 'Demo Business',
-        ownerName: 'Demo Owner',
-        phone: '',
+        businessName: userData?.businessName || 'Your Business',
+        ownerName: userData?.ownerName || 'Business Owner',
+        phone: userData?.phone || '',
         subscription: {
           status: 'trial',
           plan: 'basic',

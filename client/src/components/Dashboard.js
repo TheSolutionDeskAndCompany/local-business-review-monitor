@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { 
-  Star, 
   Bell, 
   Settings, 
   LogOut, 
@@ -100,8 +99,7 @@ const Dashboard = () => {
       <header className="dashboard-header">
         <div className="header-left">
           <div className="logo">
-            <Star className="icon" />
-            <span>ReviewReady</span>
+            <img src="/Review-Ready-logo.png" alt="ReviewReady" className="logo-image" />
           </div>
           <h1>Welcome back, {user?.ownerName}</h1>
         </div>
