@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../contexts/AuthContext';
+import { useNavigate } from 'react-router-dom';
+import Connectors from './Connectors';
 import { 
   Bell, 
   Settings, 
   LogOut, 
-  Plus, 
   Download,
   EyeOff,
   TrendingUp,
@@ -14,6 +15,7 @@ import axios from 'axios';
 
 const Dashboard = () => {
   const { user, logout } = useAuth();
+  const navigate = useNavigate();
   const [reviews, setReviews] = useState([]);
   const [stats, setStats] = useState({});
   const [platforms, setPlatforms] = useState([]);
@@ -82,133 +84,22 @@ const Dashboard = () => {
         platform: 'google', 
         businessName: user?.businessName || 'Your Business',
         connected: true,
-        lastSync: new Date()
+        lastSync: new Date(),
+        rating: 4.5,
+        reviews: 100
       }]);
     }
   };
 
-  const connectYelp = () => {
-    const proceed = window.confirm(
-      '🔗 Connect Yelp Business\n\n' +
-      'This will open Yelp\'s authorization page where you can:\n' +
-      '• Grant ReviewReady access to your business data\n' +
-      '• Enable automatic review monitoring\n' +
-      '• Set up instant notifications\n\n' +
-      'You\'ll need your Yelp Business account credentials.\n\n' +
-      'Click OK to continue to Yelp authorization...'
-    );
-    
-    if (proceed) {
-      // In production, this would redirect to Yelp's OAuth or open a modal
-      // For now, open the developer portal in a new tab
-      window.open('https://www.yelp.com/developers/v3/manage_app', '_blank');
-      
-      // Show connection form
-      setTimeout(() => {
-        const businessId = prompt(
-          '📋 Yelp Connection Setup\n\n' +
-          'Enter your Yelp Business ID:\n' +
-          '(Found in your business URL: yelp.com/biz/YOUR-BUSINESS-ID)'
-        );
-        
-        if (businessId) {
-          const apiKey = prompt(
-            '🔑 API Key Required\n\n' +
-            'Enter your Yelp API Key:\n' +
-            '(From the developer portal that just opened)'
-          );
-          
-          if (apiKey) {
-            // Make the API call
-            connectYelpWithCredentials(businessId.trim(), apiKey.trim());
-          }
-        }
-      }, 1000);
-    }
-  };
-  
-  const connectYelpWithCredentials = async (businessId, apiKey) => {
-    try {
-      const response = await axios.post('/api/business/connect/yelp', {
-        businessId,
-        apiKey
-      });
-      
-      alert(`✅ ${response.data.message}\n\nBusiness: ${response.data.businessName}\n\nYour Yelp reviews will now be monitored automatically!`);
-      fetchDashboardData();
-    } catch (error) {
-      const errorMsg = error.response?.data?.message || 'Failed to connect Yelp';
-      alert(`❌ Connection Failed\n\n${errorMsg}\n\nPlease check your credentials and try again.`);
-    }
-  };
 
-  const connectFacebook = () => {
-    const proceed = window.confirm(
-      '🔗 Connect Facebook Page\n\n' +
-      'This will redirect you to Facebook to authorize ReviewReady to:\n' +
-      '• Access your Page information and reviews\n' +
-      '• Monitor new reviews automatically\n' +
-      '• Send instant notifications\n\n' +
-      'You\'ll need admin access to your Facebook Page.\n\n' +
-      'Click OK to continue to Facebook authorization...'
-    );
-    
-    if (proceed) {
-      // In production, this would use Facebook Login SDK
-      // eslint-disable-next-line no-unused-vars
-      const appId = 'your-facebook-app-id';
-      // eslint-disable-next-line no-unused-vars
-      const redirectUri = encodeURIComponent(window.location.origin + '/auth/facebook/callback');
-      // eslint-disable-next-line no-unused-vars
-      const scope = 'pages_show_list,pages_read_engagement';
-      
-      // For now, open Facebook developers tools
-      window.open('https://developers.facebook.com/tools/explorer/', '_blank');
-      
-      // Show connection form
-      setTimeout(() => {
-        const pageId = prompt(
-          '📋 Facebook Page Setup\n\n' +
-          'Enter your Facebook Page ID:\n' +
-          '(Found in your Page settings or About section)'
-        );
-        
-        if (pageId) {
-          const accessToken = prompt(
-            '🔑 Access Token Required\n\n' +
-            'Enter your Page Access Token:\n' +
-            '(From the Graph API Explorer that just opened)'
-          );
-          
-          if (accessToken) {
-            // Make the API call
-            connectFacebookWithCredentials(pageId.trim(), accessToken.trim());
-          }
-        }
-      }, 1000);
-    }
-  };
   
-  const connectFacebookWithCredentials = async (pageId, accessToken) => {
-    try {
-      const response = await axios.post('/api/business/connect/facebook', {
-        pageId,
-        accessToken
-      });
-      
-      alert(`✅ ${response.data.message}\n\nBusiness: ${response.data.businessName}\n\nYour Facebook reviews will now be monitored automatically!`);
-      fetchDashboardData();
-    } catch (error) {
-      const errorMsg = error.response?.data?.message || 'Failed to connect Facebook';
-      alert(`❌ Connection Failed\n\n${errorMsg}\n\nPlease check your credentials and try again.`);
-    }
-  };
 
-  const connectPlatform = () => {
-    // This function is now less relevant since each platform has its own connect button
-    // But keeping it for the main "Connect Platform" button
-    alert('💡 Choose a Platform Below\n\nClick the "Connect" button on any platform card below to get started:\n\n• Google Business Profile\n• Yelp Business\n• Facebook Page\n\nEach platform will guide you through its specific authorization process.');
-  };
+
+
+  
+
+
+
 
   const exportReviews = async (format = 'csv') => {
     try {
@@ -279,7 +170,12 @@ const Dashboard = () => {
           <span>
             Trial ends in {Math.ceil((new Date(user.subscription.trialEndsAt) - new Date()) / (1000 * 60 * 60 * 24))} days
           </span>
-          <button className="btn btn-primary btn-small">Upgrade Now</button>
+          <button 
+            className="btn btn-primary btn-small"
+            onClick={() => navigate('/pricing')}
+          >
+            Upgrade Now
+          </button>
         </div>
       )}
 
@@ -394,66 +290,7 @@ const Dashboard = () => {
 
         {activeTab === 'platforms' && (
           <div className="platforms-section">
-            <div className="section-header">
-              <h2>Connected Platforms</h2>
-              <button className="btn btn-primary" onClick={connectPlatform}>
-                <Plus className="icon" />
-                Connect Platform
-              </button>
-            </div>
-
-            <div className="platforms-grid">
-              <div className="platform-card">
-                <div className="platform-info">
-                  <div className="platform-icon google">G</div>
-                  <div>
-                    <h3>Google Business Profile</h3>
-                    <p>Monitor Google reviews and ratings</p>
-                  </div>
-                </div>
-                <div className="platform-status">
-                  {platforms.find(p => p.platform === 'google') ? (
-                    <span className="status connected">Connected</span>
-                  ) : (
-                    <button className="btn btn-outline" onClick={connectGoogleBusiness}>Connect</button>
-                  )}
-                </div>
-              </div>
-
-              <div className="platform-card">
-                <div className="platform-info">
-                  <div className="platform-icon yelp">Y</div>
-                  <div>
-                    <h3>Yelp</h3>
-                    <p>Track Yelp reviews and customer feedback</p>
-                  </div>
-                </div>
-                <div className="platform-status">
-                  {platforms.find(p => p.platform === 'yelp') ? (
-                    <span className="status connected">Connected</span>
-                  ) : (
-                    <button className="btn btn-outline" onClick={connectYelp}>Connect</button>
-                  )}
-                </div>
-              </div>
-
-              <div className="platform-card">
-                <div className="platform-info">
-                  <div className="platform-icon facebook">f</div>
-                  <div>
-                    <h3>Facebook</h3>
-                    <p>Monitor Facebook page reviews</p>
-                  </div>
-                </div>
-                <div className="platform-status">
-                  {platforms.find(p => p.platform === 'facebook') ? (
-                    <span className="status connected">Connected</span>
-                  ) : (
-                    <button className="btn btn-outline" onClick={connectFacebook}>Connect</button>
-                  )}
-                </div>
-              </div>
-            </div>
+            <Connectors />
           </div>
         )}
 

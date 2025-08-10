@@ -215,6 +215,38 @@ router.post('/connect/facebook', auth, async (req, res) => {
   }
 });
 
+// Disconnect platform
+router.post('/disconnect/:platform', auth, async (req, res) => {
+  try {
+    const { platform } = req.params;
+    const user = await User.findById(req.user.id);
+    
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    // Remove the platform connection
+    const initialLength = user.connectedPlatforms.length;
+    user.connectedPlatforms = user.connectedPlatforms.filter(
+      p => p.platform !== platform
+    );
+
+    if (user.connectedPlatforms.length === initialLength) {
+      return res.status(404).json({ message: 'Platform connection not found' });
+    }
+
+    await user.save();
+
+    res.json({ 
+      message: `${platform} disconnected successfully`,
+      platform 
+    });
+  } catch (error) {
+    console.error('Disconnect error:', error);
+    res.status(500).json({ message: 'Failed to disconnect platform' });
+  }
+});
+
 // Test Yelp connection
 router.get('/test/yelp', auth, async (req, res) => {
   try {

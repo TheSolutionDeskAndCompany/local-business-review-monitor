@@ -848,6 +848,125 @@ body {
   gap: 24px;
 }
 
+/* Connectors Component Styles */
+.connectors-section {
+  padding: 20px 0;
+}
+
+.connectors-section h3 {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-bottom: 20px;
+}
+
+.connectors-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.connector-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: white;
+  transition: all 0.2s ease;
+}
+
+.connector-card:hover {
+  border-color: var(--color-accent-blue);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.1);
+}
+
+.connector-info h4 {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin: 0 0 4px 0;
+}
+
+.connection-details {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.connection-details .icon.connected {
+  color: var(--color-success);
+  width: 16px;
+  height: 16px;
+}
+
+.connection-details .status {
+  font-size: 14px;
+  color: var(--color-success);
+  font-weight: 500;
+}
+
+.account-info {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  margin-top: 4px;
+}
+
+.account-name {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  font-weight: 500;
+}
+
+.connector-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.connector-actions .icon {
+  width: 16px;
+  height: 16px;
+  margin-left: 4px;
+}
+
+.alert {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.alert .icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.alert-error {
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--color-danger);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.alert-success {
+  background: rgba(16, 185, 129, 0.1);
+  color: var(--color-success);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.loading {
+  text-align: center;
+  padding: 40px;
+  color: var(--color-text-secondary);
+}
+
 .settings-card {
   background: var(--color-card);
   border: 1px solid var(--color-border);

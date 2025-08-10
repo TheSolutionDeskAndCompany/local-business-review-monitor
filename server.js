@@ -33,6 +33,8 @@ app.use('/api/auth', require('./routes/auth'));
 app.use('/api/business', require('./routes/business'));
 app.use('/api/reviews', require('./routes/reviews'));
 app.use('/api/payments', require('./routes/payments'));
+app.use('/api/connectors', require('./routes/connectors'));
+app.use('/api/oauth/google', require('./routes/oauth-google'));
 
 // Serve static assets in production
 if (process.env.NODE_ENV === 'production') {
