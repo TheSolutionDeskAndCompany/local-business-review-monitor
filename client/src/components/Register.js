@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
-import { Star } from 'lucide-react';
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -66,8 +65,7 @@ const Register = () => {
       <div className="auth-container">
         <div className="auth-header">
           <Link to="/" className="logo">
-            <Star className="icon" />
-            <span>ReviewReady</span>
+            <img src="/Review-Ready-logo.png" alt="ReviewReady" className="logo-img" />
           </Link>
           <h1>Start Your Free Trial</h1>
           <p>7 days free, no credit card required</p>
