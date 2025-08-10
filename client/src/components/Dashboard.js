@@ -66,8 +66,72 @@ const Dashboard = () => {
     }]);
   };
 
+  const connectYelp = async () => {
+    const businessId = prompt('Enter your Yelp Business ID:\n\n(You can find this in your Yelp business URL: yelp.com/biz/YOUR-BUSINESS-ID)');
+    const apiKey = prompt('Enter your Yelp API Key:\n\n(Get this from: https://www.yelp.com/developers/v3/manage_app)');
+    
+    if (!businessId || !apiKey) {
+      alert('Both Business ID and API Key are required to connect Yelp.');
+      return;
+    }
+    
+    try {
+      const response = await axios.post('/api/business/connect/yelp', {
+        businessId: businessId.trim(),
+        apiKey: apiKey.trim()
+      });
+      
+      alert(`✅ ${response.data.message}\n\nBusiness: ${response.data.businessName}\n\nYour Yelp reviews will now be monitored automatically!`);
+      
+      // Refresh platforms list
+      fetchDashboardData();
+    } catch (error) {
+      const errorMsg = error.response?.data?.message || 'Failed to connect Yelp';
+      alert(`❌ Connection Failed\n\n${errorMsg}\n\nPlease check your credentials and try again.`);
+    }
+  };
+
+  const connectFacebook = async () => {
+    const pageId = prompt('Enter your Facebook Page ID:\n\n(Find this in your Facebook Page settings or URL)');
+    const accessToken = prompt('Enter your Facebook Page Access Token:\n\n(Generate this from: https://developers.facebook.com/tools/explorer/)');
+    
+    if (!pageId || !accessToken) {
+      alert('Both Page ID and Access Token are required to connect Facebook.');
+      return;
+    }
+    
+    try {
+      const response = await axios.post('/api/business/connect/facebook', {
+        pageId: pageId.trim(),
+        accessToken: accessToken.trim()
+      });
+      
+      alert(`✅ ${response.data.message}\n\nBusiness: ${response.data.businessName}\n\nYour Facebook reviews will now be monitored automatically!`);
+      
+      // Refresh platforms list
+      fetchDashboardData();
+    } catch (error) {
+      const errorMsg = error.response?.data?.message || 'Failed to connect Facebook';
+      alert(`❌ Connection Failed\n\n${errorMsg}\n\nPlease check your credentials and try again.`);
+    }
+  };
+
   const connectPlatform = () => {
-    alert('Platform connection wizard would open here.\n\nAvailable platforms:\n• Google Business Profile (Ready)\n• Yelp (Coming Soon)\n• Facebook (Coming Soon)');
+    const choice = prompt('Choose a platform to connect:\n\n1. Google Business Profile\n2. Yelp Business\n3. Facebook Page\n\nEnter 1, 2, or 3:');
+    
+    switch(choice) {
+      case '1':
+        connectGoogleBusiness();
+        break;
+      case '2':
+        connectYelp();
+        break;
+      case '3':
+        connectFacebook();
+        break;
+      default:
+        alert('Please enter 1, 2, or 3 to select a platform.');
+    }
   };
 
   const exportReviews = async (format = 'csv') => {
@@ -289,7 +353,11 @@ const Dashboard = () => {
                   </div>
                 </div>
                 <div className="platform-status">
-                  <span className="status coming-soon">Coming Soon</span>
+                  {platforms.find(p => p.platform === 'yelp') ? (
+                    <span className="status connected">Connected</span>
+                  ) : (
+                    <button className="btn btn-outline" onClick={connectYelp}>Connect</button>
+                  )}
                 </div>
               </div>
 
@@ -302,7 +370,11 @@ const Dashboard = () => {
                   </div>
                 </div>
                 <div className="platform-status">
-                  <span className="status coming-soon">Coming Soon</span>
+                  {platforms.find(p => p.platform === 'facebook') ? (
+                    <span className="status connected">Connected</span>
+                  ) : (
+                    <button className="btn btn-outline" onClick={connectFacebook}>Connect</button>
+                  )}
                 </div>
               </div>
             </div>
@@ -316,8 +388,8 @@ const Dashboard = () => {
             </div>
             <div className="analytics-placeholder">
               <TrendingUp className="empty-icon" />
-              <h3>Analytics Coming Soon</h3>
-              <p>We're working on detailed analytics and insights for your reviews</p>
+              <h3>Review Analytics</h3>
+              <p>Connect your business platforms to start seeing detailed analytics and insights for your reviews</p>
             </div>
           </div>
         )}
