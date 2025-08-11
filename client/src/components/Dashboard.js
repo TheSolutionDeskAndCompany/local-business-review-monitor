@@ -1,26 +1,376 @@
 import React, { useState, useEffect } from 'react';
-import { useAuth } from '../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
-import Connectors from './Connectors';
-import { 
-  Bell, 
-  Settings, 
-  LogOut, 
-  Download,
-  EyeOff,
-  TrendingUp,
-  AlertCircle
-} from 'lucide-react';
 import axios from 'axios';
+import { useAuth } from '../contexts/AuthContext';
+import { 
+  Star, 
+  TrendingUp, 
+  MessageSquare, 
+  Bell, 
+  Download, 
+  ArrowRight, 
+  LogOut,
+  Clock
+} from 'lucide-react';
+
+// Onboarding Component
+const Onboarding = ({ providers }) => {
+  const primary = providers.find(p => p.id === 'google') || providers[0];
+  
+  const startOAuth = (id) => {
+    const returnTo = encodeURIComponent('/dashboard');
+    window.location.href = `/api/oauth/${id}/start?return_to=${returnTo}`;
+  };
+
+  const Step = ({ n, title, hint, action }) => (
+    <div className="p-6 border rounded-2xl bg-white">
+      <div className="flex items-center gap-3 mb-3">
+        <div className="w-8 h-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-semibold text-sm">
+          {n}
+        </div>
+        <h3 className="font-semibold text-gray-900">{title}</h3>
+      </div>
+      {hint && <p className="text-sm text-gray-600 mb-4">{hint}</p>}
+      {action}
+    </div>
+  );
+
+  return (
+    <div className="rounded-2xl border shadow-sm bg-white">
+      <div className="p-6 border-b">
+        <h2 className="text-lg font-semibold text-gray-900">Get set up in 3 minutes</h2>
+        <p className="text-gray-600 mt-1">Connect your first platform to start monitoring reviews</p>
+      </div>
+      <div className="p-6">
+        <div className="grid gap-4 md:grid-cols-3">
+          <Step 
+            n="1" 
+            title="Connect Google Business Profile" 
+            action={
+              <button 
+                onClick={() => startOAuth(primary?.id || 'google')}
+                className="w-full bg-blue-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-blue-700 transition-colors flex items-center justify-center gap-2"
+              >
+                Connect {primary?.name || 'Google'} <ArrowRight className="w-4 h-4" />
+              </button>
+            } 
+          />
+          <Step 
+            n="2" 
+            title="Turn on alerts" 
+            hint="Email or Slack when a low-star review lands."
+          />
+          <Step 
+            n="3" 
+            title="Send first review request" 
+            hint="Use our prebuilt template."
+          />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// KPI Bar Component
+const KpiBar = ({ metrics }) => {
+  if (!metrics) return null;
+
+  const kpis = [
+    {
+      label: 'New Reviews (7d)',
+      value: metrics.newReviews7d || 0,
+      delta: metrics.deltas?.newReviews7d,
+      icon: MessageSquare,
+      color: 'text-blue-600'
+    },
+    {
+      label: 'Avg Rating (30d)',
+      value: metrics.avgRating30d ? metrics.avgRating30d.toFixed(1) : '0.0',
+      delta: metrics.deltas?.avgRating30d,
+      icon: Star,
+      color: 'text-yellow-500'
+    },
+    {
+      label: 'Response Rate (30d)',
+      value: `${metrics.responseRate30d || 0}%`,
+      delta: metrics.deltas?.responseRate30d,
+      icon: TrendingUp,
+      color: 'text-green-600'
+    },
+    {
+      label: 'Avg Response Time',
+      value: `${metrics.avgResponseHours || 0}h`,
+      delta: metrics.deltas?.avgResponseHours,
+      icon: Clock,
+      color: 'text-purple-600'
+    }
+  ];
+
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {kpis.map((kpi, index) => {
+        const Icon = kpi.icon;
+        const isPositive = kpi.delta > 0;
+        const deltaColor = isPositive ? 'text-green-600' : 'text-red-600';
+        
+        return (
+          <div key={index} className="rounded-2xl border shadow-sm bg-white p-6">
+            <div className="flex items-center justify-between mb-2">
+              <Icon className={`w-5 h-5 ${kpi.color}`} />
+              {kpi.delta && (
+                <span className={`text-sm font-medium ${deltaColor}`}>
+                  {isPositive ? '+' : ''}{kpi.delta}
+                </span>
+              )}
+            </div>
+            <div className="text-2xl font-bold text-gray-900 mb-1">{kpi.value}</div>
+            <div className="text-sm text-gray-600">{kpi.label}</div>
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
+// Reviews Inbox Component
+const ReviewsInbox = ({ reviews = [] }) => {
+  const [filter, setFilter] = useState('all');
+
+  const handleExport = () => {
+    console.log('Exporting reviews...');
+  };
+
+  const handleReply = (reviewId) => {
+    console.log('Replying to review:', reviewId);
+  };
+
+  return (
+    <div className="rounded-2xl border shadow-sm bg-white">
+      <div className="p-6 border-b">
+        <div className="flex items-center justify-between">
+          <h2 className="text-lg font-semibold text-gray-900">Reviews Inbox</h2>
+          <button 
+            onClick={handleExport}
+            className="flex items-center gap-2 px-4 py-2 border rounded-lg text-gray-700 hover:bg-gray-50 transition-colors"
+          >
+            <Download className="w-4 h-4" />
+            Export
+          </button>
+        </div>
+        <div className="flex gap-2 mt-4">
+          {['all', 'unreplied', 'low-rating'].map((filterOption) => (
+            <button
+              key={filterOption}
+              onClick={() => setFilter(filterOption)}
+              className={`px-3 py-1 rounded-lg text-sm font-medium transition-colors ${
+                filter === filterOption 
+                  ? 'bg-blue-100 text-blue-700' 
+                  : 'text-gray-600 hover:bg-gray-100'
+              }`}
+            >
+              {filterOption.charAt(0).toUpperCase() + filterOption.slice(1).replace('-', ' ')}
+            </button>
+          ))}
+        </div>
+      </div>
+      <div className="p-6">
+        {reviews.length === 0 ? (
+          <div className="text-center py-12">
+            <MessageSquare className="w-12 h-12 text-gray-400 mx-auto mb-4" />
+            <h3 className="text-lg font-semibold text-gray-900 mb-2">No reviews yet</h3>
+            <p className="text-gray-600 mb-6">Connect Google Business Profile to start monitoring reviews</p>
+            <button className="bg-blue-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-blue-700 transition-colors">
+              Connect Google
+            </button>
+          </div>
+        ) : (
+          <div className="space-y-4">
+            {reviews.map((review, index) => (
+              <div key={index} className="border rounded-lg p-4">
+                <div className="flex items-start justify-between mb-2">
+                  <div className="flex items-center gap-2">
+                    <div className="flex">
+                      {[...Array(5)].map((_, i) => (
+                        <Star 
+                          key={i} 
+                          className={`w-4 h-4 ${i < (review.rating || 5) ? 'text-yellow-400 fill-current' : 'text-gray-300'}`} 
+                        />
+                      ))}
+                    </div>
+                    <span className="text-sm text-gray-600">{review.platform || 'Google'}</span>
+                  </div>
+                  <span className="text-sm text-gray-500">{review.date || 'Today'}</span>
+                </div>
+                <p className="text-gray-900 mb-3">{review.text || 'Great service and friendly staff!'}</p>
+                <div className="flex items-center gap-2">
+                  <button 
+                    onClick={() => handleReply(review.id)}
+                    className="text-blue-600 hover:text-blue-700 text-sm font-medium"
+                  >
+                    Reply
+                  </button>
+                  <button className="text-gray-500 hover:text-gray-700 text-sm">
+                    Assign
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+// Connect Platforms Card Component
+const ConnectPlatformsCard = ({ providers = [] }) => {
+  if (!providers.length) return null;
+
+  return (
+    <div className="rounded-2xl border shadow-sm bg-white">
+      <div className="p-6 border-b">
+        <h2 className="text-lg font-semibold text-gray-900">Connected Platforms</h2>
+      </div>
+      <div className="p-6 space-y-3">
+        {providers.map(provider => (
+          <div key={provider.id} className="flex items-center justify-between">
+            <div className="font-medium text-gray-900">{provider.name}</div>
+            {provider.connected ? (
+              <span className="px-2 py-1 bg-green-100 text-green-700 rounded-lg text-sm font-medium">
+                Connected
+              </span>
+            ) : (
+              <button 
+                onClick={() => {
+                  const returnTo = encodeURIComponent('/dashboard');
+                  window.location.href = `/api/oauth/${provider.id}/start?return_to=${returnTo}`;
+                }}
+                className="px-3 py-1 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors"
+              >
+                Connect
+              </button>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+// Alerts Panel Component
+const AlertsPanel = ({ alerts = [] }) => (
+  <div className="rounded-2xl border shadow-sm bg-white">
+    <div className="p-6 border-b">
+      <h2 className="text-lg font-semibold text-gray-900">Recent Alerts</h2>
+    </div>
+    <div className="p-6">
+      {alerts.length === 0 ? (
+        <p className="text-gray-600 text-sm">No recent alerts</p>
+      ) : (
+        <div className="space-y-3">
+          {alerts.slice(0, 3).map(alert => (
+            <div key={alert.id} className="flex items-start gap-3">
+              <div className={`w-2 h-2 rounded-full mt-2 ${alert.type === 'low_rating' ? 'bg-red-500' : 'bg-yellow-500'}`} />
+              <div className="flex-1">
+                <p className="text-sm font-medium text-gray-900">{alert.title}</p>
+                <p className="text-xs text-gray-600">{alert.message}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  </div>
+);
+
+// Other placeholder components
+const AutomationsCard = () => (
+  <div className="rounded-2xl border shadow-sm bg-white">
+    <div className="p-6 border-b">
+      <h2 className="text-lg font-semibold text-gray-900">Automations</h2>
+    </div>
+    <div className="p-6">
+      <div className="space-y-3">
+        <div className="flex items-center justify-between">
+          <span className="text-sm text-gray-700">Auto-reply to 5-star reviews</span>
+          <button className="w-10 h-6 bg-gray-200 rounded-full relative">
+            <div className="w-4 h-4 bg-white rounded-full absolute top-1 left-1 transition-transform" />
+          </button>
+        </div>
+        <div className="flex items-center justify-between">
+          <span className="text-sm text-gray-700">Alert on low ratings</span>
+          <button className="w-10 h-6 bg-blue-600 rounded-full relative">
+            <div className="w-4 h-4 bg-white rounded-full absolute top-1 right-1 transition-transform" />
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+);
+
+const PlanCard = () => (
+  <div className="rounded-2xl border shadow-sm bg-white">
+    <div className="p-6 border-b">
+      <h2 className="text-lg font-semibold text-gray-900">Plan & Usage</h2>
+    </div>
+    <div className="p-6">
+      <div className="text-sm text-gray-600 mb-2">Free Trial</div>
+      <div className="text-lg font-semibold text-gray-900 mb-4">5 days remaining</div>
+      <button className="w-full bg-blue-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-blue-700 transition-colors">
+        Upgrade Now
+      </button>
+    </div>
+  </div>
+);
+
+const InsightsMini = ({ insights }) => {
+  if (!insights) return null;
+  
+  return (
+    <div className="rounded-2xl border shadow-sm bg-white">
+      <div className="p-6 border-b">
+        <h2 className="text-lg font-semibold text-gray-900">Insights (30 days)</h2>
+      </div>
+      <div className="p-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <h3 className="font-medium text-gray-900 mb-2">Top Keywords</h3>
+            <div className="space-y-2">
+              {insights.keywords?.slice(0, 3).map((keyword, index) => (
+                <div key={index} className="flex justify-between text-sm">
+                  <span className="text-gray-700">{keyword.word}</span>
+                  <span className="text-gray-500">{keyword.count}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div>
+            <h3 className="font-medium text-gray-900 mb-2">Platform Split</h3>
+            <div className="space-y-2">
+              {insights.platformSplit?.map((platform, index) => (
+                <div key={index} className="flex justify-between text-sm">
+                  <span className="text-gray-700">{platform.platform}</span>
+                  <span className="text-gray-500">{platform.percentage}%</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 const Dashboard = () => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
+  const [connectors, setConnectors] = useState(null);
+  const [metrics, setMetrics] = useState(null);
   const [reviews, setReviews] = useState([]);
-  const [stats, setStats] = useState({});
-
+  const [alerts, setAlerts] = useState([]);
+  const [insights, setInsights] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState('reviews');
+  const [hasConnections, setHasConnections] = useState(false);
 
   useEffect(() => {
     fetchDashboardData();
@@ -28,13 +378,22 @@ const Dashboard = () => {
 
   const fetchDashboardData = async () => {
     try {
-      const [reviewsRes, statsRes] = await Promise.all([
-        axios.get('/api/reviews?limit=10'),
-        axios.get('/api/reviews/stats')
+      const [connectorsRes, metricsRes, reviewsRes, alertsRes, insightsRes] = await Promise.all([
+        axios.get('/api/connectors'),
+        axios.get('/api/me/metrics?range=30d').catch(() => null),
+        axios.get('/api/reviews?limit=50').catch(() => ({ data: { reviews: [] } })),
+        axios.get('/api/alerts').catch(() => ({ data: [] })),
+        axios.get('/api/insights?range=30d').catch(() => null)
       ]);
 
-      setReviews(reviewsRes.data.reviews);
-      setStats(statsRes.data.overall);
+      setConnectors(connectorsRes.data);
+      setMetrics(metricsRes?.data);
+      setReviews(reviewsRes.data.reviews || []);
+      setAlerts(alertsRes.data || []);
+      setInsights(insightsRes?.data);
+      
+      const hasConn = connectorsRes.data?.some(c => c.enabled && c.connected);
+      setHasConnections(hasConn);
     } catch (error) {
       console.error('Dashboard data fetch error:', error);
     } finally {
@@ -42,363 +401,70 @@ const Dashboard = () => {
     }
   };
 
-  const markAsRead = async (reviewId) => {
-    try {
-      await axios.patch(`/api/reviews/${reviewId}/read`);
-      setReviews(reviews.map(review => 
-        review._id === reviewId ? { ...review, isNew: false } : review
-      ));
-    } catch (error) {
-      console.error('Mark as read error:', error);
-    }
-  };
-
-
-
-
-  
-
-
-
-  
-
-
-
-
-  const exportReviews = async (format = 'csv') => {
-    try {
-      const response = await axios.get(`/api/reviews/export?format=${format}`, {
-        responseType: format === 'csv' ? 'blob' : 'json'
-      });
-      
-      if (format === 'csv') {
-        const url = window.URL.createObjectURL(new Blob([response.data]));
-        const link = document.createElement('a');
-        link.href = url;
-        link.setAttribute('download', 'reviews.csv');
-        document.body.appendChild(link);
-        link.click();
-        link.remove();
-      }
-    } catch (error) {
-      console.error('Export error:', error);
-    }
-  };
-
-  const getStarRating = (rating) => {
-    return '★'.repeat(rating) + '☆'.repeat(5 - rating);
-  };
-
-  const getTimeAgo = (date) => {
-    const now = new Date();
-    const reviewDate = new Date(date);
-    const diffInHours = Math.floor((now - reviewDate) / (1000 * 60 * 60));
-    
-    if (diffInHours < 1) return 'Just now';
-    if (diffInHours < 24) return `${diffInHours}h ago`;
-    const diffInDays = Math.floor(diffInHours / 24);
-    if (diffInDays < 7) return `${diffInDays}d ago`;
-    return reviewDate.toLocaleDateString();
-  };
-
   if (loading) {
-    return <div className="loading">Loading dashboard...</div>;
+    return (
+      <div className="max-w-7xl mx-auto p-6">
+        <div className="animate-pulse">Loading dashboard...</div>
+      </div>
+    );
   }
 
+  if (!connectors) {
+    return (
+      <div className="max-w-7xl mx-auto p-6">
+        <div className="text-center">Error loading dashboard data</div>
+      </div>
+    );
+  }
+
+  const enabledProviders = connectors.filter(c => c.enabled);
+
   return (
-    <div className="dashboard">
+    <div className="max-w-7xl mx-auto p-6 space-y-6">
       {/* Header */}
-      <header className="dashboard-header">
-        <div className="header-left">
-          <div className="logo">
-            <img src="/Review-Ready-logo.png" alt="ReviewReady" className="logo-image" />
-          </div>
-          <h1>Welcome back, {user?.ownerName}</h1>
-        </div>
-        <div className="header-right">
-          <button className="btn btn-outline" onClick={() => setActiveTab('settings')}>
-            <Settings className="icon" />
-            Settings
+      <header className="flex items-center justify-between">
+        <h1 className="text-xl font-semibold text-gray-900">Dashboard</h1>
+        <div className="flex items-center gap-2">
+          <button 
+            onClick={() => navigate('/upgrade')}
+            className="bg-blue-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-blue-700 transition-colors"
+          >
+            Upgrade
           </button>
-          <button className="btn btn-outline" onClick={logout}>
-            <LogOut className="icon" />
-            Logout
+          <button 
+            onClick={logout}
+            className="text-gray-600 hover:text-gray-900 p-2"
+          >
+            <LogOut className="w-5 h-5" />
           </button>
         </div>
       </header>
 
-      {/* Subscription Status */}
-      {user?.subscription?.status === 'trial' && (
-        <div className="trial-banner">
-          <AlertCircle className="icon" />
-          <span>
-            Trial ends in {Math.ceil((new Date(user.subscription.trialEndsAt) - new Date()) / (1000 * 60 * 60 * 24))} days
-          </span>
-          <button 
-            className="btn btn-primary btn-small"
-            onClick={() => navigate('/pricing')}
-          >
-            Upgrade Now
-          </button>
-        </div>
+      {/* Onboarding or KPI Bar */}
+      {!hasConnections ? (
+        <Onboarding providers={enabledProviders} />
+      ) : (
+        <KpiBar metrics={metrics} />
       )}
 
-      {/* Navigation Tabs */}
-      <nav className="dashboard-nav">
-        <button 
-          className={`nav-tab ${activeTab === 'reviews' ? 'active' : ''}`}
-          onClick={() => setActiveTab('reviews')}
-        >
-          Reviews
-        </button>
-        <button 
-          className={`nav-tab ${activeTab === 'analytics' ? 'active' : ''}`}
-          onClick={() => setActiveTab('analytics')}
-        >
-          Analytics
-        </button>
-        <button 
-          className={`nav-tab ${activeTab === 'platforms' ? 'active' : ''}`}
-          onClick={() => setActiveTab('platforms')}
-        >
-          Platforms
-        </button>
-      </nav>
+      {/* Main Grid Layout */}
+      <div className="grid grid-cols-12 gap-6">
+        {/* Left Column - Reviews Inbox */}
+        <div className="col-span-12 lg:col-span-8">
+          <ReviewsInbox reviews={reviews} />
+        </div>
 
-      {/* Main Content */}
-      <main className="dashboard-main">
-        {activeTab === 'reviews' && (
-          <div className="reviews-section">
-            {/* Stats Cards */}
-            <div className="stats-grid">
-              <div className="stat-card">
-                <div className="stat-value">{stats.totalReviews || 0}</div>
-                <div className="stat-label">Total Reviews</div>
-              </div>
-              <div className="stat-card">
-                <div className="stat-value">{stats.newReviews || 0}</div>
-                <div className="stat-label">New Reviews</div>
-              </div>
-              <div className="stat-card">
-                <div className="stat-value">{(stats.averageRating || 0).toFixed(1)}</div>
-                <div className="stat-label">Average Rating</div>
-              </div>
-              <div className="stat-card positive">
-                <div className="stat-value">{stats.positiveReviews || 0}</div>
-                <div className="stat-label">Positive Reviews</div>
-              </div>
-            </div>
+        {/* Right Column - Sidebar */}
+        <div className="col-span-12 lg:col-span-4 space-y-6">
+          <AlertsPanel alerts={alerts} />
+          <ConnectPlatformsCard providers={enabledProviders} />
+          <AutomationsCard />
+          <PlanCard />
+        </div>
+      </div>
 
-            {/* Reviews Header */}
-            <div className="section-header">
-              <h2>Recent Reviews</h2>
-              <div className="header-actions">
-                <button 
-                  className="btn btn-outline"
-                  onClick={() => exportReviews('csv')}
-                >
-                  <Download className="icon" />
-                  Export
-                </button>
-              </div>
-            </div>
-
-            {/* Reviews List */}
-            <div className="reviews-list">
-              {reviews.length === 0 ? (
-                <div className="empty-state">
-                  <Bell className="empty-icon" />
-                  <h3>No reviews yet</h3>
-                  <p>Connect your business platforms to start monitoring reviews</p>
-                </div>
-              ) : (
-                reviews.map((review) => (
-                  <div key={review._id} className={`review-card ${review.isNew ? 'new' : ''}`}>
-                    <div className="review-header">
-                      <div className="reviewer-info">
-                        <span className="reviewer-name">{review.reviewerName}</span>
-                        <div className="review-rating">
-                          <span className="stars">{getStarRating(review.rating)}</span>
-                          <span className="rating-number">({review.rating})</span>
-                        </div>
-                      </div>
-                      <div className="review-meta">
-                        <span className="platform">{review.platform}</span>
-                        <span className="time">{getTimeAgo(review.reviewDate)}</span>
-                        {review.isNew && (
-                          <button 
-                            className="mark-read-btn"
-                            onClick={() => markAsRead(review._id)}
-                            title="Mark as read"
-                          >
-                            <EyeOff className="icon" />
-                          </button>
-                        )}
-                      </div>
-                    </div>
-                    <div className="review-content">
-                      <p>{review.text || 'No comment provided'}</p>
-                    </div>
-                    {review.response && (
-                      <div className="review-response">
-                        <strong>Your Response:</strong>
-                        <p>{review.response.text}</p>
-                      </div>
-                    )}
-                  </div>
-                ))
-              )}
-            </div>
-          </div>
-        )}
-
-        {activeTab === 'platforms' && (
-          <div className="platforms-section">
-            <Connectors />
-          </div>
-        )}
-
-        {activeTab === 'analytics' && (
-          <div className="analytics-section">
-            <div className="section-header">
-              <h2>Review Analytics</h2>
-            </div>
-            <div className="analytics-placeholder">
-              <TrendingUp className="empty-icon" />
-              <h3>Review Analytics</h3>
-              <p>Connect your business platforms to start seeing detailed analytics and insights for your reviews</p>
-            </div>
-          </div>
-        )}
-
-        {activeTab === 'settings' && (
-          <div className="settings-section">
-            <div className="section-header">
-              <h2>Account Settings</h2>
-            </div>
-            
-            {/* Profile Settings */}
-            <div className="settings-card">
-              <h3>Profile Information</h3>
-              <div className="settings-form">
-                <div className="form-group">
-                  <label>Business Name</label>
-                  <input 
-                    type="text" 
-                    value={user?.businessName || ''} 
-                    readOnly 
-                    className="form-input"
-                  />
-                </div>
-                <div className="form-group">
-                  <label>Owner Name</label>
-                  <input 
-                    type="text" 
-                    value={user?.ownerName || ''} 
-                    readOnly 
-                    className="form-input"
-                  />
-                </div>
-                <div className="form-group">
-                  <label>Email Address</label>
-                  <input 
-                    type="email" 
-                    value={user?.email || ''} 
-                    readOnly 
-                    className="form-input"
-                  />
-                </div>
-                <div className="form-group">
-                  <label>Phone Number</label>
-                  <input 
-                    type="tel" 
-                    value={user?.phone || 'Not provided'} 
-                    readOnly 
-                    className="form-input"
-                  />
-                </div>
-              </div>
-            </div>
-
-            {/* Subscription Settings */}
-            <div className="settings-card">
-              <h3>Subscription</h3>
-              <div className="subscription-info">
-                <div className="subscription-status">
-                  <div className="status-badge trial">Free Trial</div>
-                  <p>Trial ends in 7 days</p>
-                </div>
-                <button className="btn btn-primary">
-                  Upgrade to Pro
-                </button>
-              </div>
-            </div>
-
-            {/* Notification Settings */}
-            <div className="settings-card">
-              <h3>Notifications</h3>
-              <div className="settings-form">
-                <div className="form-group checkbox-group">
-                  <label className="checkbox-label">
-                    <input type="checkbox" defaultChecked />
-                    <span className="checkmark"></span>
-                    Email notifications for new reviews
-                  </label>
-                </div>
-                <div className="form-group checkbox-group">
-                  <label className="checkbox-label">
-                    <input type="checkbox" defaultChecked />
-                    <span className="checkmark"></span>
-                    Weekly review summary
-                  </label>
-                </div>
-                <div className="form-group checkbox-group">
-                  <label className="checkbox-label">
-                    <input type="checkbox" />
-                    <span className="checkmark"></span>
-                    SMS notifications (Pro feature)
-                  </label>
-                </div>
-              </div>
-            </div>
-
-            {/* API Settings */}
-            <div className="settings-card">
-              <h3>Connected Platforms</h3>
-              <div className="platform-connections">
-                <div className="connection-item">
-                  <div className="connection-info">
-                    <strong>Google Business Profile</strong>
-                    <span className="connection-status disconnected">Not Connected</span>
-                  </div>
-                  <button className="btn btn-outline">Connect</button>
-                </div>
-                <div className="connection-item">
-                  <div className="connection-info">
-                    <strong>Yelp</strong>
-                    <span className="connection-status coming-soon">Coming Soon</span>
-                  </div>
-                  <button className="btn btn-outline" disabled>Connect</button>
-                </div>
-              </div>
-            </div>
-
-            {/* Danger Zone */}
-            <div className="settings-card danger-zone">
-              <h3>Danger Zone</h3>
-              <div className="danger-actions">
-                <div className="danger-item">
-                  <div>
-                    <strong>Delete Account</strong>
-                    <p>Permanently delete your account and all data</p>
-                  </div>
-                  <button className="btn btn-danger">Delete Account</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-      </main>
+      {/* Insights - Only show if connected */}
+      {hasConnections && <InsightsMini insights={insights} />}
     </div>
   );
 };
