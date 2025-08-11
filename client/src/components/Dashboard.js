@@ -6,7 +6,6 @@ import {
   Star, 
   TrendingUp, 
   MessageSquare, 
-  Bell, 
   Download, 
   ArrowRight, 
   LogOut,
@@ -362,7 +361,7 @@ const InsightsMini = ({ insights }) => {
 };
 
 const Dashboard = () => {
-  const { user, logout } = useAuth();
+  const { logout } = useAuth();
   const navigate = useNavigate();
   const [connectors, setConnectors] = useState(null);
   const [metrics, setMetrics] = useState(null);
