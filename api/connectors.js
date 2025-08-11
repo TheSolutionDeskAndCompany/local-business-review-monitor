@@ -1,4 +1,4 @@
-export default async function handler(req, res) {
+export default function handler(req, res) {
   // Set CORS headers
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
@@ -14,29 +14,29 @@ export default async function handler(req, res) {
         {
           id: 'google',
           name: 'Google Business Profile',
-          enabled: true, // Always show Google for demo
-          connected: false // TODO: Check DB for actual connection status
+          enabled: true,
+          connected: false
         },
         {
           id: 'facebook',
           name: 'Facebook Page',
-          enabled: true, // Always show Facebook for demo
+          enabled: true,
           connected: false
         },
         {
           id: 'yelp',
           name: 'Yelp Business',
-          enabled: true, // Always show Yelp for demo
+          enabled: true,
           connected: false
         }
       ];
 
-      res.status(200).json(connectors);
+      return res.status(200).json(connectors);
     } catch (error) {
       console.error('Error fetching connectors:', error);
-      res.status(500).json({ message: 'Failed to fetch connectors' });
+      return res.status(500).json({ error: 'Failed to fetch connectors' });
     }
   } else {
-    res.status(405).json({ message: 'Method not allowed' });
+    return res.status(405).json({ message: 'Method not allowed' });
   }
 }

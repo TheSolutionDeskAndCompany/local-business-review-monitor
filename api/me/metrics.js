@@ -1,7 +1,7 @@
-export default async function handler(req, res) {
+export default function handler(req, res) {
   // Set CORS headers
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
 
   if (req.method === 'OPTIONS') {
@@ -10,26 +10,24 @@ export default async function handler(req, res) {
 
   if (req.method === 'GET') {
     try {
-      // Mock metrics data - replace with real DB queries
+      // Mock metrics data for dashboard KPI strip
       const metrics = {
         newReviews7d: 12,
+        newReviews7dDelta: +3,
         avgRating30d: 4.3,
+        avgRating30dDelta: +0.2,
         responseRate30d: 85,
+        responseRate30dDelta: +5,
         avgResponseHours: 2.4,
-        deltas: {
-          newReviews7d: +3,
-          avgRating30d: +0.2,
-          responseRate30d: +5,
-          avgResponseHours: -0.5
-        }
+        avgResponseHoursDelta: -0.5
       };
 
-      res.status(200).json(metrics);
+      return res.status(200).json(metrics);
     } catch (error) {
       console.error('Error fetching metrics:', error);
-      res.status(500).json({ message: 'Failed to fetch metrics' });
+      return res.status(500).json({ error: 'Failed to fetch metrics' });
     }
   } else {
-    res.status(405).json({ message: 'Method not allowed' });
+    return res.status(405).json({ message: 'Method not allowed' });
   }
 }
