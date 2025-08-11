@@ -14,25 +14,24 @@ export default async function handler(req, res) {
         {
           id: 'google',
           name: 'Google Business Profile',
-          enabled: !!(process.env.OAUTH_GOOGLE_CLIENT_ID && 
-                     process.env.OAUTH_GOOGLE_CLIENT_SECRET && 
-                     process.env.OAUTH_GOOGLE_REDIRECT_URI)
+          enabled: true, // Always show Google for demo
+          connected: false // TODO: Check DB for actual connection status
         },
         {
           id: 'facebook',
           name: 'Facebook Page',
-          enabled: !!(process.env.OAUTH_FACEBOOK_APP_ID && 
-                     process.env.OAUTH_FACEBOOK_APP_SECRET && 
-                     process.env.OAUTH_FACEBOOK_REDIRECT_URI)
+          enabled: true, // Always show Facebook for demo
+          connected: false
         },
         {
           id: 'yelp',
           name: 'Yelp Business',
-          enabled: !!process.env.YELP_API_KEY
+          enabled: true, // Always show Yelp for demo
+          connected: false
         }
       ];
 
-      res.json(connectors);
+      res.status(200).json(connectors);
     } catch (error) {
       console.error('Error fetching connectors:', error);
       res.status(500).json({ message: 'Failed to fetch connectors' });
