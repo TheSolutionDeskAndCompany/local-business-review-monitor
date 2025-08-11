@@ -18,7 +18,7 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const [reviews, setReviews] = useState([]);
   const [stats, setStats] = useState({});
-  const [platforms, setPlatforms] = useState([]);
+
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState('reviews');
 
@@ -28,15 +28,13 @@ const Dashboard = () => {
 
   const fetchDashboardData = async () => {
     try {
-      const [reviewsRes, statsRes, platformsRes] = await Promise.all([
+      const [reviewsRes, statsRes] = await Promise.all([
         axios.get('/api/reviews?limit=10'),
-        axios.get('/api/reviews/stats'),
-        axios.get('/api/business/platforms')
+        axios.get('/api/reviews/stats')
       ]);
 
       setReviews(reviewsRes.data.reviews);
       setStats(statsRes.data.overall);
-      setPlatforms(platformsRes.data);
     } catch (error) {
       console.error('Dashboard data fetch error:', error);
     } finally {
@@ -55,41 +53,7 @@ const Dashboard = () => {
     }
   };
 
-  const connectGoogleBusiness = () => {
-    // In a real implementation, this would redirect to Google OAuth
-    // eslint-disable-next-line no-unused-vars
-    const clientId = 'your-google-client-id';
-    // eslint-disable-next-line no-unused-vars
-    const redirectUri = encodeURIComponent(window.location.origin + '/auth/google/callback');
-    // eslint-disable-next-line no-unused-vars
-    const scope = encodeURIComponent('https://www.googleapis.com/auth/business.manage');
-    
-    // For now, show what would happen
-    const proceed = window.confirm(
-      '🔗 Connect Google Business Profile\n\n' +
-      'This will redirect you to Google to authorize ReviewReady to:\n' +
-      '• Access your Business Profile information\n' +
-      '• Monitor reviews and ratings\n' +
-      '• Send notifications for new reviews\n\n' +
-      'Click OK to continue to Google OAuth...'
-    );
-    
-    if (proceed) {
-      // In production, redirect to:
-      // window.location.href = `https://accounts.google.com/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}&response_type=code`;
-      
-      // For demo, simulate successful connection
-      alert('✅ Google Business Profile Connected!\n\nIn production, you would be redirected to Google OAuth and then back here with your connection established.');
-      setPlatforms([...platforms, { 
-        platform: 'google', 
-        businessName: user?.businessName || 'Your Business',
-        connected: true,
-        lastSync: new Date(),
-        rating: 4.5,
-        reviews: 100
-      }]);
-    }
-  };
+
 
 
   
