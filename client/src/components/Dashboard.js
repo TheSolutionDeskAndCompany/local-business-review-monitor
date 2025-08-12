@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { useAuth } from '../contexts/AuthContext';
 import { 
   Star, 
   TrendingUp, 
@@ -361,8 +360,13 @@ const InsightsMini = ({ insights }) => {
 };
 
 const Dashboard = () => {
-  const { logout } = useAuth();
   const navigate = useNavigate();
+  
+  // Mock logout function since authentication is removed
+  const logout = () => {
+    console.log('Logout clicked (no auth required)');
+    navigate('/');
+  };
   const [connectors, setConnectors] = useState(null);
   const [metrics, setMetrics] = useState(null);
   const [reviews, setReviews] = useState([]);
