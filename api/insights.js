@@ -9,104 +9,40 @@ export default async function handler(req, res) {
   }
 
   if (req.method === 'GET') {
-    // Check for authentication
-    const token = req.headers['x-auth-token'];
-    if (!token) {
-      return res.status(401).json({ message: 'Authorization required' });
-    }
-
-    // Verify JWT token
-    const jwt = require('jsonwebtoken');
+    // No authentication required for testing
     try {
-      const decoded = jwt.verify(token, process.env.JWT_SECRET || 'fallback-secret-key');
-      const userId = decoded.userId;
-      
-      // Connect to database
-      const { MongoClient } = require('mongodb');
-      const client = new MongoClient(process.env.MONGODB_URI);
-      await client.connect();
-      const db = client.db('reviewready');
-      const reviews = db.collection('reviews');
-      
-      const range = req.query.range || '30d';
-      const days = parseInt(range.replace('d', ''));
-      const startDate = new Date(Date.now() - days * 24 * 60 * 60 * 1000);
-      
-      // Aggregate real insights from user's reviews
-      const userReviews = await reviews.find({ 
-        userId, 
-        date: { $gte: startDate } 
-      }).toArray();
-      
-      // Generate volume series
-      const volumeSeries = [];
-      for (let i = days - 1; i >= 0; i--) {
-        const date = new Date(Date.now() - i * 24 * 60 * 60 * 1000);
-        const dateStr = date.toISOString().split('T')[0];
-        const count = userReviews.filter(r => 
-          new Date(r.date).toISOString().split('T')[0] === dateStr
-        ).length;
-        volumeSeries.push({ date: dateStr, count });
-      }
-      
-      // Generate rating series
-      const ratingSeries = [];
-      for (let i = days - 1; i >= 0; i--) {
-        const date = new Date(Date.now() - i * 24 * 60 * 60 * 1000);
-        const dateStr = date.toISOString().split('T')[0];
-        const dayReviews = userReviews.filter(r => 
-          new Date(r.date).toISOString().split('T')[0] === dateStr
-        );
-        const avgRating = dayReviews.length > 0 
-          ? dayReviews.reduce((sum, r) => sum + r.rating, 0) / dayReviews.length 
-          : 0;
-        ratingSeries.push({ date: dateStr, rating: Number(avgRating.toFixed(1)) });
-      }
-      
-      // Extract keywords from review text
-      const keywords = [];
-      const wordCounts = {};
-      userReviews.forEach(review => {
-        if (review.text) {
-          const words = review.text.toLowerCase()
-            .replace(/[^a-z\s]/g, '')
-            .split(/\s+/)
-            .filter(word => word.length > 3);
-          words.forEach(word => {
-            wordCounts[word] = (wordCounts[word] || 0) + 1;
-          });
-        }
-      });
-      
-      Object.entries(wordCounts)
-        .sort(([,a], [,b]) => b - a)
-        .slice(0, 10)
-        .forEach(([word, count]) => {
-          keywords.push({ word, count });
-        });
-      
-      // Platform split
-      const platformCounts = {};
-      userReviews.forEach(review => {
-        const platform = review.platform || 'Unknown';
-        platformCounts[platform] = (platformCounts[platform] || 0) + 1;
-      });
-      
-      const total = userReviews.length;
-      const platformSplit = Object.entries(platformCounts).map(([platform, count]) => ({
-        platform,
-        count,
-        percentage: total > 0 ? Math.round((count / total) * 100) : 0
-      }));
-      
-      await client.close();
-      
-      // Real insights data from database
+      // Return sample insights for testing (no database required)
       const insights = {
-        volumeSeries,
-        ratingSeries,
-        keywords,
-        platformSplit
+        volumeSeries: [
+          { date: '2025-01-01', count: 5 },
+          { date: '2025-01-02', count: 3 },
+          { date: '2025-01-03', count: 8 },
+          { date: '2025-01-04', count: 6 },
+          { date: '2025-01-05', count: 12 },
+          { date: '2025-01-06', count: 9 },
+          { date: '2025-01-07', count: 15 }
+        ],
+        ratingSeries: [
+          { date: '2025-01-01', rating: 4.2 },
+          { date: '2025-01-02', rating: 4.1 },
+          { date: '2025-01-03', rating: 4.4 },
+          { date: '2025-01-04', rating: 4.3 },
+          { date: '2025-01-05', rating: 4.5 },
+          { date: '2025-01-06', rating: 4.2 },
+          { date: '2025-01-07', rating: 4.3 }
+        ],
+        keywords: [
+          { word: 'excellent service', count: 24 },
+          { word: 'friendly staff', count: 18 },
+          { word: 'quick response', count: 15 },
+          { word: 'professional', count: 12 },
+          { word: 'highly recommend', count: 10 }
+        ],
+        platformSplit: [
+          { platform: 'Google', count: 45, percentage: 60 },
+          { platform: 'Yelp', count: 20, percentage: 27 },
+          { platform: 'Facebook', count: 10, percentage: 13 }
+        ]
       };
 
       res.status(200).json(insights);

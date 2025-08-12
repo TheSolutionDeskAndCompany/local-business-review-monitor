@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Bell, Shield, CheckCircle, Mail, MessageSquare, CreditCard } from 'lucide-react';
-import { TRIAL_DAYS, SHOW_SOCIAL_PROOF, ALERT_FREQUENCY_COPY } from '../lib/marketing';
+import { CheckCircle, Shield, Bell, CreditCard, Mail, MessageSquare } from 'lucide-react';
+import { SHOW_SOCIAL_PROOF, ALERT_FREQUENCY_COPY } from '../lib/marketing';
 
 
 const Landing = () => {
@@ -17,8 +17,7 @@ const Landing = () => {
               <img src="/Review-Ready-logo.png" alt="ReviewReady" className="logo-image" />
             </div>
             <div className="nav-links">
-              <Link to="/login" className="btn btn-outline">Login</Link>
-              <Link to="/register" className="btn btn-primary">Start 7-Day Free Trial</Link>
+              <Link to="/dashboard" className="btn btn-primary">Go to Dashboard</Link>
             </div>
           </div>
         </div>
@@ -40,7 +39,7 @@ const Landing = () => {
         <div className="container">
           <div className="hero-content">
             <div className="hero-cta">
-              <Link to="/register" className="btn btn-primary btn-large" aria-label="Get instant review alerts">
+              <Link to="/dashboard" className="btn btn-primary btn-large" aria-label="Get instant review alerts">
                 Get Instant Review Alerts
               </Link>
             </div>
@@ -54,7 +53,7 @@ const Landing = () => {
               </div>
               <div className="trust-badge">
                 <CheckCircle size={16} />
-                <a href="/login" target="_blank" rel="noopener" aria-label="Sign in with Google OAuth">Sign in with Google</a>
+                <Link to="/dashboard" aria-label="Go to Dashboard">Go to Dashboard</Link>
               </div>
               <div className="trust-badge">
                 <Shield size={16} />
@@ -275,8 +274,8 @@ const Landing = () => {
                 <li><CheckCircle className="check" /> Dashboard</li>
                 <li><CheckCircle className="check" /> Exports</li>
               </ul>
-              <Link to="/register" className="btn btn-primary" aria-label={`Start ${TRIAL_DAYS}-day free trial for Basic plan`}>
-                Start {TRIAL_DAYS}-Day Free Trial
+              <Link to="/dashboard" className="btn btn-primary" aria-label="Go to Dashboard for Basic plan">
+                Go to Dashboard
               </Link>
               <p className="trial-note">No credit card required</p>
             </div>
@@ -293,8 +292,8 @@ const Landing = () => {
                 <li><CheckCircle className="check" /> SMS alerts</li>
                 <li><CheckCircle className="check" /> Priority support</li>
               </ul>
-              <Link to="/register" className="btn btn-primary" aria-label={`Start ${TRIAL_DAYS}-day free trial for Pro plan`}>
-                Start {TRIAL_DAYS}-Day Free Trial
+              <Link to="/dashboard" className="btn btn-primary" aria-label="Go to Dashboard for Pro plan">
+                Go to Dashboard
               </Link>
               <p className="trial-note">No credit card required</p>
             </div>
@@ -307,8 +306,8 @@ const Landing = () => {
         <div className="container">
           <h2>Ready to Stop Juggling Multiple Apps?</h2>
           <p>Join 500+ businesses who unified their review management and never miss an opportunity to respond.</p>
-          <Link to="/register" className="btn btn-primary btn-large" aria-label={`Start your ${TRIAL_DAYS}-day free trial`}>
-            Start Your {TRIAL_DAYS}-Day Free Trial
+          <Link to="/dashboard" className="btn btn-primary btn-large" aria-label="Go to Dashboard">
+            Go to Dashboard
           </Link>
           <p className="trial-note">✓ All platforms in one dashboard ✓ No credit card required ✓ Setup in 2 minutes</p>
         </div>
@@ -323,7 +322,7 @@ const Landing = () => {
             </div>
             <div className="footer-links">
               <Link to="/pricing">Pricing</Link>
-              <Link to="/login">Login</Link>
+              <Link to="/dashboard">Dashboard</Link>
               <a href="mailto:support@reviewready.ca">Support</a>
               <Link to="/privacy" id="privacy">Privacy</Link>
               <Link to="/terms">Terms</Link>

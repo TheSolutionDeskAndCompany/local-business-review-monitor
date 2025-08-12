@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { useAuth } from '../contexts/AuthContext';
 import { ExternalLink, CheckCircle, AlertCircle } from 'lucide-react';
 import axios from 'axios';
 
 const Connectors = () => {
-  const { user } = useAuth();
+  // Mock user data since authentication is removed
+  const user = {
+    id: 'temp-user',
+    email: 'admin@thesolutiondesk.ca',
+    businessName: 'The Solution Desk'
+  };
   const [providers, setProviders] = useState([]);
   const [busy, setBusy] = useState(null);
   const [error, setError] = useState('');

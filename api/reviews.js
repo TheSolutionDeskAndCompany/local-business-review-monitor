@@ -9,49 +9,49 @@ export default async function handler(req, res) {
   }
 
   if (req.method === 'GET') {
-    // Check for authentication
-    const token = req.headers['x-auth-token'];
-    if (!token) {
-      return res.status(401).json({ message: 'Authorization required' });
-    }
-
-    // Verify JWT token
-    const jwt = require('jsonwebtoken');
+    // No authentication required for testing
     try {
-      const decoded = jwt.verify(token, process.env.JWT_SECRET || 'fallback-secret-key');
-    } catch (error) {
-      return res.status(401).json({ message: 'Invalid token' });
-    }
-    try {
-      // Connect to database
-      const { MongoClient } = require('mongodb');
-      const client = new MongoClient(process.env.MONGODB_URI);
-      await client.connect();
-      const db = client.db('reviewready');
-      const reviews = db.collection('reviews');
-      
-      // Get user ID from token
-      const decoded = jwt.verify(token, process.env.JWT_SECRET || 'fallback-secret-key');
-      const userId = decoded.userId;
+      // Return sample reviews for testing (no database required)
+      const sampleReviews = [
+        {
+          _id: '1',
+          platform: 'Google',
+          rating: 5,
+          author: 'John Smith',
+          text: 'Excellent service! Highly recommend.',
+          date: new Date().toISOString(),
+          replied: false,
+          businessId: 'sample-business-1'
+        },
+        {
+          _id: '2',
+          platform: 'Google',
+          rating: 4,
+          author: 'Sarah Johnson',
+          text: 'Great experience overall. Will come back again.',
+          date: new Date(Date.now() - 86400000).toISOString(),
+          replied: true,
+          businessId: 'sample-business-1'
+        },
+        {
+          _id: '3',
+          platform: 'Facebook',
+          rating: 3,
+          author: 'Mike Davis',
+          text: 'Good service but could be improved.',
+          date: new Date(Date.now() - 172800000).toISOString(),
+          replied: false,
+          businessId: 'sample-business-1'
+        }
+      ];
       
       const limit = parseInt(req.query.limit) || 50;
-      const skip = parseInt(req.query.skip) || 0;
-      
-      // Fetch reviews for the authenticated user's businesses
-      const userReviews = await reviews.find({ userId })
-        .sort({ date: -1 })
-        .skip(skip)
-        .limit(limit)
-        .toArray();
-      
-      const total = await reviews.countDocuments({ userId });
-      
-      await client.close();
+      const limitedReviews = sampleReviews.slice(0, limit);
 
       return res.status(200).json({ 
-        reviews: userReviews,
-        total,
-        hasMore: total > (skip + limit)
+        reviews: limitedReviews,
+        total: sampleReviews.length,
+        hasMore: sampleReviews.length > limit
       });
     } catch (error) {
       console.error('Error fetching reviews:', error);

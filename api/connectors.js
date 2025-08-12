@@ -9,19 +9,7 @@ export default function handler(req, res) {
   }
 
   if (req.method === 'GET') {
-    // Check for authentication
-    const token = req.headers['x-auth-token'];
-    if (!token) {
-      return res.status(401).json({ message: 'Authorization required' });
-    }
-
-    // Verify JWT token
-    const jwt = require('jsonwebtoken');
-    try {
-      jwt.verify(token, process.env.JWT_SECRET || 'fallback-secret-key');
-    } catch (error) {
-      return res.status(401).json({ message: 'Invalid token' });
-    }
+    // No authentication required for testing
     try {
       const connectors = [
         {
