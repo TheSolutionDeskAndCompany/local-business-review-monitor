@@ -476,7 +476,7 @@ const Dashboard = () => {
     <div className="max-w-7xl mx-auto p-6 space-y-6">
       {/* Header */}
       <header className="flex items-center justify-between">
-        <h1 className="text-xl font-semibold text-gray-900">Dashboard</h1>
+        <h1 className="text-xl font-semibold text-gray-900">ReviewReady Dashboard</h1>
         <div className="flex items-center gap-2">
           <button 
             onClick={() => navigate('/upgrade')}
