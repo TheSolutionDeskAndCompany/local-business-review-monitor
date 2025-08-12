@@ -9,10 +9,18 @@ async function connectToDatabase() {
     return cachedClient;
   }
 
-  const client = new MongoClient(process.env.MONGODB_URI);
-  await client.connect();
-  cachedClient = client;
-  return client;
+  try {
+    const client = new MongoClient(process.env.MONGODB_URI, {
+      serverSelectionTimeoutMS: 5000, // 5 second timeout
+      connectTimeoutMS: 5000,
+    });
+    await client.connect();
+    cachedClient = client;
+    return client;
+  } catch (error) {
+    console.error('MongoDB connection failed:', error.message);
+    throw new Error('Database connection failed. Please ensure MongoDB is running or check your connection string.');
+  }
 }
 
 export default async function handler(req, res) {

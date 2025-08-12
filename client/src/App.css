@@ -3144,8 +3144,8 @@ body {
   }
 }
 
-/* Marketing Dashboard Mock Styles */
-.marketing-dashboard-mock {
+/* Dashboard Preview Styles */
+.dashboard-preview {
   max-width: 1280px;
   width: 100%;
   margin: 0 auto;
@@ -3434,9 +3434,9 @@ body {
   border-color: var(--brand-600);
 }
 
-/* Responsive styles for dashboard mock */
-@media (max-width: 1024px) {
-  .marketing-dashboard-mock {
+/* Responsive styles for dashboard preview */
+@media (max-width: 768px) {
+  .dashboard-preview {
     margin: 0 1rem;
   }
   

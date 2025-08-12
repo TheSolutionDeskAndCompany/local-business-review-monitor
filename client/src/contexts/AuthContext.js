@@ -41,86 +41,55 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     try {
-      // TEMPORARY: Mock successful login to bypass deployment issues
-      console.log('Mock login for:', email);
+      const response = await axios.post('/api/auth/login', {
+        email,
+        password
+      });
+
+      const { token, user } = response.data;
       
-      // Simulate API delay
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      // Store token and user data
+      localStorage.setItem('token', token);
+      localStorage.setItem('user', JSON.stringify(user));
       
-      // Create mock token and user data
-      const mockToken = 'mock-jwt-token-' + Date.now();
+      // Set axios default header for future requests
+      axios.defaults.headers.common['x-auth-token'] = token;
       
-      // Try to get user data from localStorage (from registration) or use defaults
-      const storedUser = localStorage.getItem('user');
-      let userData = null;
-      if (storedUser) {
-        try {
-          userData = JSON.parse(storedUser);
-        } catch (e) {
-          console.log('Could not parse stored user data');
-        }
-      }
-      
-      const mockUser = userData || {
-        id: 'temp-user-' + Date.now(),
-        email: email,
-        businessName: 'Your Business',
-        ownerName: 'Business Owner',
-        phone: '',
-        subscription: {
-          status: 'trial',
-          plan: 'basic',
-          trialEndsAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
-        }
-      };
-      
-      localStorage.setItem('token', mockToken);
-      localStorage.setItem('user', JSON.stringify(mockUser));
-      setUser(mockUser);
+      setUser(user);
       
       return { success: true };
     } catch (error) {
       console.error('Login error:', error);
+      const errorMessage = error.response?.data?.message || 'Login failed';
       return { 
         success: false, 
-        error: 'Login failed' 
+        error: errorMessage
       };
     }
   };
 
   const register = async (userData) => {
     try {
-      // TEMPORARY: Mock successful registration to bypass deployment issues
-      console.log('Mock registration for:', userData.email);
+      const response = await axios.post('/api/auth/register', userData);
+
+      const { token, user } = response.data;
       
-      // Simulate API delay
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      // Store token and user data
+      localStorage.setItem('token', token);
+      localStorage.setItem('user', JSON.stringify(user));
       
-      // Create mock token and user data
-      const mockToken = 'mock-jwt-token-' + Date.now();
-      const mockUser = {
-        id: 'temp-user-' + Date.now(),
-        email: userData.email,
-        businessName: userData.businessName,
-        ownerName: userData.ownerName,
-        phone: userData.phone || '',
-        subscription: {
-          status: 'trial',
-          plan: 'basic',
-          trialEndsAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
-        }
-      };
+      // Set axios default header for future requests
+      axios.defaults.headers.common['x-auth-token'] = token;
       
-      localStorage.setItem('token', mockToken);
-      localStorage.setItem('user', JSON.stringify(mockUser));
-      setUser(mockUser);
+      setUser(user);
       
       return { success: true };
     } catch (error) {
       console.error('Registration error:', error);
+      const errorMessage = error.response?.data?.message || 'Registration failed';
       return { 
         success: false, 
-        error: 'Registration failed' 
+        error: errorMessage
       };
     }
   };

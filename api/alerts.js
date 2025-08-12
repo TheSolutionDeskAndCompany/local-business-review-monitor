@@ -1,4 +1,4 @@
-export default function handler(req, res) {
+export default async function handler(req, res) {
   // Set CORS headers
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
@@ -9,30 +9,34 @@ export default function handler(req, res) {
   }
 
   if (req.method === 'GET') {
-    try {
-      // Mock alerts data - replace with real DB queries
-      const alerts = [
-        {
-          id: '1',
-          type: 'low_rating',
-          title: 'New 2-star review received',
-          message: 'Customer left a 2-star review on Google Business Profile',
-          platform: 'google',
-          timestamp: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
-          read: false
-        },
-        {
-          id: '2',
-          type: 'response_needed',
-          title: 'Review needs response',
-          message: 'Review from 3 days ago still awaiting response',
-          platform: 'yelp',
-          timestamp: new Date(Date.now() - 6 * 60 * 60 * 1000).toISOString(),
-          read: true
-        }
-      ];
+    // Check for authentication
+    const token = req.headers['x-auth-token'];
+    if (!token) {
+      return res.status(401).json({ message: 'Authorization required' });
+    }
 
-      res.status(200).json(alerts);
+    // Verify JWT token
+    const jwt = require('jsonwebtoken');
+    try {
+      const decoded = jwt.verify(token, process.env.JWT_SECRET || 'fallback-secret-key');
+      const userId = decoded.userId;
+      
+      // Connect to database
+      const { MongoClient } = require('mongodb');
+      const client = new MongoClient(process.env.MONGODB_URI);
+      await client.connect();
+      const db = client.db('reviewready');
+      const alerts = db.collection('alerts');
+      
+      // Fetch real alerts for the authenticated user
+      const userAlerts = await alerts.find({ userId })
+        .sort({ timestamp: -1 })
+        .limit(50)
+        .toArray();
+      
+      await client.close();
+      
+      res.status(200).json(userAlerts);
     } catch (error) {
       console.error('Error fetching alerts:', error);
       res.status(500).json({ message: 'Failed to fetch alerts' });
@@ -41,3 +45,9 @@ export default function handler(req, res) {
     res.status(405).json({ message: 'Method not allowed' });
   }
 }
+
+// Remove the old mock implementation below
+/*
+    try {
+      // Mock alerts data - replace with real DB queries
+*/

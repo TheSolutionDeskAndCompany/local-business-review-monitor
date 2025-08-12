@@ -36,7 +36,7 @@ export default async function handler(req, res) {
       return res.status(401).json({ message: 'No token, authorization denied' });
     }
 
-    // Verify token
+    // Verify JWT token
     const decoded = jwt.verify(token, process.env.JWT_SECRET || 'fallback-secret-key');
     
     // Connect to database
