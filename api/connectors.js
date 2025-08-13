@@ -1,6 +1,6 @@
-import { setCors } from './_util-cors.js';
+const { setCors } = require('./_util-cors.js');
 
-export default function handler(req, res) {
+module.exports = function handler(req, res) {
   setCors(res);
   if (req.method === 'OPTIONS') return res.status(200).end();
 

@@ -1,7 +1,7 @@
-import { setCors } from '../../_util-cors.js';
-import { connectDB } from '../../_db.js';
-import jwt from 'jsonwebtoken';
-import mongoose from 'mongoose';
+const { setCors } = require( '../../_util-cors.js';
+const { connectDB } = require( '../../_db.js';
+const jwt = require( 'jsonwebtoken';
+const mongoose = require( 'mongoose';
 
 // User Schema (inline for serverless)
 const UserSchema = new mongoose.Schema({
@@ -27,7 +27,7 @@ const UserSchema = new mongoose.Schema({
 
 const User = mongoose.models.User || mongoose.model('User', UserSchema);
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   setCors(res);
   if (req.method === 'OPTIONS') return res.status(200).end();
 

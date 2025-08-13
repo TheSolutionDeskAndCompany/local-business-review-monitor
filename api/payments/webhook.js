@@ -1,7 +1,7 @@
-import { setCors } from '../_util-cors.js';
-import { connectDB } from '../_db.js';
-import mongoose from 'mongoose';
-import Stripe from 'stripe';
+const { setCors } = require( '../_util-cors.js';
+const { connectDB } = require( '../_db.js';
+const mongoose = require( 'mongoose';
+const Stripe = require( 'stripe';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
@@ -24,7 +24,7 @@ const UserSchema = new mongoose.Schema({
 
 const User = mongoose.models.User || mongoose.model('User', UserSchema);
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   setCors(res);
   if (req.method === 'OPTIONS') return res.status(200).end();
 

@@ -4,7 +4,9 @@ import mongoose from "mongoose";
 let cached = global._mongoose;
 if (!cached) cached = global._mongoose = { conn: null, promise: null };
 
-export async function connectDB() {
+let isConnected = false;
+
+async function connectDB() {
   if (cached.conn) return cached.conn;
   
   if (!process.env.MONGODB_URI) {
@@ -18,6 +20,8 @@ export async function connectDB() {
     }).then(m => m.connection);
   }
   
-  cached.conn = await cached.promise;
-  return cached.conn;
+  console.log('✅ MongoDB connected successfully');
+  return mongoose.connection;
 }
+
+module.exports = { connectDB };
