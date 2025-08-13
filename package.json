@@ -37,6 +37,6 @@
     "vercel": "^44.7.3"
   },
   "engines": {
-    "node": "20.x"
+    "node": "18.x"
   }
 }
