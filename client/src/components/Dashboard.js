@@ -236,14 +236,16 @@ const Dashboard = () => {
               }}
               onClick={connectGoogleBusiness}
               onMouseEnter={(e) => {
-                e.target.style.borderColor = '#10b981';
-                e.target.style.transform = 'translateY(-2px)';
-                e.target.style.boxShadow = '0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)';
+                const card = e.currentTarget;
+                card.style.borderColor = '#10b981';
+                card.style.transform = 'translateY(-2px)';
+                card.style.boxShadow = '0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)';
               }}
               onMouseLeave={(e) => {
-                e.target.style.borderColor = '#e5e7eb';
-                e.target.style.transform = 'translateY(0)';
-                e.target.style.boxShadow = '0 4px 6px -1px rgba(0, 0, 0, 0.1)';
+                const card = e.currentTarget;
+                card.style.borderColor = '#e5e7eb';
+                card.style.transform = 'translateY(0)';
+                card.style.boxShadow = '0 4px 6px -1px rgba(0, 0, 0, 0.1)';
               }}>
                 <div style={{
                   width: '48px',
@@ -287,14 +289,16 @@ const Dashboard = () => {
               }}
               onClick={connectYelp}
               onMouseEnter={(e) => {
-                e.target.style.borderColor = '#10b981';
-                e.target.style.transform = 'translateY(-2px)';
-                e.target.style.boxShadow = '0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)';
+                const card = e.currentTarget;
+                card.style.borderColor = '#10b981';
+                card.style.transform = 'translateY(-2px)';
+                card.style.boxShadow = '0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)';
               }}
               onMouseLeave={(e) => {
-                e.target.style.borderColor = '#e5e7eb';
-                e.target.style.transform = 'translateY(0)';
-                e.target.style.boxShadow = '0 4px 6px -1px rgba(0, 0, 0, 0.1)';
+                const card = e.currentTarget;
+                card.style.borderColor = '#e5e7eb';
+                card.style.transform = 'translateY(0)';
+                card.style.boxShadow = '0 4px 6px -1px rgba(0, 0, 0, 0.1)';
               }}>
                 <div style={{
                   width: '48px',
@@ -335,14 +339,16 @@ const Dashboard = () => {
               }}
               onClick={connectFacebook}
               onMouseEnter={(e) => {
-                e.target.style.borderColor = '#10b981';
-                e.target.style.transform = 'translateY(-2px)';
-                e.target.style.boxShadow = '0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)';
+                const card = e.currentTarget;
+                card.style.borderColor = '#10b981';
+                card.style.transform = 'translateY(-2px)';
+                card.style.boxShadow = '0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)';
               }}
               onMouseLeave={(e) => {
-                e.target.style.borderColor = '#e5e7eb';
-                e.target.style.transform = 'translateY(0)';
-                e.target.style.boxShadow = '0 4px 6px -1px rgba(0, 0, 0, 0.1)';
+                const card = e.currentTarget;
+                card.style.borderColor = '#e5e7eb';
+                card.style.transform = 'translateY(0)';
+                card.style.boxShadow = '0 4px 6px -1px rgba(0, 0, 0, 0.1)';
               }}>
                 <div style={{
                   width: '48px',
