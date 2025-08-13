@@ -62,29 +62,13 @@ const Landing = () => {
             </div>
           </div>
           <div className="hero-image">
-            <div className="dashboard-preview rounded-2xl shadow-xl ring-1 ring-black/5 bg-white overflow-hidden">
-              <div className="p-6 border-b bg-gray-50">
+            <div className="dashboard-preview">
+              <div className="dashboard-header">
                 <h3 className="text-lg font-semibold text-gray-900">ReviewReady Dashboard</h3>
                 <p className="text-gray-600 mt-1">Monitor and respond to reviews from all platforms</p>
               </div>
-              <div className="p-6">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-                  <div className="bg-blue-50 p-4 rounded-lg">
-                    <div className="text-2xl font-bold text-blue-600">4.8</div>
-                    <div className="text-sm text-gray-600">Average Rating</div>
-                  </div>
-                  <div className="bg-green-50 p-4 rounded-lg">
-                    <div className="text-2xl font-bold text-green-600">24</div>
-                    <div className="text-sm text-gray-600">New Reviews</div>
-                  </div>
-                  <div className="bg-purple-50 p-4 rounded-lg">
-                    <div className="text-2xl font-bold text-purple-600">95%</div>
-                    <div className="text-sm text-gray-600">Response Rate</div>
-                  </div>
-                </div>
-                <div className="text-center py-8">
-                  <div className="text-gray-500">Real-time review monitoring across Google, Facebook, Yelp and more</div>
-                </div>
+              <div className="dashboard-body">
+                <p className="dashboard-note">Connect your profiles to see live data in your dashboard.</p>
               </div>
             </div>
           </div>
@@ -122,9 +106,9 @@ const Landing = () => {
           <div className="features-grid">
             <div className="feature">
               <div className="platform-logos">
-                <span className="platform-logo google" aria-label="Google Business Profile" role="img">G</span>
-                <span className="platform-logo facebook" aria-label="Facebook" role="img">f</span>
-                <span className="platform-logo yelp" aria-label="Yelp" role="img">Y</span>
+                <span className="platform-badge" aria-label="Google Business Profile">Google</span>
+                <span className="platform-badge" aria-label="Facebook">Facebook</span>
+                <span className="platform-badge" aria-label="Yelp">Yelp</span>
               </div>
               <h3>Unified Monitoring</h3>
               <p>Stop checking 5 different apps. Google, Facebook, Yelp & more in one place.</p>

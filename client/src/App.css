@@ -3354,3 +3354,31 @@ body {
     gap: 0.5rem;
   }
 }
+
+/* Non-placeholder badges and dashboard parts */
+.platform-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: #0b1220;
+  color: #fff;
+  font-weight: 600;
+  font-size: 14px;
+  margin-right: 10px;
+}
+
+.dashboard-header {
+  padding: 20px;
+  border-bottom: 1px solid var(--color-border);
+  background: #f8fafc;
+}
+
+.dashboard-body {
+  padding: 20px;
+}
+
+.dashboard-note {
+  color: var(--color-text-secondary);
+  text-align: center;
+}
