@@ -124,8 +124,6 @@ const Pricing = () => {
               <div className="card-features">
                 <ul>
                   <li><CheckCircle className="check" /> Everything in Basic</li>
-                  <li><CheckCircle className="check" /> Yelp monitoring <span className="coming-soon">Coming soon*</span></li>
-                  <li><CheckCircle className="check" /> Facebook monitoring <span className="coming-soon">Coming soon*</span></li>
                   <li><CheckCircle className="check" /> SMS notifications</li>
                   <li><CheckCircle className="check" /> Priority support</li>
                   <li><CheckCircle className="check" /> Sentiment trends & volume by source</li>

@@ -53,27 +53,6 @@ const Settings = () => {
       description: 'Monitor Google Reviews and ratings',
       status: 'mvp',
       icon: '🏢'
-    },
-    { 
-      id: 'facebook', 
-      name: 'Facebook Pages', 
-      description: 'Track Facebook page reviews and ratings',
-      status: 'coming-soon',
-      icon: '📘'
-    },
-    { 
-      id: 'yelp', 
-      name: 'Yelp Business', 
-      description: 'Monitor Yelp reviews and customer feedback',
-      status: 'coming-soon',
-      icon: '⭐'
-    },
-    { 
-      id: 'tripadvisor', 
-      name: 'TripAdvisor', 
-      description: 'Track hospitality and travel reviews',
-      status: 'requested',
-      icon: '🦉'
     }
   ];
 

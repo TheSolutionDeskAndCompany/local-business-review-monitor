@@ -6,7 +6,7 @@ function CopyButton({ text }) {
   return (
     <button
       onClick={() => navigator.clipboard.writeText(text)}
-      className="text-sm rounded-md border px-3 py-1 hover:bg-black/5"
+      className="btn btn-outline btn-small"
       aria-label="Copy template"
     >
       Copy
@@ -90,17 +90,17 @@ Preferred contact: [email]`;
 
       <main className="max-w-3xl mx-auto px-4 py-12 space-y-10">
         <div className="text-center">
-          <MessageCircle size={48} className="mx-auto mb-4 text-green-600" />
-          <h1 className="text-4xl font-bold mb-2">Need Help with Your Unified Review Dashboard?</h1>
-          <p className="text-gray-600">Get support for managing all your reviews in one place. We typically respond within 1 business day.</p>
+          <MessageCircle size={48} className="mx-auto mb-4" />
+          <h1 className="page-title">Need Help with Your Unified Review Dashboard?</h1>
+          <p className="">Get support for managing all your reviews in one place. We typically respond within 1 business day.</p>
         </div>
 
         {/* Contact Cards */}
-        <div className="grid gap-6 lg:grid-cols-3">
-          <div className="bg-white p-6 rounded-lg border shadow-sm">
-            <Mail className="w-8 h-8 text-green-600 mb-4" />
+        <div className="grid-3">
+          <div className="card">
+            <Mail className="w-8 h-8 mb-4" />
             <h3 className="text-lg font-semibold mb-2">Support</h3>
-            <p className="text-gray-600 mb-4">Technical issues, billing questions, or help getting set up.</p>
+            <p className="">Technical issues, billing questions, or help getting set up.</p>
             <a 
               href="mailto:support@reviewready.ca?subject=Support%20request%20—%20ReviewReady"
               className="text-green-600 hover:text-green-700 font-medium"
@@ -108,7 +108,7 @@ Preferred contact: [email]`;
             >
               support@reviewready.ca
             </a>
-            <p className="text-sm text-gray-500 mt-2">Hours: Mon–Fri, 9–5 PT</p>
+            <p className="">Hours: Mon–Fri, 9–5 PT</p>
           </div>
 
           <div className="bg-white p-6 rounded-lg border shadow-sm">

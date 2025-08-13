@@ -23,16 +23,6 @@ const Landing = () => {
         </div>
       </header>
 
-      {/* Banner Logo */}
-      <div className="banner-logo-section">
-        <div className="container">
-          <img src="/Review-Ready-logo.png?v=3" alt="ReviewReady" className="banner-logo" />
-          <p className="hero-subtitle">
-            Get {ALERT_FREQUENCY_COPY} from Google, Facebook, Yelp & more—all in one unified dashboard. Never miss a review across any platform. Setup in 2 minutes.
-          </p>
-        </div>
-      </div>
-
       {/* Hero Section */}
       <section className="hero">
         <div className="hero-background"></div>
