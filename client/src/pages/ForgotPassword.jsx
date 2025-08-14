@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { useAuth } from '../lib/AuthProvider';
 
@@ -14,7 +14,6 @@ const ForgotPassword = () => {
   const [resetLink, setResetLink] = useState('');
   
   const { requestPasswordReset } = useAuth();
-  const navigate = useNavigate();
 
   /**
    * Handle form submission
@@ -68,7 +67,7 @@ const ForgotPassword = () => {
           Forgot your password?
         </h2>
         <p className="mt-2 text-center text-sm text-gray-600">
-          Enter your email and we'll send you a link to reset your password
+          Enter your email and we&apos;ll send you a link to reset your password
         </p>
       </div>
 

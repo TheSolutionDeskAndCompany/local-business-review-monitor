@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navigate, useLocation } from 'react-router-dom';
+import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from './AuthProvider';
 
 /**
@@ -16,6 +16,7 @@ const ProtectedRoute = ({
   requireAdmin = false,
   ...rest 
 }) => {
+  const navigate = useNavigate();
   const { user, isAuthenticated, loading } = useAuth();
   const location = useLocation();
 
@@ -51,9 +52,15 @@ const ProtectedRoute = ({
               </svg>
             </div>
             <div className="ml-3">
-              <p className="text-sm text-red-700">
-                You don't have permission to access this page.
-              </p>
+              <div className="text-center p-8">
+                <p className="text-red-600">You don&apos;t have permission to access this page.</p>
+                <button
+                  onClick={() => navigate(-1)}
+                  className="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+                >
+                  Go Back
+                </button>
+              </div>
             </div>
           </div>
         </div>
