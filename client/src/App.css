@@ -168,7 +168,7 @@ body {
 .hero {
   position: relative;
   background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-  padding: 0 0 120px 0;
+  padding: 32px 0 40px;
   position: relative;
   overflow: hidden;
 }
@@ -194,6 +194,12 @@ body {
   align-items: center;
 }
 
+@media (min-width: 1024px) {
+  .hero .container {
+    grid-template-columns: 1.2fr 1fr;
+  }
+}
+
 .hero-content {
   max-width: 700px;
   margin: 0 auto;
@@ -213,35 +219,18 @@ body {
   border: 1px solid rgba(16, 185, 129, 0.2);
 }
 
-/* Banner Logo */
-.banner-logo-section {
-  width: 100%;
-  padding: 40px 0 40px 0;
-  background: linear-gradient(135deg, rgba(16, 185, 129, 0.05) 0%, rgba(16, 185, 129, 0.02) 100%);
-  border-top: 1px solid rgba(16, 185, 129, 0.1);
-  border-bottom: 1px solid rgba(16, 185, 129, 0.1);
-}
-
-.banner-logo {
-  width: 100%;
-  max-width: 600px;
-  height: auto;
-  display: block;
-  margin: 0 auto 40px auto;
-  opacity: 0.9;
-  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
-}
+/* Banner Logo Section Removed */
 
 .hero h1 {
   font-size: 56px;
   font-weight: 800;
   margin-bottom: 24px;
   line-height: 1.1;
-  color: var(--color-text);
-  background: linear-gradient(135deg, var(--color-text) 0%, var(--color-primary) 100%);
+  background: linear-gradient(135deg, var(--color-text-primary) 0%, var(--color-primary) 100%);
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
   background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: var(--color-text-primary);
 }
 
 .hero-subtitle {
@@ -3384,6 +3373,15 @@ body {
 .dashboard-note {
   color: var(--color-text-secondary);
   text-align: center;
+}
+
+/* Section spacing improvements */
+.section {
+  padding: 40px 0;
+}
+
+.how-it-works {
+  padding-top: 24px;
 }
 
 @media (min-width:1024px){ .hero .container{ grid-template-columns:1.2fr 1fr; } }

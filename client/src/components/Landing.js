@@ -54,8 +54,8 @@ const Landing = () => {
           <div className="hero-image">
             <div className="dashboard-preview">
               <div className="dashboard-header">
-                <h3 className="text-lg font-semibold text-gray-900">ReviewReady Dashboard</h3>
-                <p className="text-gray-600 mt-1">Monitor and respond to reviews from all platforms</p>
+                <h3>ReviewReady Dashboard</h3>
+                <p>Monitor and respond to reviews from all platforms</p>
               </div>
               <div className="dashboard-body">
                 <p className="dashboard-note">Connect your profiles to see live data in your dashboard.</p>
