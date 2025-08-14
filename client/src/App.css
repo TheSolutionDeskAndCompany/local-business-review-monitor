@@ -226,11 +226,11 @@ body {
   font-weight: 800;
   margin-bottom: 24px;
   line-height: 1.1;
+  color: var(--color-text-primary);
   background: linear-gradient(135deg, var(--color-text-primary) 0%, var(--color-primary) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  color: var(--color-text-primary);
 }
 
 .hero-subtitle {

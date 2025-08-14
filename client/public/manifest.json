@@ -3,17 +3,17 @@
   "name": "ReviewReady",
   "icons": [
     {
-      "src": "/favicon-16.png?v=2",
+      "src": "/favicon-16.png?v=3",
       "sizes": "16x16",
       "type": "image/png"
     },
     {
-      "src": "/favicon-32.png?v=2",
+      "src": "/favicon-32.png?v=3",
       "sizes": "32x32",
       "type": "image/png"
     },
     {
-      "src": "/apple-touch-icon.png?v=2",
+      "src": "/apple-touch-icon.png?v=3",
       "sizes": "180x180",
       "type": "image/png"
     }
