@@ -205,7 +205,17 @@ const Dashboard = () => {
     }
   };
 
-  const openConnectionModal = (platform, fields) => {
+  const openConnectionModal = (platform) => {
+    // Standard fields for all platforms
+    const fields = [
+      {
+        name: 'apiKey',
+        label: 'API Key',
+        type: 'password',
+        helpText: `Enter your ${platform} API key or access token`
+      }
+    ];
+    
     setModalState({
       isOpen: true,
       platform,
@@ -223,43 +233,21 @@ const Dashboard = () => {
 
   const handleConnect = async (platform, data) => {
     try {
-      let response;
+      const response = await axios.post('/api/connectors', {
+        id: platform.toLowerCase(),
+        token: data.apiKey || data.accessToken,
+        name: platform,
+        auth_type: 'api_key',
+        enabled: true
+      });
       
-      switch (platform) {
-        case 'Google Business':
-          response = await axios.post('/api/business/connect/google', {
-            businessId: data.businessId,
-            apiKey: data.apiKey
-          });
-          break;
-          
-        case 'Yelp':
-          response = await axios.post('/api/business/connect/yelp', {
-            businessId: data.businessId,
-            apiKey: data.apiKey
-          });
-          break;
-          
-        case 'Facebook':
-          response = await axios.post('/api/business/connect/facebook', {
-            pageId: data.pageId,
-            accessToken: data.accessToken
-          });
-          break;
-          
-        default:
-          throw new Error('Unsupported platform');
-      }
-      
-      if (response.data.success) {
-        alert(`Successfully connected ${platform}!`);
-        checkConnections(); // Refresh connections
-      } else {
-        alert('Failed to connect. Please check your credentials and try again.');
+      if (response.data) {
+        await checkConnections();
+        closeModal();
       }
     } catch (error) {
-      console.error(`Error connecting to ${platform}:`, error);
-      alert(`Error connecting to ${platform}. Please try again.`);
+      console.error(`Error connecting ${platform}:`, error);
+      alert(`Failed to connect ${platform}. Please try again.`);
     }
   };
   

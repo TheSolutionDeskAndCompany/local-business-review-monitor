@@ -208,7 +208,7 @@ const Pricing = () => {
         <div className="container">
           <h2>Ready to Never Miss a Review Again?</h2>
           <p>Join businesses who never miss a review</p>
-          <Link to="/register" className="btn btn-primary btn-large">
+          <Link to="/dashboard" className="btn btn-primary btn-large">
             Start {TRIAL_DAYS}-Day Free Trial
           </Link>
         </div>

@@ -1,21 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>%REACT_APP_CANONICAL_DOMAIN%/</loc></url>
-  <url><loc>%REACT_APP_CANONICAL_DOMAIN%/pricing</loc></url>
-  <url><loc>%REACT_APP_CANONICAL_DOMAIN%/security</loc></url>
-  <url><loc>%REACT_APP_CANONICAL_DOMAIN%/privacy</loc></url>
-  <url><loc>%REACT_APP_CANONICAL_DOMAIN%/terms</loc></url>
-  <url><loc>%REACT_APP_CANONICAL_DOMAIN%/contact</loc></url>
   <url>
-    <loc>https://reviewready.ca/register</loc>
+    <loc>%REACT_APP_CANONICAL_DOMAIN%/</loc>
     <lastmod>2025-08-08</lastmod>
-    <changefreq>yearly</changefreq>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>%REACT_APP_CANONICAL_DOMAIN%/pricing</loc>
+    <lastmod>2025-08-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>%REACT_APP_CANONICAL_DOMAIN%/security</loc>
+    <lastmod>2025-08-08</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://reviewready.ca/privacy</loc>
+    <loc>%REACT_APP_CANONICAL_DOMAIN%/privacy</loc>
     <lastmod>2025-08-08</lastmod>
-    <changefreq>quarterly</changefreq>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>%REACT_APP_CANONICAL_DOMAIN%/terms</loc>
+    <lastmod>2025-08-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>%REACT_APP_CANONICAL_DOMAIN%/contact</loc>
+    <lastmod>2025-08-08</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>

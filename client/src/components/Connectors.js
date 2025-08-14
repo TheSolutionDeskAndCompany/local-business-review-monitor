@@ -5,7 +5,7 @@ const Connectors = () => {
   const providers = [
     { 
       id: 'google', 
-      name: 'Google Reviews', 
+      name: 'Google Business Profile', 
       status: 'available',
       description: 'Connect your Google Business Profile to monitor and respond to reviews',
       icon: 'G',
@@ -14,18 +14,18 @@ const Connectors = () => {
     { 
       id: 'facebook', 
       name: 'Facebook', 
-      status: 'coming-soon',
-      description: 'Facebook reviews coming soon',
+      status: 'available',
+      description: 'Connect your Facebook Business Page to monitor and respond to reviews',
       icon: 'F',
-      available: false
+      available: true
     },
     { 
       id: 'yelp', 
       name: 'Yelp', 
-      status: 'coming-soon',
-      description: 'Yelp reviews coming soon',
+      status: 'available',
+      description: 'Connect your Yelp Business to monitor and respond to reviews',
       icon: 'Y',
-      available: false
+      available: true
     }
   ];
 

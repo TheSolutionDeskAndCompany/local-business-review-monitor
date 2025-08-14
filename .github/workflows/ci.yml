@@ -1,38 +1,81 @@
 name: CI
+
 on:
-  push: { branches: [main] }
-  pull_request: { branches: [main] }
+  push:
+    branches: [main, master]
+    paths-ignore:
+      - '**/README.md'
+      - '**/CHANGELOG.md'
+  pull_request:
+    branches: [main, master]
   workflow_dispatch:
+
 concurrency:
   group: ci-${{ github.ref }}
   cancel-in-progress: true
+
 jobs:
-  build:
+  lint-and-test:
+    name: Lint and Test
     runs-on: ubuntu-latest
-    permissions: { contents: read }
+    
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '18.x'
           cache: 'npm'
+          
       - name: Install root dependencies
         run: npm ci
-      - name: Install client dependencies
-        working-directory: client
-        run: npm ci
+        
       - name: Run ESLint
-        working-directory: client
-        run: npx eslint . --ext .js,.jsx
+        run: npm run lint
+        
+      - name: Run tests
+        run: npm test -- --ci --coverage --watchAll=false
+        env:
+          NODE_ENV: test
+          JWT_SECRET: test-secret
+          MONGODB_URI: mongodb://localhost:27017/test
+          
+  build:
+    name: Build
+    needs: lint-and-test
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18.x'
+          cache: 'npm'
+          
+      - name: Install root dependencies
+        run: npm ci
+        
       - name: Build client
         working-directory: client
+        run: |
+          npm ci
+          npm run build
+        env:
+          NODE_ENV: production
+          REACT_APP_API_URL: /api
+          
+      - name: Build server
         run: npm run build
-          if [ -f package-lock.json ]; then npm ci; else npm install; fi
-      - name: Lint
-        run: npm run -s lint --if-present
-      - name: Typecheck
-        run: npm run -s typecheck --if-present
-      - name: Test
-        run: npm test --if-present -- --ci
-      - name: Build
-        run: npm run -s build
+        env:
+          NODE_ENV: production
+          
+      - name: Verify build
+        run: |
+          ls -la
+          [ -d "client/build" ] || (echo "Client build directory not found" && exit 1)
+          [ -f "server.js" ] || (echo "Server entry point not found" && exit 1)

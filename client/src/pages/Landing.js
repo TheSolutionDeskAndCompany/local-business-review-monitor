@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import { CheckCircle, MessageSquare } from 'lucide-react';
-import HealthCheckBadge from './HealthCheckBadge';
+import HealthCheckBadge from '../components/HealthCheckBadge';
 import { SHOW_SOCIAL_PROOF, ALERT_FREQUENCY_COPY } from '../lib/marketing';
 import { SITE } from '../lib/config';
 
@@ -62,11 +62,11 @@ const Landing = () => {
             <div className="trust-badges">
               <div className="trust-badge">
                 <CheckCircle size={16} />
-                <span>Google reviews today</span>
+                <span>Google Business Profile</span>
               </div>
               <div className="trust-badge">
                 <MessageSquare size={16} />
-                <span>Facebook & Yelp coming soon</span>
+                <span>Facebook & Yelp</span>
               </div>
             </div>
           </div>

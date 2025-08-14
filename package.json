@@ -13,7 +13,8 @@
     "lint:fix": "eslint . --ext .js,.jsx --ignore-path .gitignore --fix",
     "test": "npm run test:client",
     "test:client": "cd client && npm test -- --ci --coverage --watchAll=false",
-    "smoke-test": "node scripts/smoke-test.js"
+    "smoke-test": "node scripts/smoke-test.js",
+    "check-unused": "node tools/find-unused-assets.js"
   },
   "dependencies": {
     "axios": "^1.5.0",
@@ -32,8 +33,9 @@
   },
   "devDependencies": {
     "eslint": "^8.57.0",
-    "prettier": "^3.2.5",
+    "glob": "^11.0.3",
     "nodemon": "^3.0.1",
+    "prettier": "^3.2.5",
     "vercel": "^44.7.3"
   },
   "engines": {
