@@ -78,4 +78,4 @@ jobs:
         run: |
           ls -la
           [ -d "client/build" ] || (echo "Client build directory not found" && exit 1)
-          [ -f "server.js" ] || (echo "Server entry point not found" && exit 1)
+          [ -f "vercel.json" ] || (echo "vercel.json not found" && exit 1)

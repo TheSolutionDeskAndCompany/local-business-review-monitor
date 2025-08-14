@@ -1,11 +1,12 @@
 {
   "name": "local-business-review-monitor",
   "version": "1.0.1",
-  "description": "ReviewReady - Never miss another review. Get instant alerts for Google Business Profile reviews with MongoDB Atlas integration and complete password reset functionality.",
-  "main": "server.js",
+  "description": "ReviewReady - Monitor and respond to business reviews across platforms",
+  "type": "module",
+  "main": "api/index.js",
   "scripts": {
-    "start": "node server.js",
-    "dev": "nodemon server.js",
+    "start": "vercel dev",
+    "dev": "vercel dev",
     "build": "npm run install-client && cd client && npm run build",
     "install-client": "cd client && npm install",
     "heroku-postbuild": "npm run install-client && npm run build",
@@ -13,10 +14,10 @@
     "lint:fix": "eslint . --ext .js,.jsx --ignore-path .gitignore --fix",
     "test": "npm run test:client",
     "test:client": "cd client && npm test -- --ci --coverage --watchAll=false",
-    "smoke-test": "node scripts/smoke-test.js",
     "check-unused": "node tools/find-unused-assets.js"
   },
   "dependencies": {
+    "pg": "^8.11.0",
     "axios": "^1.5.0",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
@@ -25,11 +26,7 @@
     "express-rate-limit": "^6.10.0",
     "helmet": "^7.0.0",
     "jsonwebtoken": "^9.0.2",
-    "mongodb": "^6.18.0",
-    "mongoose": "^7.5.0",
-    "node-cron": "^3.0.2",
-    "nodemailer": "^6.10.1",
-    "stripe": "^13.5.0"
+    "node-cron": "^3.0.2"
   },
   "devDependencies": {
     "eslint": "^8.57.0",
@@ -39,6 +36,6 @@
     "vercel": "^44.7.3"
   },
   "engines": {
-    "node": "18.x"
+    "node": "20.x"
   }
 }

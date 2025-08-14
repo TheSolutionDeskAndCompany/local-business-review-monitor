@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../lib/AuthProvider';
 
@@ -6,14 +6,31 @@ const Navbar = () => {
   const { user, isAuthenticated, logout } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const handleLogout = async () => {
     try {
       await logout();
       navigate('/login');
+      setIsMenuOpen(false);
+      setIsMobileMenuOpen(false);
     } catch (error) {
       console.error('Logout failed:', error);
     }
+  };
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+  
+  const closeAllMenus = () => {
+    setIsMenuOpen(false);
+    setIsMobileMenuOpen(false);
   };
 
   // Don't show navbar on auth pages
@@ -26,96 +43,88 @@ const Navbar = () => {
   }
 
   return (
-    <nav className="bg-white shadow-sm">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-16">
-          <div className="flex">
-            <div className="flex-shrink-0 flex items-center">
-              <Link to="/">
-                <img
-                  className="h-8 w-auto"
-                  src="/Review-Ready-logo.png"
-                  alt="ReviewReady"
-                />
-              </Link>
-            </div>
-            <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
-              <Link
-                to="/"
-                className={`${
-                  location.pathname === '/'
-                    ? 'border-blue-500 text-gray-900'
-                    : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
-                } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
-              >
-                Home
-              </Link>
-              {isAuthenticated && (
-                <Link
-                  to="/dashboard"
-                  className={`${
-                    location.pathname === '/dashboard'
-                      ? 'border-blue-500 text-gray-900'
-                      : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
-                  } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
-                >
-                  Dashboard
-                </Link>
-              )}
-              <Link
-                to="/pricing"
-                className={`${
-                  location.pathname === '/pricing'
-                    ? 'border-blue-500 text-gray-900'
-                    : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
-                } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
-              >
-                Pricing
-              </Link>
-            </div>
+    <nav className="navbar">
+      <div className="nav-container">
+        <div className="nav-content">
+          <div className="nav-logo">
+            <Link to="/" onClick={closeAllMenus}>
+              <img
+                src="/Review-Ready-logo.png"
+                alt="ReviewReady"
+              />
+            </Link>
           </div>
-          <div className="hidden sm:ml-6 sm:flex sm:items-center">
+          
+          {/* Mobile menu button */}
+          <button 
+            className="mobile-menu-button" 
+            onClick={toggleMobileMenu}
+            aria-label="Toggle menu"
+            aria-expanded={isMobileMenuOpen}
+          >
+            <span className="mobile-menu-icon"></span>
+          </button>
+          
+          {/* Desktop Navigation */}
+          <div className="nav-links">
+            <Link
+              to="/"
+              className={`nav-link ${location.pathname === '/' ? 'active' : ''}`}
+              onClick={closeAllMenus}
+            >
+              Home
+            </Link>
+            {isAuthenticated && (
+              <Link
+                to="/dashboard"
+                className={`nav-link ${location.pathname === '/dashboard' ? 'active' : ''}`}
+                onClick={closeAllMenus}
+              >
+                Dashboard
+              </Link>
+            )}
+            <Link
+              to="/pricing"
+              className={`nav-link ${location.pathname === '/pricing' ? 'active' : ''}`}
+              onClick={closeAllMenus}
+            >
+              Pricing
+            </Link>
+          </div>
+          
+          <div className="nav-actions">
             {isAuthenticated ? (
-              <div className="ml-3 relative">
-                <div>
-                  <button
-                    type="button"
-                    className="bg-white rounded-full flex text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                    id="user-menu"
-                    aria-expanded="false"
-                    aria-haspopup="true"
-                  >
-                    <span className="sr-only">Open user menu</span>
-                    <div className="h-8 w-8 rounded-full bg-gray-200 flex items-center justify-center">
-                      <span className="text-gray-600 font-medium">
-                        {user?.email?.charAt(0).toUpperCase() || 'U'}
-                      </span>
-                    </div>
-                  </button>
-                </div>
-                <div
-                  className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none hidden"
+              <div style={{ position: 'relative' }}>
+                <button
+                  type="button"
+                  className="user-menu-button"
+                  onClick={toggleMenu}
+                  aria-expanded={isMenuOpen}
+                  aria-haspopup="true"
+                >
+                  <span className="sr-only">Open user menu</span>
+                  <div className="user-avatar">
+                    {user?.email?.charAt(0).toUpperCase() || 'U'}
+                  </div>
+                </button>
+                
+                <div 
+                  className={`user-dropdown ${isMenuOpen ? 'show' : ''}`}
                   role="menu"
                   aria-orientation="vertical"
                   aria-labelledby="user-menu"
                 >
                   <Link
                     to="/profile"
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    role="menuitem"
+                    className="user-dropdown-item"
+                    onClick={closeAllMenus}
                   >
-                    Your Profile
+                    Profile
                   </Link>
-                  <Link
-                    to="/settings"
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    role="menuitem"
-                  >
-                    Settings
-                  </Link>
+                  <div className="user-dropdown-divider"></div>
                   <button
                     onClick={handleLogout}
-                    className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    className="user-dropdown-item"
                     role="menuitem"
                   >
                     Sign out
@@ -123,18 +132,20 @@ const Navbar = () => {
                 </div>
               </div>
             ) : (
-              <div className="flex space-x-4">
+              <div className="auth-buttons">
                 <Link
                   to="/login"
-                  className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
+                  className="btn btn-link"
+                  onClick={closeAllMenus}
                 >
-                  Log in
+                  Sign in
                 </Link>
                 <Link
                   to="/register"
-                  className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                  className="btn btn-primary"
+                  onClick={closeAllMenus}
                 >
-                  Sign up
+                  Get started
                 </Link>
               </div>
             )}
@@ -259,6 +270,70 @@ const Navbar = () => {
             </div>
           )}
         </div>
+      </div>
+      
+      {/* Mobile Navigation */}
+      <div className={`mobile-menu ${isMobileMenuOpen ? 'show' : ''}`}>
+        <Link
+          to="/"
+          className="mobile-nav-link"
+          onClick={closeAllMenus}
+        >
+          Home
+        </Link>
+        {isAuthenticated && (
+          <Link
+            to="/dashboard"
+            className="mobile-nav-link"
+            onClick={closeAllMenus}
+          >
+            Dashboard
+          </Link>
+        )}
+        <Link
+          to="/pricing"
+          className="mobile-nav-link"
+          onClick={closeAllMenus}
+        >
+          Pricing
+        </Link>
+        
+        {!isAuthenticated ? (
+          <>
+            <div className="mobile-nav-divider"></div>
+            <Link
+              to="/login"
+              className="mobile-nav-link"
+              onClick={closeAllMenus}
+            >
+              Sign In
+            </Link>
+            <Link
+              to="/register"
+              className="mobile-nav-link btn btn-primary"
+              onClick={closeAllMenus}
+            >
+              Get Started
+            </Link>
+          </>
+        ) : (
+          <>
+            <div className="mobile-nav-divider"></div>
+            <Link
+              to="/profile"
+              className="mobile-nav-link"
+              onClick={closeAllMenus}
+            >
+              My Profile
+            </Link>
+            <button
+              onClick={handleLogout}
+              className="mobile-nav-link text-left"
+            >
+              Sign Out
+            </button>
+          </>
+        )}
       </div>
     </nav>
   );
