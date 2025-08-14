@@ -1,6 +1,152 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+
+const ConnectionModal = ({ isOpen, onClose, onSubmit, platform, fields }) => {
+  const [formData, setFormData] = useState({});
+  const modalRef = useRef(null);
+
+  useEffect(() => {
+    if (isOpen) {
+      // Initialize form data with empty strings for each field
+      const initialData = {};
+      fields.forEach(field => {
+        initialData[field.name] = '';
+      });
+      setFormData(initialData);
+    }
+  }, [isOpen, fields]);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onSubmit(formData);
+    onClose();
+  };
+
+  if (!isOpen) return null;
+
+  return (
+    <div style={{
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      backgroundColor: 'rgba(0, 0, 0, 0.5)',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      zIndex: 1000
+    }} onClick={onClose}>
+      <div style={{
+        backgroundColor: 'white',
+        padding: '24px',
+        borderRadius: '8px',
+        width: '100%',
+        maxWidth: '480px',
+        boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)'
+      }} onClick={e => e.stopPropagation()} ref={modalRef}>
+        <h2 style={{
+          fontSize: '20px',
+          fontWeight: '600',
+          marginBottom: '20px',
+          color: '#111827'
+        }}>
+          Connect {platform}
+        </h2>
+        
+        <form onSubmit={handleSubmit}>
+          {fields.map((field, index) => (
+            <div key={field.name} style={{ marginBottom: '16px' }}>
+              <label style={{
+                display: 'block',
+                fontSize: '14px',
+                fontWeight: '500',
+                color: '#374151',
+                marginBottom: '8px'
+              }}>
+                {field.label}
+              </label>
+              <input
+                type={field.type || 'text'}
+                name={field.name}
+                value={formData[field.name] || ''}
+                onChange={handleChange}
+                required={field.required !== false}
+                style={{
+                  width: '100%',
+                  padding: '8px 12px',
+                  border: '1px solid #d1d5db',
+                  borderRadius: '6px',
+                  fontSize: '14px',
+                  color: '#111827',
+                  backgroundColor: '#f9fafb'
+                }}
+              />
+              {field.helpText && (
+                <p style={{
+                  fontSize: '12px',
+                  color: '#6b7280',
+                  marginTop: '4px',
+                  marginBottom: '0'
+                }}>
+                  {field.helpText}
+                </p>
+              )}
+            </div>
+          ))}
+          
+          <div style={{
+            display: 'flex',
+            justifyContent: 'flex-end',
+            gap: '12px',
+            marginTop: '24px'
+          }}>
+            <button
+              type="button"
+              onClick={onClose}
+              style={{
+                padding: '8px 16px',
+                border: '1px solid #d1d5db',
+                borderRadius: '6px',
+                backgroundColor: 'white',
+                color: '#374151',
+                cursor: 'pointer',
+                fontSize: '14px',
+                fontWeight: '500'
+              }}
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              style={{
+                padding: '8px 16px',
+                border: 'none',
+                borderRadius: '6px',
+                backgroundColor: '#10b981',
+                color: 'white',
+                cursor: 'pointer',
+                fontSize: '14px',
+                fontWeight: '500'
+              }}
+            >
+              Connect
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+};
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -14,6 +160,11 @@ const Dashboard = () => {
   });
   const [reviews, setReviews] = useState([]);
   const [connectors, setConnectors] = useState([]);
+  const [modalState, setModalState] = useState({
+    isOpen: false,
+    platform: null,
+    fields: []
+  });
 
   useEffect(() => {
     checkConnections();
@@ -54,76 +205,114 @@ const Dashboard = () => {
     }
   };
 
-  const connectGoogleBusiness = async () => {
-    const businessId = prompt('Enter your Google Business Profile ID:');
-    const apiKey = prompt('Enter your Google Business Profile API Key:');
-    
-    if (!businessId || !apiKey) return;
-
-    try {
-      const response = await axios.post('/api/business/connect/google', {
-        businessId,
-        apiKey
-      });
-      
-      if (response.data.success) {
-        alert('Successfully connected Google Business Profile!');
-        checkConnections(); // Refresh connections
-      } else {
-        alert('Failed to connect. Please check your credentials.');
-      }
-    } catch (error) {
-      alert('Error connecting to Google Business Profile. Please try again.');
-      console.error('Connection error:', error);
-    }
+  const openConnectionModal = (platform, fields) => {
+    setModalState({
+      isOpen: true,
+      platform,
+      fields
+    });
   };
 
-  const connectYelp = async () => {
-    const businessId = prompt('Enter your Yelp Business ID:');
-    const apiKey = prompt('Enter your Yelp API Key:');
-    
-    if (!businessId || !apiKey) return;
-
-    try {
-      const response = await axios.post('/api/business/connect/yelp', {
-        businessId,
-        apiKey
-      });
-      
-      if (response.data.success) {
-        alert('Successfully connected Yelp!');
-        checkConnections(); // Refresh connections
-      } else {
-        alert('Failed to connect. Please check your credentials.');
-      }
-    } catch (error) {
-      alert('Error connecting to Yelp. Please try again.');
-      console.error('Connection error:', error);
-    }
+  const closeModal = () => {
+    setModalState({
+      isOpen: false,
+      platform: null,
+      fields: []
+    });
   };
 
-  const connectFacebook = async () => {
-    const pageId = prompt('Enter your Facebook Page ID:');
-    const accessToken = prompt('Enter your Facebook Access Token:');
-    
-    if (!pageId || !accessToken) return;
-
+  const handleConnect = async (platform, data) => {
     try {
-      const response = await axios.post('/api/business/connect/facebook', {
-        pageId,
-        accessToken
-      });
+      let response;
+      
+      switch (platform) {
+        case 'Google Business':
+          response = await axios.post('/api/business/connect/google', {
+            businessId: data.businessId,
+            apiKey: data.apiKey
+          });
+          break;
+          
+        case 'Yelp':
+          response = await axios.post('/api/business/connect/yelp', {
+            businessId: data.businessId,
+            apiKey: data.apiKey
+          });
+          break;
+          
+        case 'Facebook':
+          response = await axios.post('/api/business/connect/facebook', {
+            pageId: data.pageId,
+            accessToken: data.accessToken
+          });
+          break;
+          
+        default:
+          throw new Error('Unsupported platform');
+      }
       
       if (response.data.success) {
-        alert('Successfully connected Facebook!');
+        alert(`Successfully connected ${platform}!`);
         checkConnections(); // Refresh connections
       } else {
-        alert('Failed to connect. Please check your credentials.');
+        alert('Failed to connect. Please check your credentials and try again.');
       }
     } catch (error) {
-      alert('Error connecting to Facebook. Please try again.');
-      console.error('Connection error:', error);
+      console.error(`Error connecting to ${platform}:`, error);
+      alert(`Error connecting to ${platform}. Please try again.`);
     }
+  };
+  
+  const connectGoogleBusiness = () => {
+    openConnectionModal('Google Business', [
+      {
+        name: 'businessId',
+        label: 'Google Business Profile ID',
+        helpText: 'Your Google Business Profile ID (found in your Google Business Profile settings)'
+      },
+      {
+        name: 'apiKey',
+        label: 'Google API Key',
+        type: 'password',
+        helpText: 'Your Google Cloud API key with Business Profile API access'
+      }
+    ]);
+  };
+
+  const connectYelp = () => {
+    openConnectionModal('Yelp', [
+      {
+        name: 'businessId',
+        label: 'Yelp Business ID',
+        helpText: 'Your Yelp Business ID (found in your Yelp business URL)'
+      },
+      {
+        name: 'apiKey',
+        label: 'Yelp API Key',
+        type: 'password',
+        helpText: 'Your Yelp Fusion API key'
+      }
+    ]);
+  };
+
+  const connectFacebook = () => {
+    openConnectionModal('Facebook', [
+      {
+        name: 'pageId',
+        label: 'Facebook Page ID',
+        helpText: 'The ID of your Facebook Business Page'
+      },
+      {
+        name: 'accessToken',
+        label: 'Access Token',
+        type: 'password',
+        helpText: 'A valid Facebook Page access token with pages_show_list and pages_read_engagement permissions'
+      }
+    ]);
+  };
+  
+  const handleModalSubmit = (data) => {
+    handleConnect(modalState.platform, data);
   };
 
   const handleUpgrade = () => {
@@ -522,7 +711,8 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
-    </div>
+      </div>
+    </>
   );
 };
 

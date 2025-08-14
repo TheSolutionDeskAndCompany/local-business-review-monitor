@@ -510,6 +510,37 @@ body {
   opacity: 0.9;
 }
 
+/* Health Check Badge */
+.health-badge {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 10px;
+}
+.health-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+.healthy {
+  background-color: var(--color-success);
+}
+.unhealthy {
+  background-color: var(--color-danger);
+}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
 /* Footer */
 .footer {
   background: var(--color-neutral-dark);

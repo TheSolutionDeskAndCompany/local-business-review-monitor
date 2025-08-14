@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import { CheckCircle } from 'lucide-react';
 import { TRIAL_DAYS } from '../lib/marketing';
+import { SITE } from '../lib/config';
 
 const Pricing = () => {
   const [billingCycle, setBillingCycle] = useState('monthly');
@@ -23,7 +25,20 @@ const Pricing = () => {
 
   return (
     <div className="pricing-page">
-      <title>Simple, Transparent Pricing — ReviewReady</title>
+      <Helmet>
+        <title>Pricing — {SITE.name}</title>
+        <meta name="description" content={`Simple, transparent pricing for ${SITE.name}. Choose the perfect plan for your business with our {TRIAL_DAYS}-day free trial. No credit card required.`} />
+        <meta property="og:title" content={`Pricing — ${SITE.name}`} />
+        <meta property="og:description" content={`Simple, transparent pricing for ${SITE.name}. Choose the perfect plan for your business.`} />
+        <meta property="og:type" content="website" />
+        {SITE.canonical && (
+          <>
+            <link rel="canonical" href={`${SITE.canonical}/pricing`} />
+            <meta property="og:url" content={`${SITE.canonical}/pricing`} />
+          </>
+        )}
+        <meta name="twitter:card" content="summary_large_image" />
+      </Helmet>
       {/* Header */}
       <header className="header">
         <div className="container">

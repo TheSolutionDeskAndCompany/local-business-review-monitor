@@ -1,0 +1,4 @@
+{
+  "extends": ["react-app", "react-app/jest", "plugin:react/recommended", "plugin:react-hooks/recommended", "prettier"],
+  "rules": { "react/prop-types": "off" }
+}

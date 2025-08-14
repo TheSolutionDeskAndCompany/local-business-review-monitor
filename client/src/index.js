@@ -3,15 +3,36 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import ErrorBoundary from './lib/ErrorBoundary';
+
+// Initialize Sentry if configured
+if (process.env.REACT_APP_SENTRY_DSN) {
+  import('@sentry/react').then(Sentry => {
+    Sentry.init({
+      dsn: process.env.REACT_APP_SENTRY_DSN,
+      environment: process.env.NODE_ENV,
+      release: `reviewready@${process.env.REACT_APP_VERSION || '1.0.0'}`,
+      beforeSend(event) {
+        if (window.location.hostname === 'localhost') {
+          console.log('Sentry event:', event);
+          return null; // Don't send events from localhost
+        }
+        return event;
+      },
+    });  
+  });
+}
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <ErrorBoundary>
+      <App />
+    </ErrorBoundary>
   </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+reportWebVitals(console.log);

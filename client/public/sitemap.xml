@@ -1,23 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://reviewready.ca/</loc>
-    <lastmod>2025-08-08</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://reviewready.ca/pricing</loc>
-    <lastmod>2025-08-08</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://reviewready.ca/login</loc>
-    <lastmod>2025-08-08</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
-  </url>
+  <url><loc>%REACT_APP_CANONICAL_DOMAIN%/</loc></url>
+  <url><loc>%REACT_APP_CANONICAL_DOMAIN%/pricing</loc></url>
+  <url><loc>%REACT_APP_CANONICAL_DOMAIN%/security</loc></url>
+  <url><loc>%REACT_APP_CANONICAL_DOMAIN%/privacy</loc></url>
+  <url><loc>%REACT_APP_CANONICAL_DOMAIN%/terms</loc></url>
+  <url><loc>%REACT_APP_CANONICAL_DOMAIN%/contact</loc></url>
   <url>
     <loc>https://reviewready.ca/register</loc>
     <lastmod>2025-08-08</lastmod>

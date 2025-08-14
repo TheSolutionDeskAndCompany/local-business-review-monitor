@@ -1,10 +1,25 @@
 import React from 'react';
+import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import { Shield } from 'lucide-react';
+import { SITE } from '../lib/config';
 
 const Security = () => {
   return (
     <div className="legal-page">
+      <Helmet>
+        <title>Security — {SITE.name}</title>
+        <meta name="description" content={`Learn how ${SITE.name} secures your business review data with industry-standard encryption and security practices.`} />
+        <meta property="og:title" content={`Security — ${SITE.name}`} />
+        <meta property="og:description" content={`Learn how ${SITE.name} secures your business review data with industry-standard encryption and security practices.`} />
+        <meta property="og:type" content="website" />
+        {SITE.canonical && (
+          <>
+            <link rel="canonical" href={`${SITE.canonical}/security`} />
+            <meta property="og:url" content={`${SITE.canonical}/security`} />
+          </>
+        )}
+      </Helmet>
       <header className="header">
         <div className="container">
           <div className="nav">

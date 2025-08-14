@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Mail, MessageCircle, Phone, Shield } from 'lucide-react';
+import { Mail, MessageCircle, Phone } from 'lucide-react';
 
 function CopyButton({ text }) {
   return (
@@ -15,39 +15,39 @@ function CopyButton({ text }) {
 }
 
 const Contact = () => {
-  const accessExportTemplate = `Subject: Data access/export request — ReviewReady
+  const accessExportTemplate = `Subject: Request my data — ReviewReady
 
-Hello ReviewReady Privacy Team,
+Hello ReviewReady Team,
 
-I am requesting access to and a portable export of my personal data under PIPEDA/GDPR.
+I would like to request a copy of my account data.
 
 Account email: [your account email]
 Business name(s): [business name(s)]
-Request type: Access + Export
 
-Please confirm receipt and the expected timeline.
+Please let me know what information you need from me.
 
 Thank you,
 [your name]`;
 
-  const deletionTemplate = `Subject: Delete my account and personal data — ReviewReady
+  const deletionTemplate = `Subject: Delete my account — ReviewReady
 
-Hello ReviewReady Privacy Team,
+Hello ReviewReady Team,
 
-Please delete my account and associated personal data.
+I would like to request deletion of my account and associated data.
 
 Account email: [your account email]
 Business name(s): [business name(s)]
-I understand this action is permanent and may affect billing/exports.
+
+Please let me know if you need any additional information.
 
 Thank you,
 [your name]`;
 
-  const marketingOptOutTemplate = `Subject: Unsubscribe from marketing — ReviewReady
+  const marketingOptOutTemplate = `Subject: Unsubscribe from emails — ReviewReady
 
 Hello,
 
-Please remove this email from all marketing communications. Transactional emails related to my account may continue.
+Please remove this email from your mailing lists. I would like to stop receiving marketing emails.
 
 Account email: [your account email]
 
@@ -125,9 +125,8 @@ Preferred contact: [email]`;
           </div>
 
           <div className="bg-white p-6 rounded-lg border shadow-sm">
-            <Shield className="w-8 h-8 text-green-600 mb-4" />
             <h3 className="text-lg font-semibold mb-2">Security</h3>
-            <p className="text-gray-600 mb-4">Report a vulnerability (see our disclosure policy).</p>
+            <p className="text-gray-600 mb-4">Report security concerns to our team.</p>
             <div className="space-y-2">
               <a 
                 href="mailto:security@reviewready.ca?subject=Security%20report%20—%20ReviewReady"

@@ -1,188 +1,99 @@
-import React, { useEffect, useState } from 'react';
-import { ExternalLink, CheckCircle, AlertCircle } from 'lucide-react';
-import axios from 'axios';
+import React from 'react';
+import { ExternalLink } from 'lucide-react';
 
 const Connectors = () => {
-  // Mock user data since authentication is removed
-  const user = {
-    id: 'temp-user',
-    email: 'admin@thesolutiondesk.ca',
-    businessName: 'The Solution Desk'
-  };
-  const [providers, setProviders] = useState([]);
-  const [busy, setBusy] = useState(null);
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    fetchConnectors();
-    checkConnectionStatus();
-  }, []);
-
-  const fetchConnectors = async () => {
-    try {
-      const response = await axios.get('/api/connectors');
-      setProviders(response.data);
-      setLoading(false);
-    } catch (error) {
-      console.error('Failed to fetch connectors:', error);
-      setError('Failed to load available connectors');
-      setLoading(false);
+  const providers = [
+    { 
+      id: 'google', 
+      name: 'Google Reviews', 
+      status: 'available',
+      description: 'Connect your Google Business Profile to monitor and respond to reviews',
+      icon: 'G',
+      available: true
+    },
+    { 
+      id: 'facebook', 
+      name: 'Facebook', 
+      status: 'coming-soon',
+      description: 'Facebook reviews coming soon',
+      icon: 'F',
+      available: false
+    },
+    { 
+      id: 'yelp', 
+      name: 'Yelp', 
+      status: 'coming-soon',
+      description: 'Yelp reviews coming soon',
+      icon: 'Y',
+      available: false
     }
-  };
+  ];
 
-  const checkConnectionStatus = () => {
-    // Check URL params for connection status
-    const urlParams = new URLSearchParams(window.location.search);
-    const connected = urlParams.get('connected');
-    const errorParam = urlParams.get('error');
-
-    if (connected) {
-      setSuccess(`Successfully connected ${connected}!`);
-      // Clean up URL
-      window.history.replaceState({}, document.title, window.location.pathname);
-    }
-
-    if (errorParam) {
-      const errorMessages = {
-        oauth_denied: 'OAuth authorization was denied',
-        invalid_state: 'Invalid OAuth state - please try again',
-        session_expired: 'Session expired - please try again',
-        user_not_found: 'User session not found',
-        oauth_failed: 'OAuth connection failed - please try again',
-        oauth_start_failed: 'Failed to start OAuth flow'
-      };
-      setError(errorMessages[errorParam] || 'Connection failed');
-      // Clean up URL
-      window.history.replaceState({}, document.title, window.location.pathname);
-    }
-  };
-
-  const connect = (id) => {
-    setBusy(id);
-    setError('');
-    setSuccess('');
+  const handleRequestAccess = (provider) => {
+    const subject = `Request Access to ${provider.name} Integration`;
+    const body = `Hello ReviewReady team,\n\nI would like to request access to the ${provider.name} integration.\n\nBusiness Name: [Your Business Name]\nEmail: [Your Email]\n\nThank you!`;
     
-    const returnTo = encodeURIComponent('/dashboard');
-    window.location.href = `/api/oauth/${id}/start?return_to=${returnTo}`;
+    window.location.href = `mailto:support@thesolutiondesk.ca?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   };
-
-  const disconnect = async (id) => {
-    try {
-      setBusy(id);
-      await axios.post(`/api/business/disconnect/${id}`);
-      setSuccess(`Successfully disconnected ${id}`);
-      // Refresh connectors to update connection status
-      fetchConnectors();
-    } catch (error) {
-      setError(`Failed to disconnect ${id}`);
-    } finally {
-      setBusy(null);
-    }
-  };
-
-  const isConnected = (providerId) => {
-    return user?.connectedPlatforms?.some(platform => platform.platform === providerId);
-  };
-
-  const getConnectedAccount = (providerId) => {
-    return user?.connectedPlatforms?.find(platform => platform.platform === providerId);
-  };
-
-  if (loading) {
-    return (
-      <div className="connectors-section">
-        <h3>Platform Connections</h3>
-        <div className="loading">Loading available connectors...</div>
-      </div>
-    );
-  }
-
-  const enabledProviders = providers.filter(p => p.enabled);
-
-  if (enabledProviders.length === 0) {
-    return (
-      <div className="connectors-section">
-        <h3>Platform Connections</h3>
-        <div className="empty-state">
-          <AlertCircle className="empty-icon" />
-          <p>No connectors are currently configured.</p>
-          <p className="text-small">Contact support to enable platform integrations.</p>
-        </div>
-      </div>
-    );
-  }
 
   return (
-    <div className="connectors-section">
-      <h3>Platform Connections</h3>
+    <div className="max-w-4xl mx-auto p-6">
+      <h1 className="text-2xl font-bold mb-6">Connect Your Review Platforms</h1>
+      <p className="text-gray-600 mb-8">
+        Connect your business profiles to monitor and respond to reviews from multiple platforms in one place.
+      </p>
       
-      {error && (
-        <div className="alert alert-error">
-          <AlertCircle className="icon" />
-          {error}
-        </div>
-      )}
-      
-      {success && (
-        <div className="alert alert-success">
-          <CheckCircle className="icon" />
-          {success}
-        </div>
-      )}
-
-      <div className="connectors-grid">
-        {enabledProviders.map(provider => {
-          const connected = isConnected(provider.id);
-          const account = getConnectedAccount(provider.id);
-          const isBusy = busy === provider.id;
-
-          return (
-            <div key={provider.id} className="connector-card">
-              <div className="connector-info">
-                <h4>{provider.name}</h4>
-                {connected && account && (
-                  <div className="connection-details">
-                    <CheckCircle className="icon connected" />
-                    <span className="status">Connected</span>
-                    {account.profileData?.email && (
-                      <div className="account-info">
-                        {account.profileData.email}
-                      </div>
-                    )}
-                    {account.profileData?.name && account.profileData.name !== account.profileData.email && (
-                      <div className="account-name">
-                        {account.profileData.name}
-                      </div>
-                    )}
-                  </div>
-                )}
+      <div className="space-y-4">
+        {providers.map((provider) => (
+          <div key={provider.id} className="bg-white border rounded-lg p-6 shadow-sm">
+            <div className="flex items-start justify-between">
+              <div className="flex items-start space-x-4">
+                <div className="bg-gray-100 text-gray-700 rounded-full w-12 h-12 flex items-center justify-center text-xl font-bold">
+                  {provider.icon}
+                </div>
+                <div>
+                  <h3 className="text-lg font-medium">{provider.name}</h3>
+                  <p className="text-gray-600">{provider.description}</p>
+                </div>
               </div>
               
-              <div className="connector-actions">
-                {connected ? (
-                  <button
-                    disabled={isBusy}
-                    onClick={() => disconnect(provider.id)}
-                    className="btn btn-outline btn-small"
-                  >
-                    {isBusy ? 'Disconnecting...' : 'Disconnect'}
-                  </button>
-                ) : (
-                  <button
-                    disabled={isBusy}
-                    onClick={() => connect(provider.id)}
-                    className="btn btn-primary btn-small"
-                  >
-                    {isBusy ? 'Redirecting...' : 'Connect'}
-                    <ExternalLink className="icon" />
-                  </button>
-                )}
-              </div>
+              {provider.available ? (
+                <a 
+                  href="/dashboard" 
+                  className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors"
+                >
+                  Connect
+                </a>
+              ) : (
+                <button 
+                  onClick={() => handleRequestAccess(provider)}
+                  className="px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 transition-colors"
+                >
+                  Request Access
+                </button>
+              )}
             </div>
-          );
-        })}
+            
+            {!provider.available && (
+              <div className="mt-4 text-sm text-gray-500">
+                Coming soon. Request early access to be notified when this integration is available.
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+      
+      <div className="mt-8 p-6 bg-blue-50 rounded-lg">
+        <h3 className="text-lg font-medium text-blue-800 mb-2">Need help connecting your accounts?</h3>
+        <p className="text-blue-700 mb-4">
+          Our team is here to help you set up your review monitoring. Contact us for assistance.
+        </p>
+        <a 
+          href="mailto:support@thesolutiondesk.ca?subject=Help%20with%20Connecting%20Accounts"
+          className="text-blue-600 hover:text-blue-800 font-medium inline-flex items-center"
+        >
+          Contact Support <ExternalLink className="ml-1" size={16} />
+        </a>
       </div>
     </div>
   );

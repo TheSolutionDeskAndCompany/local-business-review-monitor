@@ -16,8 +16,17 @@ jobs:
         with:
           node-version: '20'
           cache: 'npm'
-      - name: Install dependencies
-        run: |
+      - name: Install root dependencies
+        run: npm ci
+      - name: Install client dependencies
+        working-directory: client
+        run: npm ci
+      - name: Run ESLint
+        working-directory: client
+        run: npx eslint . --ext .js,.jsx
+      - name: Build client
+        working-directory: client
+        run: npm run build
           if [ -f package-lock.json ]; then npm ci; else npm install; fi
       - name: Lint
         run: npm run -s lint --if-present

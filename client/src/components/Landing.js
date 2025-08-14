@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
+import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
-import { CheckCircle, Shield, Bell, CreditCard, Mail, MessageSquare } from 'lucide-react';
+import { CheckCircle, MessageSquare } from 'lucide-react';
+import HealthCheckBadge from './HealthCheckBadge';
 import { SHOW_SOCIAL_PROOF, ALERT_FREQUENCY_COPY } from '../lib/marketing';
+import { SITE } from '../lib/config';
 
 
 const Landing = () => {
@@ -9,6 +12,20 @@ const Landing = () => {
 
   return (
     <div className="landing-page">
+      <Helmet>
+        <title>{SITE.name} — Never Miss Another Review</title>
+        <meta name="description" content="Monitor and respond to customer reviews from all platforms in one place. Get instant alerts and grow your business with ReviewReady." />
+        <meta property="og:title" content={`${SITE.name} — Never Miss Another Review`} />
+        <meta property="og:description" content="Monitor and respond to customer reviews from all platforms in one place. Get instant alerts and grow your business with ReviewReady." />
+        <meta property="og:type" content="website" />
+        {SITE.canonical && (
+          <>
+            <link rel="canonical" href={SITE.canonical} />
+            <meta property="og:url" content={SITE.canonical} />
+          </>
+        )}
+        <meta name="twitter:card" content="summary_large_image" />
+      </Helmet>
       {/* Header */}
       <header className="header">
         <div className="container">
@@ -32,22 +49,24 @@ const Landing = () => {
               <Link to="/dashboard" className="btn btn-primary btn-large" aria-label="Get instant review alerts">
                 Get Instant Review Alerts
               </Link>
+              <a 
+                href="mailto:support@thesolutiondesk.ca?subject=ReviewReady%20Access%20Request" 
+                className="btn btn-secondary"
+              >
+                Request Access
+              </a>
             </div>
-            <p className="trial-note">No credit card required</p>
+            <p className="trial-note">Preview mode with sample data</p>
             
             {/* Trust Badges */}
             <div className="trust-badges">
               <div className="trust-badge">
-                <CreditCard size={16} />
-                <a href="/security" target="_blank" rel="noopener" aria-label="Learn about Stripe secure payments">Stripe secure payments</a>
-              </div>
-              <div className="trust-badge">
                 <CheckCircle size={16} />
-                <Link to="/dashboard" aria-label="Go to Dashboard">Go to Dashboard</Link>
+                <span>Google reviews today</span>
               </div>
               <div className="trust-badge">
-                <Shield size={16} />
-                <a href="/privacy" target="_blank" rel="noopener" aria-label="Learn about GDPR and PIPEDA compliance">GDPR + PIPEDA compliant</a>
+                <MessageSquare size={16} />
+                <span>Facebook & Yelp coming soon</span>
               </div>
             </div>
           </div>
@@ -105,16 +124,17 @@ const Landing = () => {
             </div>
             <div className="feature">
               <div className="feature-icons">
-                <Mail size={20} />
                 <MessageSquare size={20} />
               </div>
               <h3>Instant Alerts</h3>
-              <p>Get notified the moment any review appears on any platform. Never miss one again.</p>
+              <p>Get notified when new reviews appear. Never miss an important customer message.</p>
             </div>
             <div className="feature">
-              <Bell className="feature-icon" />
+              <div className="feature-icons">
+                <CheckCircle size={20} />
+              </div>
               <h3>Respond Faster</h3>
-              <p>Jump straight to any review from one dashboard. Save hours every week.</p>
+              <p>Manage all your reviews from one simple dashboard.</p>
             </div>
           </div>
         </div>
@@ -305,7 +325,7 @@ const Landing = () => {
             </div>
           </div>
           <div className="footer-bottom">
-            <p>&copy; 2025 ReviewReady / The Solution Desk Inc.</p>
+            <p>&copy; 2025 ReviewReady / The Solution Desk Inc. <HealthCheckBadge /></p>
           </div>
         </div>
       </footer>

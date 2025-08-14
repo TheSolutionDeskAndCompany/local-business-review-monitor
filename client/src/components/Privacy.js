@@ -22,62 +22,47 @@ const Privacy = () => {
         <div className="text-center">
           <Shield size={48} className="mx-auto mb-4 text-green-600" />
           <h1 className="text-4xl font-bold mb-2">Privacy Policy</h1>
-          <p className="text-gray-600">How ReviewReady protects your data while unifying reviews from Google, Facebook, Yelp & more. GDPR + PIPEDA aligned.</p>
+          <p className="text-gray-600">How we handle your data in ReviewReady</p>
         </div>
 
         <div className="prose prose-lg max-w-none">
-          <p><strong>Effective date:</strong> January 8, 2025</p>
+          <p><strong>Last updated:</strong> August 2025</p>
           
-          <p><strong>Who we are.</strong> ReviewReady is a service provided by <strong>The Solution Desk Inc.</strong> ("we", "us").<br />
-          Contact: <strong><a href="mailto:support@reviewready.ca">support@reviewready.ca</a></strong> • <strong>Canada</strong></p>
+          <p>ReviewReady is a service provided by <strong>The Solution Desk Inc.</strong> ("we", "us").<br />
+          Contact: <strong><a href="mailto:support@thesolutiondesk.ca">support@thesolutiondesk.ca</a></strong></p>
 
-          <h2>Data we collect</h2>
+          <h2>Data We Collect</h2>
+          <p>We collect the minimum data needed to provide our service:</p>
           <ul>
-            <li><strong>Account:</strong> name, email, password hash.</li>
-            <li><strong>Business & locations:</strong> business names, addresses, platform IDs/URLs (Google Business Profile, Facebook Page, Yelp).</li>
-            <li><strong>Usage & device:</strong> app interactions, IP, timestamps, diagnostics/logs.</li>
-            <li><strong>Billing:</strong> handled by <strong>Stripe</strong>; we don't store full card numbers.</li>
-            <li><strong>Communications:</strong> emails you send us, support tickets, and alert preferences.</li>
+            <li><strong>Account Information:</strong> Email address and password (hashed).</li>
+            <li><strong>Business Information:</strong> Business names and platform connections you provide.</li>
+            <li><strong>Usage Data:</strong> Basic app interactions and error logs to improve our service.</li>
           </ul>
 
-          <h2>How we collect it</h2>
+          <h2>How We Use Your Data</h2>
+          <p>We use your data to:</p>
           <ul>
-            <li>Directly from you (sign-up, forms, settings).</li>
-            <li>Via connected services you authorize (e.g., Google OAuth, pasted Yelp/Facebook URLs).</li>
-            <li>Automatically via cookies/analytics for performance and security.</li>
+            <li>Provide and maintain our service</li>
+            <li>Send you important service notifications</li>
+            <li>Improve and troubleshoot our application</li>
           </ul>
 
-          <h2>Why we use it (legal basis)</h2>
+          <h2>Data Storage</h2>
+          <p>Your data is stored securely on our servers. We implement industry-standard security measures to protect your information.</p>
+
+          <h2>Your Rights</h2>
+          <p>You have the right to:</p>
           <ul>
-            <li><strong>Provide the service</strong> and send review alerts (<strong>contract</strong>).</li>
-            <li><strong>Improve, troubleshoot, prevent abuse</strong> (<strong>legitimate interests</strong>).</li>
-            <li><strong>Billing & accounting</strong> (<strong>legal obligation/contract</strong>).</li>
-            <li><strong>Marketing emails/SMS</strong> only with consent (<strong>consent/CASL</strong>). You can opt out anytime.</li>
+            <li>Access the personal data we hold about you</li>
+            <li>Request correction or deletion of your data</li>
+            <li>Opt-out of communications</li>
           </ul>
+          <p>To exercise these rights, please contact us at <a href="mailto:support@thesolutiondesk.ca">support@thesolutiondesk.ca</a>.</p>
 
-          <h2>Sharing & processors</h2>
-          <p>We use vetted vendors to run the service: <strong>Stripe (payments)</strong>, <strong>Vercel (hosting)</strong>, <strong>Email provider (transactional email)</strong>, <strong>SMS provider (SMS alerts)</strong>, and analytics/security tooling. They act as processors and may store data in the US or other regions. We don't sell personal data.</p>
+          <h2>Changes to This Policy</h2>
+          <p>We may update this policy from time to time. We'll notify you of any changes by posting the new policy on this page.</p>
 
-          <h2>International transfers</h2>
-          <p>Data may be processed outside Canada. When required, we use Standard Contractual Clauses or equivalent safeguards.</p>
-
-          <h2>Retention</h2>
-          <p>Account data is kept while your account is active. On deletion, we delete or anonymize within <strong>90 days</strong>; logs within <strong>30 days</strong> unless required for security/legal reasons.</p>
-
-          <h2>Your rights</h2>
-          <ul>
-            <li><strong>Canada (PIPEDA):</strong> access, correction, and complaint rights.</li>
-            <li><strong>EU/UK (GDPR):</strong> access, rectification, erasure, restriction, portability, objection, and withdrawal of consent.</li>
-          </ul>
-          <p>Request by emailing <strong><a href="mailto:privacy@reviewready.ca">privacy@reviewready.ca</a></strong>.</p>
-
-          <h2>Cookies</h2>
-          <p>We use essential cookies for auth and preferences, plus analytics/performance cookies. You can control cookies in your browser settings.</p>
-
-          <h2>Communications (CASL)</h2>
-          <p>We only send commercial messages with consent. Unsubscribe links are included in every message.</p>
-
-          <h2>Children</h2>
+          <h2>Contact Us</h2>
           <p>The service isn't for individuals under 16.</p>
 
           <h2>Changes</h2>
