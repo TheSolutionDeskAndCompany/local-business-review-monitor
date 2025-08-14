@@ -32,8 +32,8 @@ const Pricing = () => {
               <img src="/Review-Ready-logo.png" alt="ReviewReady" className="logo-image" />
             </Link>
             <div className="nav-links">
-              <Link to="/login" className="btn btn-outline">Login</Link>
-              <Link to="/register" className="btn btn-primary">Start {TRIAL_DAYS}-Day Free Trial</Link>
+              <Link to="/dashboard" className="btn btn-outline">Login</Link>
+              <Link to="/dashboard" className="btn btn-primary">Start {TRIAL_DAYS}-Day Free Trial</Link>
             </div>
           </div>
         </div>
@@ -102,7 +102,7 @@ const Pricing = () => {
               </div>
               
               <div className="card-footer">
-                <Link to="/register" className="btn btn-primary btn-full">
+                <Link to="/dashboard" className="btn btn-primary btn-full">
                   Start {TRIAL_DAYS}-Day Free Trial
                 </Link>
                 <p className="trial-note">No credit card required</p>
@@ -131,7 +131,7 @@ const Pricing = () => {
               </div>
               
               <div className="card-footer">
-                <Link to="/register" className="btn btn-primary btn-full">
+                <Link to="/dashboard" className="btn btn-primary btn-full">
                   Start {TRIAL_DAYS}-Day Free Trial
                 </Link>
                 <p className="trial-note">No credit card required</p>
@@ -208,7 +208,7 @@ const Pricing = () => {
             </Link>
             <div className="footer-links">
               <Link to="/pricing">Pricing</Link>
-              <Link to="/login">Login</Link>
+              <Link to="/dashboard">Login</Link>
               <Link to="/contact">Support</Link>
               <Link to="/privacy">Privacy</Link>
               <Link to="/terms">Terms</Link>

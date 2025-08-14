@@ -81,8 +81,8 @@ Preferred contact: [email]`;
               <img src="/Review-Ready-logo.png" alt="ReviewReady" className="logo-image" />
             </div>
             <div className="nav-links">
-              <Link to="/login" className="btn btn-outline">Login</Link>
-              <Link to="/register" className="btn btn-primary">Start 7-Day Free Trial</Link>
+              <Link to="/dashboard" className="btn btn-outline">Login</Link>
+              <Link to="/dashboard" className="btn btn-primary">Start 7-Day Free Trial</Link>
             </div>
           </div>
         </div>
