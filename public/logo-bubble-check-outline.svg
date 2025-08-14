@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ReviewReady outlined speech bubble with check">
+  <rect width="1024" height="1024" rx="160" fill="#FFFFFF"/>
+  <g>
+    <path d="M220,240 h584 a80,80 0 0 1 80,80 v300 a80,80 0 0 1 -80,80 h-360 l-80,80 20,-80 h-164 a80,80 0 0 1 -80,-80 v-300 a80,80 0 0 1 80,-80 z" fill="#FFFFFF" stroke="#00C853" stroke-width="64" stroke-linejoin="round"/>
+    <path d="M380,540 L470,630 L690,410" fill="none" stroke="#00C853" stroke-width="80" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>

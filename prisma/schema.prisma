@@ -1,0 +1,124 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  emailVerified DateTime?
+  image         String?
+  createdAt     DateTime  @default(now())
+  accounts      Account[]
+  sessions      Session[]
+  businesses    Business[]
+}
+
+model Business {
+  id         String     @id @default(cuid())
+  ownerId    String
+  name       String
+  createdAt  DateTime   @default(now())
+  owner      User       @relation(fields: [ownerId], references: [id])
+  locations  Location[]
+}
+
+enum Provider { 
+  GBP 
+  FACEBOOK 
+  YELP
+}
+
+model Location {
+  id           String        @id @default(cuid())
+  businessId   String
+  displayName  String
+  address      String?
+  createdAt    DateTime      @default(now())
+  business     Business      @relation(fields: [businessId], references: [id])
+  integrations Integration[]
+  reviews      Review[]
+}
+
+model Integration {
+  id            String    @id @default(cuid())
+  locationId    String
+  provider      Provider
+  accountId     String
+  accessToken   String    // encrypted (AES-256-GCM)
+  refreshToken  String?
+  expiresAt     DateTime?
+  createdAt     DateTime  @default(now())
+  location      Location  @relation(fields: [locationId], references: [id])
+  
+  @@unique([provider, accountId])
+}
+
+model Review {
+  id             String    @id @default(cuid())
+  locationId     String
+  provider       Provider
+  sourceReviewId String    // upstream id
+  rating         Int?
+  authorName     String?
+  text           String?
+  createdAt      DateTime  // user posted time
+  ingestedAt     DateTime  @default(now())
+  repliedAt      DateTime?
+  replyText      String?
+  location       Location  @relation(fields: [locationId], references: [id])
+  alerts         Alert[]
+  
+  @@unique([provider, sourceReviewId])
+}
+
+model Alert {
+  id        String   @id @default(cuid())
+  reviewId  String   @unique
+  status    String   @default("open") // open|sent|ack|closed
+  sentAt    DateTime?
+  review    Review   @relation(fields: [reviewId], references: [id])
+}
+
+// NextAuth tables
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+  
+  @@unique([identifier, token])
+}
