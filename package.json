@@ -29,7 +29,7 @@
     "mongoose": "^7.5.0",
     "node-cron": "^3.0.2",
     "nodemailer": "^6.10.1",
-    "stripe": "^13.5.0"
+    "stripe": "^18.4.0"
   },
   "devDependencies": {
     "eslint": "^8.57.0",
