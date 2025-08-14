@@ -577,8 +577,8 @@ const Dashboard = () => {
               margin: '0 auto'
             }}>
               <p style={{ fontSize: '14px', color: '#6b7280', margin: '0' }}>
-                💡 <strong>Need help?</strong> Click any platform above to get started. You'll need your API credentials ready - 
-                we'll guide you through the setup process step by step.
+                💡 <strong>Need help?</strong> Click any platform above to get started. You&apos;ll need your API credentials ready - 
+                we&apos;ll guide you through the setup process step by step.
               </p>
             </div>
           </div>
@@ -613,7 +613,17 @@ const Dashboard = () => {
 
   // Dashboard with data (when connected)
   return (
-    <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '24px' }}>
+    <>
+      {modalState.isOpen && (
+        <ConnectionModal
+          isOpen={modalState.isOpen}
+          onClose={closeModal}
+          onSubmit={handleModalSubmit}
+          platform={modalState.platform}
+          fields={modalState.fields}
+        />
+      )}
+      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '24px' }}>
       {/* Header */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
         <h1 style={{ fontSize: '24px', fontWeight: 'bold', color: '#111827' }}>ReviewReady Dashboard</h1>

@@ -1,4 +1,8 @@
 {
-  "extends": ["react-app", "react-app/jest", "plugin:react/recommended", "plugin:react-hooks/recommended", "prettier"],
-  "rules": { "react/prop-types": "off" }
+  "extends": ["react-app", "react-app/jest", "plugin:react/recommended", "prettier"],
+  "rules": { 
+    "react/prop-types": "off",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn"
+  }
 }

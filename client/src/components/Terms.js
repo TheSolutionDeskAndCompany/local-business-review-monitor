@@ -22,20 +22,20 @@ const Terms = () => {
         <div className="text-center">
           <FileText size={48} className="mx-auto mb-4 text-green-600" />
           <h1 className="text-4xl font-bold mb-2">Terms of Service</h1>
-          <p className="text-gray-600">Terms that govern your use of ReviewReady's unified review management platform.</p>
+          <p className="text-gray-600">Terms that govern your use of ReviewReady&apos;s unified review management platform.</p>
         </div>
 
         <div className="prose prose-lg max-w-none">
           <p><strong>Effective date:</strong> January 8, 2025</p>
 
           <h2>1) Agreement</h2>
-          <p>By using ReviewReady you agree to these Terms and our Privacy Policy. If you're accepting on behalf of a company, you confirm you're authorized.</p>
+          <p>By using ReviewReady you agree to these Terms and our Privacy Policy. If you&apos;re accepting on behalf of a company, you confirm you&apos;re authorized.</p>
 
           <h2>2) Service</h2>
-          <p>ReviewReady monitors review platforms you connect (e.g., Google Business Profile, Facebook, Yelp) and sends alerts. We're not affiliated with those platforms and can't guarantee their availability or data accuracy.</p>
+          <p>ReviewReady monitors review platforms you connect (e.g., Google Business Profile, Facebook, Yelp) and sends alerts. We&apos;re not affiliated with those platforms and can&apos;t guarantee their availability or data accuracy.</p>
 
           <h2>3) Accounts</h2>
-          <p>Keep credentials confidential and accurate. You're responsible for activity under your account.</p>
+          <p>Keep credentials confidential and accurate. You&apos;re responsible for activity under your account.</p>
 
           <h2>4) Plans, trials, billing</h2>
           <ul>
@@ -45,16 +45,16 @@ const Terms = () => {
           </ul>
 
           <h2>5) Acceptable use</h2>
-          <p>Only monitor locations you own or are authorized to manage. Don't misuse the service (no scraping, probing, or circumventing rate limits/security).</p>
+          <p>Only monitor locations you own or are authorized to manage. Don&apos;t misuse the service (no scraping, probing, or circumventing rate limits/security).</p>
 
           <h2>6) Data & IP</h2>
           <p>You retain rights to your content. You grant us a limited license to process it to operate the service. Our software, trademarks, and site content are our IP.</p>
 
           <h2>7) Availability & changes</h2>
-          <p>The service is provided <strong>"as is"</strong> and may change over time. We may suspend access for maintenance, security, or legal reasons.</p>
+          <p>The service is provided <strong>&ldquo;as is&rdquo;</strong> and may change over time. We may suspend access for maintenance, security, or legal reasons.</p>
 
           <h2>8) Warranties & liability</h2>
-          <p>We disclaim all implied warranties to the extent permitted by law. Our total liability for any claim is limited to the fees you paid in the <strong>12 months</strong> before the event giving rise to the claim. We're not liable for indirect or consequential damages.</p>
+          <p>We disclaim all implied warranties to the extent permitted by law. Our total liability for any claim is limited to the fees you paid in the <strong>12 months</strong> before the event giving rise to the claim. We&apos;re not liable for indirect or consequential damages.</p>
 
           <h2>9) Termination</h2>
           <p>You may stop using the service at any time. We may terminate or suspend accounts for breach or misuse.</p>

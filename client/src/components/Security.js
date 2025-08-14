@@ -73,7 +73,7 @@ const Security = () => {
           </ul>
 
           <h2>Responsible disclosure</h2>
-          <p>Found a security issue? Email <strong><a href="mailto:security@reviewready.ca">security@reviewready.ca</a></strong>. We'll acknowledge receipt and work to resolve promptly. Please avoid accessing other users' data and allow us time to fix the issue.</p>
+          <p>Found a security issue? Email <strong><a href="mailto:security@reviewready.ca">security@reviewready.ca</a></strong>. We&apos;ll acknowledge receipt and work to resolve promptly. Please avoid accessing other users&apos; data and allow us time to fix the issue.</p>
 
           <h2>Subprocessors</h2>
           <p>Payments: <strong>Stripe</strong><br />

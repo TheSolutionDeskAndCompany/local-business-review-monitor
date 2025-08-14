@@ -147,17 +147,17 @@ const Landing = () => {
             <h2>Trusted by 500+ Local Businesses</h2>
             <div className="testimonials">
               <div className="testimonial">
-                <p>"ReviewReady helped us catch a bad review within minutes. We responded quickly and turned an angry customer into a happy one!"</p>
+                <p>&ldquo;ReviewReady helped us catch a bad review within minutes. We responded quickly and turned an angry customer into a happy one!&rdquo;</p>
                 <div className="author">
                   <img src="/images/testimonial-mike.jpg" alt="Mike Chen" className="author-photo" />
                   <div>
                     <strong>Mike Chen</strong>
-                    <span>Chen's Restaurant, Toronto</span>
+                    <span>Chen&apos;s Restaurant, Toronto</span>
                   </div>
                 </div>
               </div>
               <div className="testimonial">
-                <p>"I used to check Google and Yelp manually every morning. Now I just get alerts and can focus on running my business."</p>
+                <p>&ldquo;I used to check Google and Yelp manually every morning. Now I just get alerts and can focus on running my business.&rdquo;</p>
                 <div className="author">
                   <img src="/images/testimonial-lisa.jpg" alt="Lisa Rodriguez" className="author-photo" />
                   <div>
@@ -182,7 +182,7 @@ const Landing = () => {
                 <li>Check Google Business Profile manually</li>
                 <li>Log into Facebook Pages separately</li>
                 <li>Monitor Yelp business account daily</li>
-                <li>Miss reviews when you're busy</li>
+                <li>Miss reviews when you&apos;re busy</li>
                 <li>Slow response times hurt your reputation</li>
               </ul>
             </div>
@@ -227,9 +227,9 @@ const Landing = () => {
           </div>
           <div className="testimonial-preview">
             <blockquote>
-              "I used to spend 30 minutes every morning checking Google, Facebook, and Yelp for new reviews. Now ReviewReady does it all automatically and I get alerts instantly. It's saved me hours every week!"
+              &ldquo;I used to spend 30 minutes every morning checking Google, Facebook, and Yelp for new reviews. Now ReviewReady does it all automatically and I get alerts instantly. It&apos;s saved me hours every week!&rdquo;
             </blockquote>
-            <cite>— Sarah Mitchell, Owner of Mitchell's Bakery, Vancouver</cite>
+            <cite>&mdash; Sarah Mitchell, Owner of Mitchell&apos;s Bakery, Vancouver</cite>
           </div>
         </div>
       </section>

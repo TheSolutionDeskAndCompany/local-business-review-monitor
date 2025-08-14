@@ -28,7 +28,7 @@ const Privacy = () => {
         <div className="prose prose-lg max-w-none">
           <p><strong>Last updated:</strong> August 2025</p>
           
-          <p>ReviewReady is a service provided by <strong>The Solution Desk Inc.</strong> ("we", "us").<br />
+          <p>ReviewReady is a service provided by <strong>The Solution Desk Inc.</strong> (&ldquo;we&rdquo;, &ldquo;us&rdquo;).<br />
           Contact: <strong><a href="mailto:support@thesolutiondesk.ca">support@thesolutiondesk.ca</a></strong></p>
 
           <h2>Data We Collect</h2>
@@ -60,15 +60,15 @@ const Privacy = () => {
           <p>To exercise these rights, please contact us at <a href="mailto:support@thesolutiondesk.ca">support@thesolutiondesk.ca</a>.</p>
 
           <h2>Changes to This Policy</h2>
-          <p>We may update this policy from time to time. We'll notify you of any changes by posting the new policy on this page.</p>
+          <p>We may update this policy from time to time. We&apos;ll notify you of any changes by posting the new policy on this page.</p>
 
           <h2>Contact Us</h2>
-          <p>The service isn't for individuals under 16.</p>
+          <p>The service isn&apos;t for individuals under 16.</p>
 
           <h2>Changes</h2>
-          <p>We'll post updates here and revise the effective date.</p>
+          <p>We&apos;ll post updates here and revise the effective date.</p>
 
-          <p><em>This policy is provided for transparency and isn't legal advice.</em></p>
+          <p><em>This policy is provided for transparency and isn&apos;t legal advice.</em></p>
         </div>
 
         <div className="text-center">

@@ -160,7 +160,7 @@ const Pricing = () => {
 
           {/* Footnotes */}
           <div className="pricing-footnotes">
-            <p>* "Coming soon" features will be enabled automatically on Pro plans when released.</p>
+            <p>* &ldquo;Coming soon&rdquo; features will be enabled automatically on Pro plans when released.</p>
             <p>SMS: standard messaging fees may apply.</p>
           </div>
         </div>
